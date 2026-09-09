@@ -1,0 +1,150 @@
+/* User-supplied photographs keep their natural colors and original framing. */
+.city-discover-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 42px;
+}
+.city-discover-heading h2 {
+  font-size: clamp(40px, 5vw, 68px);
+  margin: 0;
+}
+.city-discover-heading h2 span {
+  color: var(--navy);
+}
+.city-discover-heading > p {
+  max-width: 355px;
+  margin: 0 0 5px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #486279;
+}
+.city-photo-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr 0.95fr;
+  align-items: start;
+  gap: 26px;
+}
+.city-photo {
+  margin: 0;
+  min-width: 0;
+}
+.city-photo > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.city-photo figcaption {
+  padding: 22px 0 0;
+}
+.city-photo .eyebrow {
+  font-size: 9px;
+}
+.city-photo h3 {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  text-transform: none;
+  margin: 8px 0 10px;
+  color: var(--deep);
+}
+.city-photo figcaption > p {
+  color: #486279;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+.city-photo figcaption > small {
+  display: block;
+  color: #486279;
+  font-size: 10px;
+  margin-top: 8px;
+}
+.city-photo-basilica {
+  padding-top: 40px;
+}
+.city-photo-chinita {
+  padding-top: 80px;
+}
+.city-discover-footer {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid #0b3b8220;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.city-discover-footer .handwritten {
+  font-size: 30px;
+  color: var(--navy);
+  transform: rotate(-3deg);
+}
+@media (max-width: 900px) {
+  .city-discover-heading {
+    gap: 24px;
+  }
+  .city-discover-heading > p {
+    max-width: 300px;
+    font-size: 14px;
+  }
+  .city-photo-grid {
+    gap: 18px;
+  }
+  .city-photo-chinita {
+    padding-top: 60px;
+  }
+}
+@media (max-width: 600px) {
+  .city-discover-heading {
+    display: block;
+    margin-bottom: 28px;
+  }
+  .city-discover-heading > p {
+    margin-top: 18px;
+    max-width: none;
+  }
+  .city-discover-heading .eyebrow {
+    font-size: 9px;
+  }
+  .city-photo-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 18px;
+  }
+  .city-photo-lake {
+    grid-column: 1 / -1;
+  }
+  .city-photo-basilica,
+  .city-photo-chinita {
+    padding-top: 0;
+  }
+  .city-photo h3 {
+    font-size: 19px;
+  }
+  .city-photo-lake h3 {
+    max-width: 300px;
+    font-size: 27px;
+  }
+  .city-photo figcaption {
+    padding-top: 15px;
+  }
+  .city-photo .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+  .city-photo figcaption > p {
+    font-size: 11px;
+  }
+  .city-discover-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .city-discover-footer .text-link {
+    font-size: 13px;
+  }
+}

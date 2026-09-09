@@ -1,0 +1,72 @@
+[
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\mitsubishi-lancer.png",
+    "source": "https://www.ciudadcars.com/wp-content/uploads/2017/01/Lancer.png",
+    "width": 600,
+    "height": 450,
+    "decoded": true,
+    "bytes": 217000
+  },
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\chevrolet-cruze.png",
+    "source": "https://www.ciudadcars.com/wp-content/uploads/2023/01/Cruze-Wall-Paper4.png",
+    "width": 600,
+    "height": 344,
+    "decoded": true,
+    "bytes": 198307
+  },
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\toyota-camry.png",
+    "source": "https://www.ciudadcars.com/wp-content/uploads/2017/01/camryvino.png",
+    "width": 640,
+    "height": 409,
+    "decoded": true,
+    "bytes": 59423
+  },
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\jeep-cherokee.png",
+    "source": "https://www.ciudadcars.com/wp-content/uploads/2017/01/Jeep-Cherokee.png",
+    "width": 1280,
+    "height": 960,
+    "decoded": true,
+    "bytes": 997127
+  },
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\ford-explorer.png",
+    "source": "https://www.ciudadcars.com/wp-content/uploads/2017/01/Ford-Explorer.png",
+    "width": 800,
+    "height": 437,
+    "decoded": true,
+    "bytes": 249159
+  },
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\ciudadcars-logo.png",
+    "source": "https://www.ciudadcars.com/wp-content/uploads/2023/01/logocc.png",
+    "width": 427,
+    "height": 74,
+    "decoded": true,
+    "bytes": 56324
+  },
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\company-hero-original.webp",
+    "source": "https://www.ciudadcars.com/wp-content/uploads/2023/01/vehiculo-e1675186627641.webp",
+    "decoded": true,
+    "width": 696,
+    "height": 388,
+    "verification": "Decoded and visually inspected with view_image; System.Drawing does not support WebP.",
+    "bytes": 44386
+  },
+  {
+    "file": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\maracaibo-bridge.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/ce/General_Rafael_Urdaneta_Bridge_view_from_the_lake_to_Cabimas_side.jpg",
+    "sourcePage": "https://commons.wikimedia.org/wiki/File:General_Rafael_Urdaneta_Bridge_view_from_the_lake_to_Cabimas_side.jpg",
+    "width": 4288,
+    "height": 2848,
+    "decoded": true,
+    "bytes": 1104262,
+    "author": "Wilfredor / Wilfredo R. Rodriguez H.",
+    "license": "CC0 1.0 Universal",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "description": "General Rafael Urdaneta Bridge over Lake Maracaibo, viewed toward Cabimas, photographed August 5, 2013."
+  }
+]

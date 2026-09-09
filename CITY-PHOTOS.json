@@ -1,0 +1,120 @@
+{
+  "description": "Cinco fotografías aportadas por el usuario, convertidas a WebP sin edición creativa.",
+  "processing": {
+    "tool": "sharp",
+    "format": "webp",
+    "quality": 88,
+    "effort": 6,
+    "resized": false,
+    "cropped": false,
+    "dimensionsPreserved": true,
+    "creativeEditing": false
+  },
+  "photos": [
+    {
+      "filename": "maracaibo-puente-atardecer.webp",
+      "src": "/images/maracaibo-puente-atardecer.webp",
+      "width": 720,
+      "height": 689,
+      "bytes": 101558,
+      "alt": "Puente Rafael Urdaneta sobre el lago de Maracaibo con el sol bajo y un cielo anaranjado.",
+      "credit": null,
+      "creditSource": null,
+      "provenance": {
+        "suppliedBy": "usuario",
+        "originalFilename": "Lago de Maracaibo, de producir petróleo a camarones.jpg",
+        "originalPath": "C:/Users/home/Downloads/Lago de Maracaibo, de producir petróleo a camarones.jpg",
+        "originalWidth": 720,
+        "originalHeight": 689,
+        "originalBytes": 94949,
+        "sourceUrl": null,
+        "license": null,
+        "licenseNote": "Licencia no especificada; no se ha inferido a partir del nombre del archivo."
+      }
+    },
+    {
+      "filename": "maracaibo-ciudad.webp",
+      "src": "/images/maracaibo-ciudad.webp",
+      "width": 736,
+      "height": 552,
+      "bytes": 128450,
+      "alt": "Edificios altos y avenidas con tráfico en la ciudad de Maracaibo.",
+      "credit": null,
+      "creditSource": null,
+      "provenance": {
+        "suppliedBy": "usuario",
+        "originalFilename": "Maracaibo - Wikipedia, la enciclopedia libre.jpg",
+        "originalPath": "C:/Users/home/Downloads/Maracaibo - Wikipedia, la enciclopedia libre.jpg",
+        "originalWidth": 736,
+        "originalHeight": 552,
+        "originalBytes": 107786,
+        "sourceUrl": null,
+        "license": null,
+        "licenseNote": "Licencia no especificada; no se ha inferido a partir del nombre del archivo."
+      }
+    },
+    {
+      "filename": "maracaibo-el-milagro.webp",
+      "src": "/images/maracaibo-el-milagro.webp",
+      "width": 482,
+      "height": 700,
+      "bytes": 113948,
+      "alt": "Vista elevada de la avenida El Milagro entre edificios, con el lago de Maracaibo al fondo.",
+      "credit": null,
+      "creditSource": null,
+      "provenance": {
+        "suppliedBy": "usuario",
+        "originalFilename": "El Milagro, Maracaibo-Venezuela.jpg",
+        "originalPath": "C:/Users/home/Downloads/El Milagro, Maracaibo-Venezuela.jpg",
+        "originalWidth": 482,
+        "originalHeight": 700,
+        "originalBytes": 95296,
+        "sourceUrl": null,
+        "license": null,
+        "licenseNote": "Licencia no especificada; no se ha inferido a partir del nombre del archivo."
+      }
+    },
+    {
+      "filename": "maracaibo-chinita.webp",
+      "src": "/images/maracaibo-chinita.webp",
+      "width": 736,
+      "height": 552,
+      "bytes": 53492,
+      "alt": "Monumento a Nuestra Señora de la Chiquinquirá rodeado de arcos iluminados al anochecer.",
+      "credit": null,
+      "creditSource": null,
+      "provenance": {
+        "suppliedBy": "usuario",
+        "originalFilename": "Nuestra Señora de la Chiquinquirá Zulia Venezuela.jpg",
+        "originalPath": "C:/Users/home/Downloads/Nuestra Señora de la Chiquinquirá Zulia Venezuela.jpg",
+        "originalWidth": 736,
+        "originalHeight": 552,
+        "originalBytes": 55467,
+        "sourceUrl": null,
+        "license": null,
+        "licenseNote": "Licencia no especificada; no se ha inferido a partir del nombre del archivo."
+      }
+    },
+    {
+      "filename": "maracaibo-basilica.webp",
+      "src": "/images/maracaibo-basilica.webp",
+      "width": 595,
+      "height": 596,
+      "bytes": 81788,
+      "alt": "Fachada amarilla de la Basílica de Nuestra Señora de Chiquinquirá, con sus dos torres y la plaza delante.",
+      "credit": "@jaimejavier777",
+      "creditSource": "Crédito indicado en el nombre del archivo aportado por el usuario.",
+      "provenance": {
+        "suppliedBy": "usuario",
+        "originalFilename": "Basílica de Nuestra Señora de Chiquinquirá⛪ Foto📷_ @jaimejavier777 (1).jpg",
+        "originalPath": "C:/Users/home/Downloads/Basílica de Nuestra Señora de Chiquinquirá⛪ Foto📷_ @jaimejavier777 (1).jpg",
+        "originalWidth": 595,
+        "originalHeight": 596,
+        "originalBytes": 77794,
+        "sourceUrl": null,
+        "license": null,
+        "licenseNote": "Licencia no especificada; no se ha inferido a partir del nombre del archivo."
+      }
+    }
+  ]
+}

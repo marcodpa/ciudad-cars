@@ -1,0 +1,17 @@
+{
+  "original": "public/images/logo.png",
+  "file": "public/images/logo-transparent.png",
+  "width": 427,
+  "height": 74,
+  "locations": [
+    "Home: cierre de Maracaibo",
+    "Footer compartido"
+  ],
+  "prompt": "Use case: background-extraction. Asset: exact existing official Ciudad Cars logo for a website footer, PNG with REAL alpha transparency. Remove ONLY the solid dark blue rectangular background from this supplied logo, including the blue inside the letter counters and between letterforms. Preserve the exact existing white CIUDAD, green CARS, green underline and white CAR RENTALS lettering, original proportions, slant, spacing, shapes and colors. Do not redesign, retype, add, simplify or change anything in the logo. Keep a tight wide crop with the complete logo visible, matching the original aspect ratio 427:74. Output a PNG with actual fully transparent background pixels, clean antialiased edges, no blue rectangle or halo, no checkerboard pattern rendered into the pixels, no shadows, no extra content.",
+  "imagegenMode": "built-in",
+  "generatedCandidate": "C:/Users/home/.codex/generated_images/01a0861a-5d15-7500-939e-f8b46a7f3b95/exec-6c5fe6d7-99c8-4d6e-acfe-4494749baf2c.png",
+  "candidateAccepted": false,
+  "reason": "La imagen generada contenía un damero opaco y modificaba el encuadre. No se utiliza en la web.",
+  "finalExport": "Exportación alfa a partir del logo original, separación del fondo azul y recuperación de bordes blancos/verdes, sin redibujar las letras.",
+  "script": "scripts/export-transparent-logo.mjs"
+}

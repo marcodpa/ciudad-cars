@@ -1,0 +1,25 @@
+{
+  "canvas": {
+    "width": 1859,
+    "height": 846
+  },
+  "realAlpha": true,
+  "generatedForegroundHadAlpha": false,
+  "matteSource": "C:/Users/home/.codex/generated_images/work/lancer-corrected-assets/showroom-lancer-older-matte.png",
+  "exportMethod": "Generated matte applied to original colored foreground, neutral checkerboard fringe removed in the matte edge band; resized and padded to match showroom canvas.",
+  "opaqueCoverage": 0.1553263975522568,
+  "vehicleBounds": {
+    "minX": 461,
+    "minY": 341,
+    "maxX": 1331,
+    "maxY": 763
+  },
+  "catalogBounds": {
+    "left": 0.03376815492200108,
+    "right": 0.8995562130177515,
+    "top": 0.18476656804733732,
+    "bottom": 0.8776955621301775
+  },
+  "foregroundSource": "C:/Users/home/.codex/generated_images/work/lancer-corrected-assets/showroom-lancer-older-generated.png",
+  "heroSource": "C:/Users/home/.codex/generated_images/work/lancer-corrected-assets/hero-lancer-older.png"
+}

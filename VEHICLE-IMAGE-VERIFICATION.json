@@ -1,0 +1,42 @@
+[
+  {
+    "model": "lancer",
+    "path": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\scene-lancer-v3.png",
+    "width": 1859,
+    "height": 846,
+    "decoded": true,
+    "bytes": 2530830
+  },
+  {
+    "model": "cruze",
+    "path": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\scene-cruze-v3.png",
+    "width": 1860,
+    "height": 846,
+    "decoded": true,
+    "bytes": 2498671
+  },
+  {
+    "model": "camry",
+    "path": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\scene-camry-v3.png",
+    "width": 1858,
+    "height": 846,
+    "decoded": true,
+    "bytes": 2524800
+  },
+  {
+    "model": "cherokee",
+    "path": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\scene-cherokee-v3.png",
+    "width": 1859,
+    "height": 846,
+    "decoded": true,
+    "bytes": 2502114
+  },
+  {
+    "model": "explorer",
+    "path": "C:\\Users\\home\\AppData\\Local\\Temp\\ciudadcars-assets\\scene-explorer-v3.png",
+    "width": 1860,
+    "height": 846,
+    "decoded": true,
+    "bytes": 2510261
+  }
+]

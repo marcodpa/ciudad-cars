@@ -1,0 +1,2222 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-outfit);
+  --font-heading: var(--font-barlow);
+  --color-primary: var(--navy);
+  --color-primary-foreground: #fff;
+  --color-secondary: #e8f1f8;
+  --color-secondary-foreground: var(--navy);
+  --color-muted: #e8f1f8;
+  --color-muted-foreground: #52697d;
+  --color-accent: var(--lime);
+  --color-accent-foreground: var(--navy);
+  --color-border: #cad8e5;
+  --color-input: #cad8e5;
+  --color-ring: var(--blue);
+  --color-popover: #fff;
+  --color-popover-foreground: var(--navy);
+  --color-card: #fff;
+  --color-card-foreground: var(--navy);
+  --color-destructive: #b42318;
+  --radius-xl: 18px;
+  --radius-lg: 12px;
+}
+:root {
+  --navy: #073567;
+  --deep: #032640;
+  --blue: #0b3b82;
+  --lime: #b6f331;
+  --green: #7ac143;
+  --background: #f5f9fd;
+  --foreground: #082d54;
+  --page-gutter: clamp(24px, 4.3vw, 72px);
+  --header-height: 108px;
+  --scene-image: url('/images/maracaibo.webp');
+}
+* {
+  box-sizing: border-box;
+}
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+}
+body {
+  margin: 0;
+  font-family: var(--font-outfit), Arial, sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+a {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+svg {
+  flex-shrink: 0;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1,
+h2 {
+  font-family: var(--font-barlow), Arial, sans-serif;
+  font-weight: 900;
+  line-height: 1.01;
+  letter-spacing: -0.028em;
+  text-transform: uppercase;
+}
+::selection {
+  background: var(--lime);
+  color: var(--deep);
+}
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+header :focus-visible,
+.hero :focus-visible,
+.fleet-section :focus-visible,
+footer :focus-visible {
+  outline-color: var(--lime);
+}
+.page-width {
+  width: 100%;
+  max-width: 1640px;
+  padding-inline: var(--page-gutter);
+  margin-inline: auto;
+}
+.skip-link {
+  position: fixed;
+  top: -70px;
+  left: 15px;
+  padding: 14px;
+  background: var(--lime);
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 12px;
+}
+.site-header {
+  height: var(--header-height);
+  padding-inline: clamp(20px, 3.5vw, 58px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #063569;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  color: #fff;
+  border-bottom: 1px solid #ffffff14;
+}
+.brand {
+  width: clamp(245px, 27vw, 380px);
+  flex-shrink: 0;
+}
+.brand img {
+  width: 100%;
+  height: auto;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(15px, 2vw, 30px);
+  font-size: 16px;
+}
+.main-nav a {
+  padding: 15px 0;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.main-nav a[aria-current='page'] {
+  border-bottom: 3px solid var(--lime);
+  color: var(--lime);
+}
+.main-nav a:hover {
+  color: var(--lime);
+}
+.header-actions {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+}
+.header-phone {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background: #ffffff0c;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 13px 20px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--lime);
+  color: #072b46;
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+}
+.cta:hover {
+  background: #cafa62;
+  box-shadow: 0 4px 22px #b6f33125;
+}
+.header-cta {
+  min-height: 54px;
+  padding: 15px 21px;
+  font-size: 16px;
+  gap: 10px;
+}
+.menu-toggle {
+  display: none;
+}
+.outline-cta {
+  background: #03264066;
+  color: white;
+  border: 1px solid #c9e2f6;
+}
+.outline-cta:hover {
+  background: #164d76;
+  color: white;
+}
+.eyebrow {
+  margin: 0 0 13px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+  color: var(--lime);
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+  height: clamp(580px, 45vw, 730px);
+  color: #fff;
+  overflow: hidden;
+  background: var(--deep);
+}
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  z-index: -3;
+}
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(
+      90deg,
+      #002543f5 0%,
+      #002543d9 26%,
+      #00254380 45%,
+      #00254300 75%
+    ),
+    linear-gradient(0deg, #002b4c8c, transparent 35%);
+}
+.hero-content {
+  position: relative;
+  padding-top: clamp(52px, 5vw, 85px);
+  z-index: 3;
+  pointer-events: none;
+}
+.hero-content a {
+  pointer-events: auto;
+}
+.hero h1 {
+  font-size: clamp(47px, 4.8vw, 76px);
+  max-width: 800px;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 5px #001c3850;
+}
+.hero h1 span {
+  color: var(--lime);
+}
+.hero-content > p:not(.eyebrow) {
+  max-width: 610px;
+  font-size: clamp(17px, 1.6vw, 24px);
+  line-height: 1.36;
+  font-weight: 300;
+  margin-bottom: 29px;
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-actions .cta {
+  min-height: 55px;
+  padding: 14px 22px;
+  font-size: 16px;
+  gap: 13px;
+}
+.hero-benefits {
+  display: flex;
+  margin-top: 41px;
+  max-width: 490px;
+}
+.hero-benefits > span {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 11px;
+  padding: 0 21px;
+  border-right: 1px solid #c9e2f665;
+  font-size: 12px;
+  text-align: center;
+}
+.hero-benefits > span:first-child {
+  padding-left: 0;
+}
+.hero-benefits > span:last-child {
+  border: 0;
+}
+.hero-benefits svg {
+  width: 34px;
+  height: 34px;
+  stroke-width: 1.4;
+}
+.hero-vehicle {
+  position: absolute;
+  width: 52%;
+  max-width: 850px;
+  right: 4%;
+  bottom: 4%;
+  z-index: 1;
+}
+.hero-vehicle img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 12px #001d3560);
+}
+.handwritten {
+  font-family: var(--font-caveat), cursive;
+  font-weight: 500;
+  font-size: clamp(26px, 3vw, 46px);
+  line-height: 0.8;
+  transform: rotate(-10deg);
+}
+.hero-note {
+  position: absolute;
+  right: 5%;
+  top: 55px;
+  text-align: center;
+  z-index: 2;
+  color: var(--navy);
+  text-shadow: 0 1px 8px #fff8;
+}
+.hero-note > span {
+  border-bottom: 4px solid var(--green);
+  padding-bottom: 6px;
+}
+.hero-bottom {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 19px;
+  font-size: 12px;
+  z-index: 5;
+}
+.scroll-cue {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  opacity: 0.85;
+}
+.hero-location {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.hero-location small {
+  display: block;
+  font-size: 10px;
+  font-weight: 300;
+}
+.journey {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr 0.32fr;
+  gap: 35px;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 350px;
+  position: relative;
+  background: linear-gradient(0deg, #e7f0f888, transparent);
+}
+.journey-copy .eyebrow {
+  color: #579c1b;
+  margin-bottom: 11px;
+}
+.journey h2 {
+  font-size: clamp(38px, 4.3vw, 65px);
+  margin: 0 0 11px;
+}
+.lime-stroke {
+  display: block;
+  width: 110px;
+  height: 5px;
+  background: var(--green);
+  border-radius: 100%;
+  transform: rotate(-5deg);
+  margin-block: 11px 18px;
+}
+.journey-copy > p:last-child {
+  font-size: 16px;
+  line-height: 1.4;
+  max-width: 570px;
+  margin: 0;
+  color: #21466e;
+}
+.journey-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.journey-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 205px;
+  background: #e4edf5d9;
+  border: 1px solid #e4edf5;
+  padding: 25px 14px 20px;
+  border-radius: 10px;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.journey-card:hover {
+  background: #d8e9f6;
+  transform: translateY(-4px);
+}
+.journey-card > svg {
+  width: 49px;
+  height: 49px;
+  stroke-width: 1.4;
+  margin-bottom: 18px;
+}
+.journey-card h3 {
+  font-family: var(--font-barlow), sans-serif;
+  font-size: 17px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.journey-card p {
+  font-size: 13px;
+  line-height: 1.35;
+  margin: 0;
+}
+.journey-note {
+  font-size: 36px;
+  text-align: center;
+}
+.journey-note::after {
+  content: '';
+  height: 4px;
+  display: block;
+  background: var(--green);
+  border-radius: 100%;
+  margin-top: 10px;
+}
+.fleet-section {
+  --fleet-progress: 20%;
+  position: relative;
+  background: linear-gradient(135deg, #04324f, #022039 80%);
+  color: #fff;
+  border-radius: 23px 23px 0 0;
+  margin-inline: 16px;
+  margin-top: -20px;
+}
+.fleet-section[data-scroll='true'] {
+  height: calc(100svh - var(--header-height) + 360svh);
+}
+.fleet-stage {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 13px;
+  height: calc(100svh - var(--header-height));
+  padding: 27px 20px 15px;
+}
+.fleet-section[data-scroll='true'] .fleet-stage {
+  position: sticky;
+  top: var(--header-height);
+}
+.fleet-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 35px;
+  align-items: center;
+  padding-inline: 24px;
+}
+.fleet-heading h2 {
+  font-size: clamp(30px, 3.3vw, 48px);
+  margin: 0;
+}
+.fleet-heading .eyebrow {
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+.fleet-heading > p {
+  border-left: 1px solid #bedcec66;
+  padding-left: 28px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  color: #e0edf7;
+}
+.fleet-heading > p > span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.fleet-heading > p svg {
+  color: var(--lime);
+}
+.vehicle-scene {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #6696b980;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 0;
+}
+.fleet-landscape {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      90deg,
+      #01253ff5 0%,
+      #01253fda 29%,
+      #01253f68 49%,
+      #01253f00 75%
+    ),
+    var(--scene-image);
+  background-size: cover;
+  background-position: center 55%;
+  z-index: -1;
+}
+.vehicle-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
+.vehicle-panel:first-of-type {
+  opacity: 1;
+  visibility: visible;
+}
+.vehicle-panel[data-moving='true'] .vehicle-image {
+  will-change: transform, filter;
+}
+.fleet-rail {
+  position: absolute;
+  left: 17px;
+  top: 20px;
+  bottom: 20px;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 10;
+  border-right: 1px solid #b9ddf038;
+}
+.fleet-rail::before {
+  content: '';
+  position: absolute;
+  top: 21px;
+  bottom: 21px;
+  left: 11px;
+  width: 1px;
+  background: #d3e9f6;
+  z-index: -1;
+}
+.rail-stop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  text-align: left;
+}
+.rail-dot {
+  display: block;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1px solid #d3e9f6;
+  background: #01283f;
+}
+.rail-stop.is-active {
+  color: var(--lime);
+  font-weight: 600;
+}
+.rail-stop.is-active .rail-dot {
+  background: var(--lime);
+  border: 3px solid #36643c;
+  outline: 1px solid var(--lime);
+  box-shadow: 0 0 16px #b6f33199;
+}
+.vehicle-details {
+  position: relative;
+  margin-left: 115px;
+  width: 39%;
+  max-width: 540px;
+  z-index: 3;
+  padding-block: 18px;
+}
+.model-category {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lime);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.vehicle-details h3 {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: clamp(26px, 2.7vw, 42px);
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  margin-bottom: 7px;
+}
+.vehicle-details h3 strong {
+  font-weight: 600;
+}
+.vehicle-description {
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0 0 4px;
+  max-width: 370px;
+  line-height: 1.4;
+}
+.similar {
+  font-size: 12px;
+  color: #d1e0ed;
+}
+.vehicle-specs {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  margin-bottom: 16px;
+}
+.vehicle-specs > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.vehicle-specs svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}
+.vehicle-price > span {
+  font-size: 14px;
+}
+.vehicle-price strong {
+  font-size: 43px;
+  color: var(--lime);
+  font-weight: 700;
+  line-height: 1;
+}
+.vehicle-price small {
+  font-size: 0.7em;
+}
+.vehicle-price {
+  margin-bottom: 16px;
+}
+.vehicle-actions {
+  display: flex;
+  gap: 10px;
+}
+.vehicle-actions .cta {
+  font-size: 13px;
+  min-height: 43px;
+  padding: 10px 15px;
+}
+.vehicle-image {
+  position: absolute;
+  width: 58%;
+  height: 96%;
+  right: 0;
+  bottom: -3%;
+  pointer-events: none;
+}
+.vehicle-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 11px #00132245);
+}
+.scene-note {
+  position: absolute;
+  bottom: 23px;
+  right: 20px;
+  z-index: 4;
+  font-size: 29px;
+  text-align: center;
+}
+.fleet-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.vehicle-thumb {
+  position: relative;
+  height: clamp(132px, 14vw, 185px);
+  isolation: isolate;
+  border-radius: 9px;
+  border: 1px solid #709abc;
+  color: white;
+  background-image:
+    linear-gradient(0deg, #052b4ff9, transparent 90%), var(--scene-image);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  text-align: left;
+  padding: 0;
+  transition: border-color 0.2s;
+}
+.vehicle-thumb.is-active {
+  border-color: var(--lime);
+  box-shadow: inset 0 -3px var(--lime);
+}
+.vehicle-thumb:hover {
+  border-color: var(--lime);
+}
+.thumb-number {
+  position: absolute;
+  top: 9px;
+  left: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 2;
+}
+.vehicle-thumb > img {
+  position: absolute;
+  width: 85%;
+  height: 76%;
+  object-fit: contain;
+  right: -3%;
+  top: -9%;
+}
+.thumb-info {
+  position: absolute;
+  inset: auto 12px 10px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+.thumb-category {
+  color: var(--lime);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-size: 10px;
+  font-weight: 500;
+}
+.thumb-info > strong {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-block: 2px 5px;
+}
+.thumb-specs {
+  font-size: 11px;
+  display: flex;
+  gap: 9px;
+  margin-bottom: 4px;
+}
+.thumb-price {
+  font-size: 11px;
+}
+.thumb-price b {
+  font-size: 23px;
+  color: var(--lime);
+  font-weight: 600;
+  margin-left: 5px;
+}
+.thumb-price small {
+  font-size: 0.64em;
+}
+.fleet-footer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 36px;
+}
+.fleet-current {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  white-space: nowrap;
+}
+.fleet-current > span {
+  font-size: 12px;
+  color: #b8d2e5;
+  min-width: 80px;
+}
+.fleet-progress {
+  display: block;
+  flex: 1;
+}
+.fleet-progress [data-slot='progress-track'] {
+  height: 3px;
+  background: #60849d60;
+  border-radius: 0;
+}
+.fleet-progress [data-slot='progress-indicator'] {
+  width: var(--fleet-progress) !important;
+  background: var(--lime);
+  transition: none;
+}
+.fleet-arrows {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.arrow-button,
+.leave-fleet {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 36px;
+  min-height: 36px;
+  border-radius: 4px;
+  color: white;
+  background: transparent;
+  border: 1px solid #7897ae80;
+}
+.arrow-button:hover,
+.leave-fleet:hover {
+  color: var(--deep);
+  background: var(--lime);
+}
+.leave-fleet svg {
+  width: 16px;
+  height: 16px;
+}
+.car-dialog {
+  width: min(540px, calc(100vw - 32px)) !important;
+  max-width: 540px !important;
+  max-height: calc(100svh - 40px);
+  overflow-y: auto;
+  border-radius: 18px;
+  padding: 30px;
+  color: var(--navy);
+}
+.car-dialog > .eyebrow {
+  color: #457b14;
+  font-size: 12px;
+  margin: 0;
+}
+.dialog-title {
+  font-size: 30px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+.dialog-close {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  border-radius: 50%;
+}
+.dialog-close:hover {
+  background: #e4edf5;
+}
+.car-dialog > img {
+  height: 200px;
+  width: 100%;
+  object-fit: contain;
+}
+.dialog-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.dialog-specs > span {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+}
+.dialog-specs svg {
+  width: 20px;
+}
+.dialog-price {
+  font-size: 16px;
+  margin: 12px 0 0;
+}
+.dialog-price strong {
+  display: block;
+  font-size: 30px;
+}
+.dialog-note {
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+  color: #52697d;
+}
+[data-slot='dialog-overlay'] {
+  background: #00274699;
+}
+.how-it-works {
+  background: #032640;
+  color: #fff;
+  margin-top: 0;
+}
+.how-inner {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr auto 1fr auto 1fr;
+  gap: 27px;
+  align-items: center;
+  padding-block: 40px;
+}
+.how-heading .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+.how-heading h2 {
+  font-size: 33px;
+  margin-bottom: 9px;
+}
+.how-heading > p:last-child {
+  font-size: 14px;
+  line-height: 1.35;
+  margin: 0;
+  font-weight: 300;
+}
+.how-step {
+  text-align: center;
+}
+.how-step > svg {
+  width: 41px;
+  height: 41px;
+  stroke-width: 1.3;
+  margin: 0 auto 13px;
+}
+.how-step h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.how-step p {
+  font-size: 13px;
+  line-height: 1.35;
+  margin: 0;
+  font-weight: 300;
+  color: #d7e4ee;
+  max-width: 190px;
+  margin-inline: auto;
+}
+.step-arrow {
+  width: 24px;
+  color: #bed4e2;
+}
+.city-banner {
+  min-height: 245px;
+  height: 22vw;
+  max-height: 370px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px var(--page-gutter);
+  background-image:
+    linear-gradient(90deg, #04336355, #04336312, #032640dd), var(--scene-image);
+  background-size: cover;
+  background-position: center 35%;
+  color: white;
+}
+.city-banner > .handwritten {
+  align-self: flex-start;
+  margin-top: 15px;
+  font-size: 39px;
+  text-shadow: 0 2px 6px #032640;
+}
+.city-banner > div {
+  width: 290px;
+  text-align: center;
+}
+.city-banner img {
+  width: 100%;
+  height: auto;
+}
+.city-banner p {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  margin: 17px 0;
+}
+.city-banner .lime-stroke {
+  margin-left: auto;
+  width: 120px;
+}
+footer {
+  background: #063569;
+  color: #d7e5ef;
+}
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-block: 23px;
+}
+.footer-bottom > a,
+.footer-bottom > span {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 12px;
+}
+@media (min-width: 1700px) {
+  .hero-vehicle {
+    right: calc((100vw - 1560px) /2);
+  }
+}
+@media (max-width: 1440px) {
+  .header-phone {
+    display: none;
+  }
+}
+@media (max-width: 1250px) {
+  .header-phone {
+    display: none;
+  }
+  .brand {
+    width: 300px;
+  }
+  .main-nav {
+    gap: 22px;
+  }
+  .hero-benefits {
+    margin-top: 31px;
+  }
+  .vehicle-details {
+    width: 42%;
+  }
+  .vehicle-specs {
+    gap: 10px;
+  }
+  .journey {
+    gap: 22px;
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .journey-note {
+    display: none;
+  }
+  .vehicle-details h3 {
+    font-size: 31px;
+  }
+  .scene-note {
+    font-size: 24px;
+    right: 17px;
+  }
+}
+@media (max-width: 1000px) {
+  :root {
+    --header-height: 94px;
+  }
+  .site-header {
+    gap: 18px;
+    padding-inline: 24px;
+  }
+  .brand {
+    width: 225px;
+  }
+  .main-nav {
+    gap: 17px;
+    font-size: 12px;
+  }
+  .main-nav a:nth-child(3),
+  .main-nav a:nth-child(5) {
+    display: none;
+  }
+  .header-cta {
+    padding: 10px 13px;
+    font-size: 12px;
+  }
+  .hero {
+    height: 580px;
+  }
+  .hero h1 {
+    font-size: 50px;
+  }
+  .hero-content > p:not(.eyebrow) {
+    font-size: 18px;
+    max-width: 430px;
+  }
+  .hero-vehicle {
+    width: 57%;
+    right: 0;
+    bottom: 7%;
+  }
+  .hero-note {
+    font-size: 35px;
+    right: 5%;
+    top: 43px;
+  }
+  .hero-actions .cta {
+    min-height: 50px;
+    font-size: 14px;
+    padding-inline: 17px;
+  }
+  .hero-benefits {
+    margin-top: 34px;
+    max-width: 410px;
+  }
+  .hero-benefits > span {
+    padding-inline: 17px;
+    font-size: 11px;
+  }
+  .journey h2 {
+    font-size: 46px;
+  }
+  .journey {
+    padding-block: 33px 54px;
+  }
+  .journey-copy > p:last-child {
+    font-size: 15px;
+  }
+  .journey-card {
+    padding: 23px 10px 18px;
+  }
+  .journey-card p {
+    font-size: 12px;
+  }
+  .fleet-heading {
+    padding-inline: 8px;
+  }
+  .fleet-heading h2 {
+    font-size: 34px;
+  }
+  .fleet-heading > p {
+    font-size: 12px;
+    padding-left: 20px;
+  }
+  .fleet-heading .eyebrow {
+    font-size: 11px;
+  }
+  .fleet-rail {
+    left: 13px;
+    width: 62px;
+  }
+  .rail-stop {
+    font-size: 14px;
+    gap: 8px;
+  }
+  .rail-dot {
+    width: 20px;
+    height: 20px;
+  }
+  .fleet-rail::before {
+    left: 10px;
+  }
+  .vehicle-details {
+    margin-left: 90px;
+    width: 46%;
+  }
+  .vehicle-details h3 {
+    font-size: 28px;
+  }
+  .vehicle-description {
+    max-width: 290px;
+    font-size: 14px;
+  }
+  .vehicle-image {
+    width: 60%;
+    right: -5%;
+  }
+  .vehicle-specs {
+    gap: 8px;
+  }
+  .vehicle-specs > span {
+    font-size: 11px;
+  }
+  .vehicle-specs svg {
+    width: 17px;
+  }
+  .vehicle-actions .cta {
+    font-size: 12px;
+    padding-inline: 11px;
+    gap: 8px;
+  }
+  .fleet-thumbnails {
+    gap: 8px;
+  }
+  .thumb-info {
+    left: 9px;
+    right: 7px;
+    bottom: 9px;
+  }
+  .thumb-info > strong {
+    font-size: 13px;
+  }
+  .thumb-category {
+    font-size: 9px;
+  }
+  .thumb-specs {
+    font-size: 10px;
+    gap: 5px;
+  }
+  .thumb-price b {
+    font-size: 20px;
+  }
+  .scene-note {
+    display: none;
+  }
+  .how-inner {
+    gap: 18px;
+  }
+  .how-heading h2 {
+    font-size: 28px;
+  }
+  .how-step h3 {
+    font-size: 14px;
+  }
+  .how-step p {
+    font-size: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .menu-toggle {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    color: white;
+  }
+  .menu-toggle:hover {
+    background: #ffffff20;
+  }
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    padding: 15px 24px;
+    background: #063569;
+    border-top: 1px solid #ffffff25;
+  }
+  .main-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .main-nav a:nth-child(3),
+  .main-nav a:nth-child(5) {
+    display: block;
+  }
+  .main-nav a[aria-current='page'] {
+    border-bottom: 0;
+  }
+  .main-nav a {
+    padding: 14px;
+    font-size: 16px;
+  }
+  .site-header {
+    gap: 12px;
+  }
+  .brand {
+    width: 205px;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+  .hero {
+    height: 790px;
+  }
+  .hero-content {
+    padding-top: 43px;
+  }
+  .hero h1 {
+    font-size: 58px;
+  }
+  .hero-content > p:not(.eyebrow) {
+    font-size: 20px;
+  }
+  .hero-vehicle {
+    width: 80%;
+    right: 0;
+    bottom: 4%;
+  }
+  .hero-note {
+    top: 380px;
+    right: 8%;
+    font-size: 33px;
+  }
+  .hero-benefits {
+    margin-top: 27px;
+  }
+  .hero-shade {
+    background:
+      linear-gradient(90deg, #012b48eb, #012b4860),
+      linear-gradient(0deg, #012b48ad, transparent 40%);
+  }
+  .hero-location {
+    font-size: 11px;
+  }
+  .hero-location small {
+    display: none;
+  }
+  .journey {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-block: 35px 60px;
+  }
+  .journey h2 {
+    font-size: 46px;
+  }
+  .journey-copy > p:last-child {
+    max-width: 610px;
+    font-size: 16px;
+  }
+  .journey-options {
+    gap: 12px;
+  }
+  .journey-card {
+    min-height: 185px;
+  }
+  .journey-card p {
+    font-size: 14px;
+  }
+  .journey-card > svg {
+    width: 42px;
+    height: 42px;
+  }
+  .fleet-heading > p {
+    display: none;
+  }
+  .fleet-stage {
+    padding: 20px 14px 12px;
+    gap: 10px;
+  }
+  .fleet-heading h2 {
+    font-size: 31px;
+  }
+  .fleet-section {
+    margin-inline: 10px;
+    border-radius: 18px 18px 0 0;
+  }
+  .vehicle-description {
+    display: none;
+  }
+  .vehicle-details {
+    margin-left: 70px;
+    width: 50%;
+  }
+  .fleet-rail {
+    left: 10px;
+    width: 46px;
+  }
+  .rail-stop {
+    gap: 5px;
+    font-size: 12px;
+  }
+  .rail-dot {
+    width: 15px;
+    height: 15px;
+  }
+  .fleet-rail::before {
+    left: 7px;
+  }
+  .vehicle-details h3 {
+    font-size: 26px;
+  }
+  .vehicle-specs {
+    max-width: 230px;
+    margin-block: 12px;
+    gap: 10px;
+  }
+  .vehicle-price strong {
+    font-size: 35px;
+  }
+  .vehicle-actions {
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .vehicle-actions .cta {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .vehicle-image {
+    width: 63%;
+    right: -7%;
+  }
+  .vehicle-thumb {
+    height: 126px;
+  }
+  .thumb-specs {
+    display: none;
+  }
+  .thumb-info > strong {
+    font-size: 11px;
+  }
+  .thumb-category {
+    font-size: 8px;
+  }
+  .thumb-price {
+    font-size: 9px;
+  }
+  .thumb-price b {
+    font-size: 17px;
+    margin-left: 2px;
+  }
+  .thumb-number {
+    font-size: 12px;
+    left: 8px;
+    top: 6px;
+  }
+  .thumb-info {
+    left: 8px;
+    bottom: 8px;
+  }
+  .how-inner {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px 16px;
+  }
+  .how-heading {
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+  .how-heading .eyebrow {
+    display: none;
+  }
+  .how-heading h2 {
+    margin: 0;
+  }
+  .how-heading > p:last-child {
+    max-width: 160px;
+  }
+  .step-arrow {
+    display: none;
+  }
+  .city-banner > div {
+    width: 230px;
+  }
+  .city-banner > .handwritten {
+    font-size: 32px;
+  }
+}
+@media (max-width: 600px) {
+  :root {
+    --header-height: 84px;
+    --page-gutter: 22px;
+  }
+  .site-header {
+    padding-inline: 17px;
+    gap: 9px;
+  }
+  .brand {
+    width: 170px;
+  }
+  .header-cta {
+    font-size: 12px;
+    gap: 6px;
+    min-height: 44px;
+    padding: 10px;
+  }
+  .header-cta > svg {
+    width: 16px;
+  }
+  .header-actions {
+    gap: 4px;
+  }
+  .hero {
+    height: 750px;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 10.2vw, 57px);
+    margin-bottom: 16px;
+  }
+  .hero-content {
+    padding-top: 35px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+  .hero-content > p:not(.eyebrow) {
+    font-size: 17px;
+    line-height: 1.4;
+    max-width: 370px;
+    margin-bottom: 22px;
+  }
+  .desktop-break {
+    display: none;
+  }
+  .hero-actions {
+    gap: 10px;
+  }
+  .hero-actions .cta {
+    font-size: 13px;
+    gap: 8px;
+    padding: 12px 14px;
+    min-height: 47px;
+  }
+  .hero-actions .cta svg {
+    width: 18px;
+  }
+  .hero-benefits {
+    margin-top: 28px;
+    max-width: 390px;
+    justify-content: space-between;
+  }
+  .hero-benefits > span {
+    padding-inline: 12px;
+    font-size: 10px;
+    gap: 7px;
+  }
+  .hero-benefits svg {
+    width: 29px;
+    height: 29px;
+  }
+  .hero-vehicle {
+    width: 105%;
+    right: -5%;
+    bottom: 6%;
+  }
+  .hero-note {
+    top: 405px;
+    right: 12%;
+    font-size: 31px;
+  }
+  .hero-bottom {
+    bottom: 17px;
+    gap: 10px;
+  }
+  .scroll-cue {
+    font-size: 10px;
+  }
+  .hero-location {
+    font-size: 10px;
+  }
+  .hero-location svg {
+    width: 15px;
+  }
+  .journey {
+    padding-block: 32px 54px;
+    gap: 24px;
+  }
+  .journey h2 {
+    font-size: 42px;
+  }
+  .journey .eyebrow {
+    font-size: 11px;
+  }
+  .journey-copy > p:last-child {
+    font-size: 16px;
+  }
+  .journey-options {
+    gap: 8px;
+  }
+  .journey-card {
+    padding: 20px 8px 15px;
+    min-height: 178px;
+  }
+  .journey-card h3 {
+    font-size: 15px;
+  }
+  .journey-card p {
+    font-size: 12px;
+  }
+  .journey-card > svg {
+    width: 37px;
+    height: 37px;
+    margin-bottom: 14px;
+  }
+  .fleet-section {
+    margin-inline: 8px;
+  }
+  .fleet-stage {
+    padding: 17px 11px 11px;
+    gap: 9px;
+  }
+  .fleet-heading {
+    padding-inline: 4px;
+  }
+  .fleet-heading .eyebrow {
+    font-size: 10px;
+    margin-bottom: 7px;
+  }
+  .fleet-heading h2 {
+    font-size: 27px;
+  }
+  .fleet-rail {
+    flex-direction: row;
+    justify-content: space-between;
+    width: auto;
+    left: 13px;
+    right: 13px;
+    top: 5px;
+    bottom: auto;
+    height: 39px;
+    border-right: 0;
+  }
+  .fleet-rail::before {
+    left: 8px;
+    right: 8px;
+    width: auto;
+    top: 19px;
+    bottom: auto;
+    height: 1px;
+  }
+  .rail-stop {
+    gap: 5px;
+    min-height: 38px;
+    padding-right: 4px;
+    background: #062c45;
+    font-size: 12px;
+  }
+  .rail-dot {
+    width: 15px;
+    height: 15px;
+  }
+  .rail-stop.is-active .rail-dot {
+    border-width: 2px;
+  }
+  .vehicle-panel {
+    align-items: flex-start;
+  }
+  .vehicle-details {
+    position: static;
+    margin: 0;
+    padding: 48px 16px 0;
+    width: 100%;
+    max-width: none;
+  }
+  .model-category {
+    font-size: 11px;
+    margin-bottom: 3px;
+    letter-spacing: 0.14em;
+  }
+  .vehicle-details h3 {
+    font-size: 25px;
+    margin-bottom: 3px;
+    max-width: 100%;
+  }
+  .similar {
+    font-size: 11px;
+  }
+  .vehicle-specs {
+    max-width: none;
+    margin-top: 7px;
+    margin-bottom: 0;
+    gap: 13px;
+  }
+  .vehicle-specs > span {
+    font-size: 11px;
+    gap: 4px;
+  }
+  .vehicle-specs svg {
+    width: 16px;
+    height: 16px;
+  }
+  .vehicle-price {
+    position: absolute;
+    left: 16px;
+    bottom: 69px;
+    margin: 0;
+    z-index: 3;
+  }
+  .vehicle-price > span {
+    font-size: 12px;
+  }
+  .vehicle-price strong {
+    font-size: 31px;
+  }
+  .vehicle-price small {
+    font-size: 0.7em;
+  }
+  .vehicle-actions {
+    position: absolute;
+    bottom: 13px;
+    left: 13px;
+    right: 13px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 8px;
+  }
+  .vehicle-actions .cta {
+    min-height: 42px;
+    padding: 9px;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .vehicle-image {
+    width: 87%;
+    height: 53%;
+    bottom: 51px;
+    right: -10%;
+  }
+  .fleet-landscape {
+    background-image:
+      linear-gradient(
+        180deg,
+        #012c49ef 0%,
+        #012c49b0 28%,
+        #012c4910 70%,
+        #012c49ad
+      ),
+      var(--scene-image);
+    background-position: 60% center;
+  }
+  .fleet-thumbnails {
+    gap: 5px;
+  }
+  .vehicle-thumb {
+    height: 99px;
+    border-radius: 6px;
+  }
+  .vehicle-thumb > img {
+    width: 120%;
+    right: -20%;
+    top: -8%;
+    height: 77%;
+  }
+  .thumb-info {
+    left: 5px;
+    right: 3px;
+    bottom: 7px;
+  }
+  .thumb-category {
+    display: none;
+  }
+  .thumb-info > strong {
+    font-size: 10px;
+    line-height: 1.05;
+    margin: 0 0 4px;
+  }
+  .thumb-price {
+    font-size: 0;
+  }
+  .thumb-price b {
+    font-size: 17px;
+    margin: 0;
+  }
+  .thumb-price small {
+    font-size: 0.65em;
+  }
+  .thumb-number {
+    font-size: 10px;
+    left: 6px;
+    top: 4px;
+  }
+  .fleet-footer {
+    gap: 12px;
+    min-height: 36px;
+  }
+  .fleet-current {
+    font-size: 13px;
+  }
+  .fleet-current > span {
+    display: none;
+  }
+  .fleet-arrows {
+    gap: 5px;
+  }
+  .arrow-button,
+  .leave-fleet {
+    width: 37px;
+    height: 36px;
+  }
+  .fleet-progress {
+    min-width: 20px;
+  }
+  .how-inner {
+    padding-block: 32px;
+    gap: 24px 12px;
+  }
+  .how-heading h2 {
+    font-size: 30px;
+  }
+  .how-heading > p:last-child {
+    font-size: 14px;
+  }
+  .how-step > svg {
+    width: 34px;
+    height: 34px;
+  }
+  .how-step h3 {
+    font-size: 14px;
+  }
+  .how-step p {
+    font-size: 12px;
+  }
+  .city-banner {
+    min-height: 245px;
+    padding-inline: 25px;
+    align-items: flex-end;
+  }
+  .city-banner > div {
+    width: 210px;
+    margin-left: auto;
+  }
+  .city-banner > .handwritten {
+    font-size: 29px;
+    position: absolute;
+  }
+  .city-banner p {
+    font-size: 10px;
+    margin: 12px 0;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .car-dialog {
+    padding: 25px;
+  }
+  .dialog-title {
+    font-size: 27px;
+  }
+  .car-dialog > img {
+    height: 160px;
+  }
+}
+@media (max-width: 380px) {
+  .brand {
+    width: 142px;
+  }
+  .site-header {
+    padding-inline: 12px;
+    gap: 4px;
+  }
+  .header-cta {
+    font-size: 11px;
+    padding: 8px;
+  }
+  .header-cta svg {
+    display: none;
+  }
+  .hero-actions .cta {
+    padding-inline: 12px;
+  }
+  .hero-benefits > span {
+    padding-inline: 8px;
+  }
+  .fleet-heading h2 {
+    font-size: 24px;
+  }
+  .vehicle-details h3 {
+    font-size: 22px;
+  }
+  .vehicle-specs {
+    gap: 9px;
+  }
+  .vehicle-specs > span {
+    font-size: 10px;
+  }
+}
+@media (min-width: 601px) and (max-height: 850px) {
+  .fleet-stage {
+    padding-top: 18px;
+    gap: 10px;
+  }
+  .fleet-heading h2 {
+    font-size: 34px;
+  }
+  .fleet-heading .eyebrow {
+    font-size: 11px;
+  }
+  .vehicle-thumb {
+    height: 128px;
+  }
+  .vehicle-details {
+    padding-block: 10px;
+  }
+  .vehicle-details h3 {
+    font-size: 29px;
+  }
+  .vehicle-description {
+    font-size: 14px;
+  }
+  .vehicle-specs {
+    margin-block: 10px;
+  }
+  .vehicle-price {
+    margin-bottom: 12px;
+  }
+  .vehicle-price strong {
+    font-size: 35px;
+  }
+  .model-category {
+    font-size: 12px;
+  }
+  .vehicle-actions .cta {
+    min-height: 41px;
+  }
+}
+@media (max-width: 600px) and (max-height: 760px) {
+  .fleet-stage {
+    padding-top: 12px;
+    padding-bottom: 9px;
+    gap: 7px;
+  }
+  .fleet-heading h2 {
+    font-size: 24px;
+  }
+  .fleet-heading .eyebrow {
+    font-size: 9px;
+    margin-bottom: 5px;
+  }
+  .vehicle-thumb {
+    height: 83px;
+  }
+  .vehicle-details {
+    padding-top: 44px;
+  }
+  .vehicle-details h3 {
+    font-size: 22px;
+  }
+  .similar {
+    display: none;
+  }
+  .vehicle-specs {
+    margin-top: 6px;
+  }
+  .vehicle-price strong {
+    font-size: 28px;
+  }
+  .vehicle-price {
+    bottom: 61px;
+  }
+  .vehicle-actions {
+    bottom: 9px;
+  }
+  .vehicle-actions .cta {
+    min-height: 40px;
+  }
+  .vehicle-image {
+    height: 53%;
+    bottom: 42px;
+  }
+}
+@media (max-height: 600px) {
+  .fleet-stage {
+    min-height: 780px;
+    height: auto;
+    grid-template-rows: auto 430px auto auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .fleet-stage {
+    height: auto;
+    min-height: 750px;
+    grid-template-rows: auto 430px auto auto;
+  }
+  .hero-vehicle,
+  .hero-backdrop {
+    transform: none !important;
+  }
+}
+/* Touch-friendly thumbnails keep the stage fixed while their strip scrolls horizontally. */
+@media (max-width: 600px) {
+  .fleet-thumbnails {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    padding-bottom: 1px;
+  }
+  .fleet-thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+  .vehicle-thumb {
+    flex: 0 0 135px;
+    height: 111px;
+    scroll-snap-align: center;
+  }
+  .vehicle-thumb > img {
+    width: 92%;
+    right: 0;
+    top: -12%;
+    height: 86%;
+  }
+  .thumb-info {
+    left: 9px;
+    bottom: 7px;
+  }
+  .thumb-info > strong {
+    font-size: 12px;
+  }
+  .thumb-price b {
+    font-size: 20px;
+  }
+  .thumb-number {
+    font-size: 12px;
+  }
+  .rail-stop {
+    min-height: 44px;
+  }
+  .fleet-rail {
+    height: 44px;
+  }
+  .fleet-rail::before {
+    top: 22px;
+  }
+  .vehicle-details {
+    padding-top: 53px;
+  }
+  .arrow-button,
+  .leave-fleet {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+  }
+  .fleet-footer {
+    min-height: 44px;
+  }
+}
+@media (max-width: 600px) and (max-height: 760px) {
+  .vehicle-thumb {
+    height: 91px;
+    flex-basis: 120px;
+  }
+  .vehicle-details {
+    padding-top: 49px;
+  }
+  .vehicle-specs {
+    gap: 8px;
+  }
+}
+/* The final vehicle photographs share the same scenic composition. */
+:root {
+  --scene-image: url('/images/maracaibo-dusk.webp');
+}
+.hero-backdrop {
+  object-position: center bottom;
+}
+.hero-vehicle {
+  display: none;
+}
+.hero-shade {
+  background:
+    linear-gradient(
+      90deg,
+      #002543d9 0%,
+      #00254391 28%,
+      #00254330 45%,
+      transparent 65%
+    ),
+    linear-gradient(0deg, #00254333, transparent 35%);
+}
+.vehicle-image {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  mask-image: linear-gradient(90deg, transparent 23%, #000 45%);
+}
+.vehicle-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  filter: none;
+}
+.vehicle-details {
+  width: calc(45% - 115px);
+}
+.fleet-landscape {
+  background-position: center bottom;
+}
+.vehicle-thumb > img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 65%;
+}
+.vehicle-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #062847 0%, #062847c9 30%, transparent 72%);
+  z-index: 1;
+  pointer-events: none;
+}
+.thumb-number {
+  text-shadow: 0 1px 4px #00213b;
+}
+.car-dialog > img {
+  object-fit: cover;
+  border-radius: 9px;
+  height: auto;
+  max-height: 240px;
+}
+@media (max-width: 1000px) {
+  .vehicle-details {
+    width: calc(48% - 90px);
+  }
+  .vehicle-image {
+    mask-image: linear-gradient(90deg, transparent 20%, #000 48%);
+  }
+}
+@media (min-width: 601px) and (max-width: 760px) {
+  .vehicle-details {
+    width: 45%;
+  }
+}
+@media (max-width: 760px) {
+  .hero-shade {
+    background:
+      linear-gradient(180deg, #012b48cc, transparent 75%),
+      linear-gradient(90deg, #012b4899, transparent);
+  }
+  .hero-vehicle {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 390px;
+    right: 0;
+    bottom: 22px;
+    mask-image: linear-gradient(
+      180deg,
+      transparent,
+      #000 15%,
+      #000 90%,
+      transparent
+    );
+  }
+  .hero-vehicle img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    filter: none;
+  }
+  .hero-note {
+    z-index: 4;
+    color: #fff;
+    text-shadow: 0 2px 9px #012b48;
+  }
+}
+@media (max-width: 600px) {
+  .vehicle-details {
+    width: 100%;
+  }
+  .vehicle-image {
+    top: 115px;
+    bottom: 43px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    mask-image: linear-gradient(
+      180deg,
+      transparent,
+      #000 22%,
+      #000 91%,
+      transparent
+    );
+  }
+  .vehicle-image img {
+    object-fit: cover;
+    object-position: center bottom;
+  }
+  .vehicle-price {
+    text-shadow: 0 2px 7px #00233c;
+  }
+  .vehicle-thumb > img {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-position: center 67%;
+  }
+  .hero-vehicle {
+    height: 320px;
+    bottom: 25px;
+  }
+  .hero-note {
+    top: 408px;
+    right: 8%;
+    font-size: 29px;
+  }
+}

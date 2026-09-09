@@ -1,0 +1,17 @@
+BUILT-IN IMAGE GENERATION PROMPTS
+
+ASSET A
+Use case: photorealistic-natural.
+Asset type: standalone wide website background scene; generate one image only.
+Input image 1 is a composition and mood REFERENCE only: use the lakefront sunset scenery in its upper hero panel as inspiration, do not reproduce the webpage.
+Primary request: a cinematic Maracaibo-inspired lakefront paved promenade at dusk, wet reflective asphalt road in the entire foreground, palm trees along the left side, Rafael Urdaneta bridge visible across the water at center-right, local urban skyline far right, warm pink-orange dusk sky. Evocative editorial composition rather than an exact documentary photograph.
+Composition: landscape approximately 2.2:1 aspect ratio, desired width at least 2048 pixels. Keep the left 40 percent dark, subdued and uncluttered, with deep navy-friendly negative space for a separate later text overlay. Dark silhouetted palms may frame the far left. Keep a broad open wet road area in the lower right for a separate later car overlay. Bridge and waterfront sit in the middle distance. Natural perspective from a low roadside camera, high-quality realistic surface reflections, warm sky toward right, blue/navy shadows toward left.
+Constraints: this is ONLY an empty scenic background. NO CARS or any vehicles anywhere, no people, no text, no lettering, no location signs, no logos, no watermark, no UI, no buttons, no panels, no border, no mockup. Do not include the reference car or any of the reference webpage content. Output a full-bleed scenic image.
+
+ASSET B
+Use case: background-extraction.
+Asset type: transparent PNG vehicle cutout, one image only.
+Input image 1 is the exact EDIT TARGET: the supplied older silver Mitsubishi Lancer sedan.
+Primary request: remove ONLY the white background and the cast ground shadow, replacing those areas with TRUE alpha transparency. Preserve the original car photo itself.
+Invariants: preserve the exact older Mitsubishi Lancer make, model, generation, body proportions, silver paint, grille, badge, black LANCER plate, headlights, wheels, windows, mirrors, antenna, spoiler, bumper, visible surfaces, geometry, lighting, reflections and original front three-quarter camera angle. Keep its front pointing to the lower left exactly as in the input. Do not alter, recreate, redesign, repaint, relight, restyle, beautify or modernize the vehicle. Do not turn it into an Evo, a 2017 Lancer, or the car in any other reference. Keep the complete car within frame with a small transparent margin. Crisp precise extraction around all physical edges. Existing reflected detail on the car should remain intact.
+Output: actual RGBA PNG with a genuinely transparent alpha background and no cast ground shadow. Do not paint a checkerboard, white, gray or any colored backdrop. No new text, no watermark, no new objects.
