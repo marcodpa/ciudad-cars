@@ -153,7 +153,7 @@
 }
 .site-footer {
   padding: 0;
-  background: #032640;
+  background: var(--deep);
   color: #d0deea;
 }
 .footer-grid {
@@ -976,7 +976,7 @@
     left: 0;
     right: 0;
     padding: 15px 24px;
-    background: #063569;
+    background: var(--deep);
     border-top: 1px solid #ffffff25;
   }
   .main-nav.is-open {

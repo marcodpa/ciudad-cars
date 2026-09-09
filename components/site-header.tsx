@@ -34,7 +34,7 @@ export function SiteHeader() {
       <header className="site-header">
         <Link href="/" aria-label="Ciudad Cars, inicio" className="brand">
           <img
-            src="/images/logo.png"
+            src="/images/logo-transparent.png"
             width="427"
             height="74"
             alt="Ciudad Cars · Car Rentals"

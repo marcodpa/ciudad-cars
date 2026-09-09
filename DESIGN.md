@@ -10,7 +10,7 @@ La captura original de vehículos define modelos, categorías, precios y capacid
 
 ## Identidad
 
-- Logo oficial: `public/images/logo.png`. Sin redibujar, recolorear ni deformar. El cierre fotográfico y el footer usan `public/images/logo-transparent.png`, con el fondo azul eliminado y transparencia real.
+- Logo oficial: `public/images/logo.png`. Sin redibujar, recolorear ni deformar. El header, el cierre fotográfico y el footer usan `public/images/logo-transparent.png`, con el fondo azul eliminado y transparencia real.
 - Personalidad: local, cercana, práctica. Maracaibo es el punto de partida.
 - Titulares: Barlow 800–900, mayúsculas y líneas compactas.
 - Texto y controles: Outfit.
@@ -20,8 +20,8 @@ La captura original de vehículos define modelos, categorías, precios y capacid
 | Color | Valor | Aplicación |
 |---|---|---|
 | Azul corporativo | #0B3B82 | Identidad y foco sobre blanco |
-| Azul de navegación | #073567 / #063569 | Header, secciones y enlaces |
-| Azul profundo | #032640 | Escenario del carrusel y footer |
+| Azul de navegación | #073567 | Secciones y enlaces |
+| Azul profundo | #032640 | Header, menú móvil, escenario del carrusel y footer |
 | Lima brillante | #B6F331 | CTA, precios y selección activa |
 | Verde corporativo | #7AC143 | Trazos y acentos |
 | Blanco | #FFFFFF | Texto sobre azul y tarjetas |

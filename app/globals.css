@@ -133,7 +133,7 @@ footer :focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  background: #063569;
+  background: var(--deep);
   position: sticky;
   top: 0;
   z-index: 40;
@@ -1022,7 +1022,7 @@ footer :focus-visible {
   width: 120px;
 }
 footer {
-  background: #063569;
+  background: var(--deep);
   color: #d7e5ef;
 }
 .footer-bottom {
@@ -1267,7 +1267,7 @@ footer {
     left: 0;
     right: 0;
     padding: 15px 24px;
-    background: #063569;
+    background: var(--deep);
     border-top: 1px solid #ffffff25;
   }
   .main-nav.is-open {
