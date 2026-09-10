@@ -48,3 +48,9 @@ Las cinco hojas de `../scroll-animation/` son referencias de identidad utilizada
 - [Prompts exactos y revisión](PROMPTS-AND-QA.md).
 
 El primer plano muestra ocho vehículos: Explorer plateada de llegada y siete estacionados. La fila al fondo, de izquierda a derecha, contiene Lancer gris cálido, Cruze negro, Camry vinotinto, Cherokee oscura, Explorer blanca, Lancer plateado y Lancer azul oscuro.
+
+## Toma anterior: entrada exterior al garaje
+
+[garage-entry.png](garage-entry.png) precede a la llegada al sótano. Se ve la Explorer plateada completa desde atrás y en tres cuartos, cruzando la boca del garaje desde el exterior para comenzar el descenso. Usa la hoja de ocho ángulos de la Explorer y la toma del sótano como referencias. [Prompt exacto y revisión](garage-entry-prompt.json); generación con ImageGen integrado.
+
+Orden de imágenes: entrada exterior → llegada por la rampa al sótano → vista desde el conductor.
