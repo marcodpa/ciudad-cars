@@ -1,10 +1,10 @@
 export const fleet = [
   {
     id: 'lancer',
-    showroomScene: '/images/lancer-reference-showroom.webp',
-    showroomCutout: '/images/lancer-reference-cutout.webp',
-    showroomMask: '/images/lancer-reference-alpha.png',
-    cutout: '/images/lancer-reference-cutout.png',
+    showroomScene: '/images/lancer-exact-showroom.webp',
+    showroomCutout: '/images/lancer-exact-cutout.webp',
+    showroomMask: '/images/lancer-exact-alpha.png',
+    cutout: '/images/lancer-exact-cutout.png',
     category: 'Económico',
     make: 'Mitsubishi',
     model: 'Lancer',
@@ -13,9 +13,9 @@ export const fleet = [
     passengers: 5,
     bags: 2,
     doors: 4,
-    image: '/images/lancer-reference-scene.webp',
-    mobileImage: '/images/lancer-reference-mobile.webp',
-    thumbnail: '/images/lancer-reference-thumb.webp',
+    image: '/images/lancer-exact-scene.webp',
+    mobileImage: '/images/lancer-exact-mobile.webp',
+    thumbnail: '/images/lancer-exact-thumb.webp',
     description:
       'Para moverte a tu ritmo. Práctico, cómodo y listo para la ciudad.',
   },

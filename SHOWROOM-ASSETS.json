@@ -10,15 +10,13 @@
   "method": "Built-in imagegen produced the five complete scenes and aligned luminance mattes. Native SVG compositions apply those generated mattes without changing the source vehicle pixels, then export RGBA PNG foregrounds and lossless WebP. Matte values 0..2 map to fully transparent; 253..255 map to fully opaque. The website uses the final color cutouts, never the black-and-white mattes.",
   "replacements": {
     "lancer": {
-      "reason": "User supplied the correct older rounded Lancer body; all active images now follow that reference.",
-      "manifest": "design-proposals/lancer-reference/README.md",
-      "reference": "design-proposals/lancer-reference/vehicle-reference.png",
-      "scene": "public/images/lancer-reference-showroom.webp",
-      "hero": "public/images/lancer-reference-scene.webp",
-      "cutout": "public/images/lancer-reference-cutout.webp",
-      "exportScript": "scripts/prepare-lancer-reference.mjs",
-      "mode": "built-in imagegen",
-      "historicalSceneEntryBelow": true
+      "reason": "2026-09-10 user rejected prior front fascia; photo-based correction keeps narrower swept headlights and slim grille.",
+      "manifest": "design-proposals/lancer-exact/README.md",
+      "reference": "design-proposals/lancer-exact/vehicle-reference.png",
+      "scene": "public/images/lancer-exact-showroom.webp",
+      "hero": "public/images/lancer-exact-scene.webp",
+      "cutout": "public/images/lancer-exact-cutout.webp",
+      "exportScript": "scripts/prepare-lancer-exact.mjs"
     },
     "cherokee": {
       "reason": "User supplied the correct dark boxy Cherokee reference on 2026-09-10; supersedes the initial silver modern Cherokee.",

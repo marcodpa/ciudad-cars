@@ -1,0 +1,24 @@
+{
+  "canvas": {
+    "width": 1859,
+    "height": 846
+  },
+  "realAlpha": true,
+  "generatedForegroundHadAlpha": false,
+  "matteSource": "C:/Users/home/.codex/generated_images/work/lancer-exact-2026-09-10/lancer-aligned-matte.png",
+  "exportMethod": "Generated matte applied to original colored foreground, neutral checkerboard fringe removed in the matte edge band and the mask contracted by two source pixels; resized and padded to match showroom canvas.",
+  "opaqueCoverage": 0.16570209205233755,
+  "vehicleBounds": {
+    "minX": 465,
+    "minY": 327,
+    "maxX": 1392,
+    "maxY": 758
+  },
+  "catalogBounds": {
+    "left": 0.03774878967186651,
+    "right": 0.9602608929532006,
+    "top": 0.16177840236686392,
+    "bottom": 0.8694855029585797
+  },
+  "foregroundSource": "C:/Users/home/.codex/generated_images/work/lancer-exact-2026-09-10/lancer-restoration-final.png"
+}

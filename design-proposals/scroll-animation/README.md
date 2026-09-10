@@ -35,7 +35,7 @@ Una hoja por modelo, con ocho vistas del mismo vehículo sobre fondo de estudio 
 
 | Modelo | Base visual |
 |---|---|
-| Mitsubishi Lancer | Carrocería anterior corregida con la foto del usuario; gris cálido, sin apariencia Evo |
+| Mitsubishi Lancer | Frente corregido con la foto real: faros delgados e inclinados, parrilla baja y pintura gris cálida |
 | Chevrolet Cruze | Modelo negro representado actualmente en la web |
 | Toyota Camry | Modelo vinotinto representado actualmente en la web |
 | Jeep Cherokee | Carrocería cuadrada oscura, faros rectangulares y parrilla cromada, según la nueva foto del usuario |
@@ -65,6 +65,6 @@ Generación mediante ImageGen integrado, con referencias actuales del proyecto. 
 - [Jeep Cherokee — ocho ángulos](cherokee-eight-views.png)
 - [Ford Explorer — ocho ángulos](explorer-eight-views.png)
 
-Los cinco PNG tienen resolución nativa 1672×941. [Prompts completos](PROMPTS.json) y [revisión visual](VISUAL-QA.md).
+Los PNG conservan la resolución nativa entregada por el generador; las correcciones pueden variar ligeramente en dimensiones. [Prompts completos](PROMPTS.json) y [revisión visual](VISUAL-QA.md).
 
 Estado: primeras referencias de ángulos. Se conservan las carrocerías y colores principales, pero se observaron diferencias de escala entre vistas, tapas de combustible duplicadas en ambos lados y variaciones de escape o acabado trasero. Esas inconsistencias deben corregirse en los planos definitivos antes de preparar una animación continua. Estas hojas no sustituyen ninguna imagen del sitio actual.

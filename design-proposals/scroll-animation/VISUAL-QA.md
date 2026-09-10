@@ -16,10 +16,9 @@ Initially generated with five built-in ImageGen calls. The Cherokee sheet was re
 
 ### Mitsubishi Lancer
 File: lancer-eight-views.png
-- Correct older rounded Lancer body, narrow split conventional grille, muted taupe metallic paint, modest stock bodywork, dark glass. No modern shark-nose/Evo replacement.
-- Eight angle categories present.
-- The fuel door is depicted on both side profiles and both rear-quarter sides, an inferred symmetry error that requires correction before continuity work.
-- Stock-style wheels remain visually similar but fine spoke design is not perfectly locked. Rear lamp/trunk geometry is inferred.
+- Replaced after the user rejected the previous headlight and grille shape. Actual photograph and new restoration define the narrower swept lamps and lower grille.
+- All eight views show the corrected taupe body. A targeted edit removed the duplicated fuel door from the right rear quarter.
+- Rear details remain inferred. Scale and fine wheel details vary between angles; reference only, not locked animation frames.
 
 ### Chevrolet Cruze
 File: cruze-eight-views.png
