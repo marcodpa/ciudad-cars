@@ -1,56 +1,30 @@
-# Explorer: de la rampa al taller en el sótano
+# Explorer: de la calle al sótano del taller
 
-Propuesta de recorrido cinematográfico para Ciudad Cars, a partir de la idea del usuario. Primero se preparan dos imágenes clave del taller y de la vista desde la Explorer; después se construye la continuidad del video.
+Secuencia visual de Ciudad Cars. La fachada se basa en la fotografía real aportada por el usuario: revestimiento beige, puerta peatonal de vidrio con marco de piedra gris, dintel claro y acceso vehicular a su derecha. El usuario confirmó que el acceso al sótano es descendente.
 
-## Recorrido propuesto
+## Orden vigente de las imágenes
 
-Duración orientativa: 12–16 segundos, ajustable cuando se defina el movimiento final.
+1. [Desde la calle, antes de entrar](real-workshop-street.png): Explorer plateada sobre la calzada, aproximándose al acceso real.
+2. [Entrada en descenso](real-workshop-entry.png): la misma Explorer avanza por el mismo acceso y comienza a bajar hacia el sótano.
+3. [Llegada al taller del sótano](basement-arrival.png): ocho vehículos contando la Explorer de llegada.
+4. [Vista desde el conductor](explorer-basement-driver-view.png): los siete carros estacionados se ven a través del parabrisas.
 
-| Momento | Acción del carro y de la cámara | Objetivo visual |
-|---|---|---|
-| 0–3 s | La Explorer plateada baja despacio una rampa suave hacia la entrada. La cámara acompaña desde tres cuartos delantero del lado del conductor. | Mostrar la carrocería correcta y establecer el acceso al taller. |
-| 3–6 s | La Explorer entra y se detiene en el pasillo central. La cámara se aproxima lateralmente a la ventana del conductor; el vidrio baja por completo. | Preparar una entrada de cámara físicamente clara. |
-| 6–9 s | La cámara atraviesa el hueco abierto de la ventana, por encima de la puerta, y gira suavemente hacia el parabrisas. | Convertir el exterior en una vista interior sin atravesar vidrio, pilares o volante. |
-| 9–13 s | Desde una posición cercana a los ojos del conductor, la cámara descubre los otros siete carros del taller. | Presentar la flota completa con cada modelo reconocible. |
-| 13–16 s | El movimiento se desacelera y sostiene la composición final. | Dar tiempo a reconocer los vehículos y permitir una futura transición al catálogo. |
+Las placas de la Explorer de la secuencia no contienen números, letras ni identificaciones visibles. Las dos primeras tomas sustituyen la fachada conceptual de garage-entry.png, que se conserva solo como historial y no debe utilizarse en la secuencia vigente.
 
-La duración por sí sola no define el recorrido de scroll. Esa correspondencia se decidirá después de aprobar la composición y el movimiento.
+## Continuidad del recorrido
 
-## Dos imágenes clave
+La cámara sigue la Explorer desde la calle hacia el portón y la rampa descendente. Una vez detenida dentro del taller, baja el vidrio del conductor; la cámara atraviesa la ventana abierta y gira suavemente hacia el parabrisas. Ese movimiento entre las imágenes aún debe construirse: las imágenes son bases de dirección visual, no un video terminado.
 
-1. **Taller y llegada:** Explorer en primer plano junto a la entrada, orientada hacia el interior. Los otros siete vehículos están más adelante, separados y organizados en un arco suave con sus frentes visibles. Una rampa descendente conecta el exterior con el taller subterráneo.
-2. **Vista desde el conductor:** interior de la misma Explorer; volante a la izquierda y tablero convencional en la franja inferior. A través del parabrisas se ven los siete vehículos, conservando orden, posiciones y luz de la primera imagen.
+Las siete unidades estacionadas mantienen el orden de izquierda a derecha: Lancer gris cálido, Cruze negro, Camry vinotinto, Cherokee cuadrada oscura, Explorer blanca, Lancer plateado y Lancer azul oscuro. Los colores adicionales no cambian carrocería, faros, parrilla ni rines.
 
-La segunda imagen se genera utilizando la primera como referencia espacial. Son imágenes de dirección visual, no fotogramas consecutivos ni una reconstrucción 3D exacta. El taller y el interior son propuestas: no se aportaron fotografías del taller real ni de la cabina de esta unidad.
+## Referencias y límites
 
-## Continuidad
+Las hojas de ángulos de ../scroll-animation/ se usan como referencias de identidad. La Explorer conserva la generación seleccionada; el Lancer utiliza la hoja corregida a partir de la foto real. La fachada real tiene prioridad sobre cualquier exterior generado antes de recibir esa foto.
 
-- Explorer plateada con la carrocería anterior ya seleccionada, parrilla de tres barras y rines de fábrica.
-- Los siete carros estacionados son: Lancer gris cálido, Cruze negro, Camry vinotinto, Cherokee cuadrada oscura, una Explorer blanca adicional y dos Lancer adicionales, plateado y azul oscuro.
-- Ocho vehículos en la vista de llegada contando la Explorer plateada; siete por delante del parabrisas en la vista interior. La Explorer blanca estacionada es una unidad adicional solicitada.
-- Mismas columnas, portón, franjas de pared, luces y posiciones de estacionamiento.
-- Techo y columnas de concreto propios de un sótano, paredes blancas, azul marino, acentos lima, iluminación LED y luz cálida únicamente desde la rampa. Sin grandes ventanales de una nave sobre el suelo. Sombras de contacto bajo cada neumático y reflejos moderados.
-- El tablero no debe tapar las parrillas de los carros. Reservar el centro del encuadre para la flota; el encuadre vertical móvil necesitará una composición propia.
-- Movimiento suave con desaceleración al entrar por la ventana. Sin saltos de escala, cambios de carrocería ni giros repentinos de cámara.
+El descenso fue confirmado por el usuario. La geometría interior no visible en la fotografía y el habitáculo siguen siendo interpretaciones cinematográficas. La imagen interior reserva aproximadamente45% a la cabina, permitiendo identificar los siete frentes; el encuadre móvil necesitará un ajuste propio.
 
-## Recursos de esta entrega
+## Generación y archivos
 
-Generación con ImageGen integrado. Los PNG seleccionados, prompts exactos y observaciones de revisión se conservan en esta carpeta. Esta entrega prepara imágenes; todavía no modifica la animación ni el carrusel de la web.
+ImageGen integrado. [Prompts de fachada real, calle, descenso y placa](real-workshop-prompts.json). [Prompts de las tomas del sótano](basement-prompts.json). [Revisión del sótano](basement-visual-qa.md).
 
-## Uso obligatorio de las hojas de ángulos
-
-Las cinco hojas de `../scroll-animation/` son referencias de identidad utilizadas en la generación de las tomas. Para el Lancer se usa la versión corregida según la fotografía real. En los vehículos adicionales solo cambia la pintura; se mantienen generación, carrocería, faros, parrilla y rines. La segunda toma debe utilizar también la primera como referencia espacial.
-
-## Imágenes finales
-
-- [Llegada por la rampa al sótano](basement-arrival.png).
-- [Vista desde el conductor](explorer-basement-driver-view.png).
-- [Prompts exactos y revisión](PROMPTS-AND-QA.md).
-
-El primer plano muestra ocho vehículos: Explorer plateada de llegada y siete estacionados. La fila al fondo, de izquierda a derecha, contiene Lancer gris cálido, Cruze negro, Camry vinotinto, Cherokee oscura, Explorer blanca, Lancer plateado y Lancer azul oscuro.
-
-## Toma anterior: entrada exterior al garaje
-
-[garage-entry.png](garage-entry.png) precede a la llegada al sótano. Se ve la Explorer plateada completa desde atrás y en tres cuartos, cruzando la boca del garaje desde el exterior para comenzar el descenso. Usa la hoja de ocho ángulos de la Explorer y la toma del sótano como referencias. [Prompt exacto y revisión](garage-entry-prompt.json); generación con ImageGen integrado.
-
-Orden de imágenes: entrada exterior → llegada por la rampa al sótano → vista desde el conductor.
+Esta carpeta prepara el recorrido visual. No modifica la interacción actual del carrusel ni presenta las imágenes como fotografías verificadas de todo el interior real.
