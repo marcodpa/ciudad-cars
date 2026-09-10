@@ -1,6 +1,6 @@
 # Fleet turnaround concept sheets — visual QA
 
-Generated with exactly five built-in ImageGen calls, one per vehicle, in one parallel batch. No alternatives, retries, website changes or image post-processing were performed. Exact prompts and input-image paths are in prompts.json.
+Initially generated with five built-in ImageGen calls. The Cherokee sheet was replaced on 2026-09-10 after the user supplied its correct body reference. Exact current prompts and input-image paths are in PROMPTS.json.
 
 ## Common findings
 
@@ -36,10 +36,10 @@ File: camry-eight-views.png
 
 ### Jeep Cherokee
 File: cherokee-eight-views.png
-- Silver current-reference Cherokee body, unified narrow headlamps, seven-slot grille, roof rails and dark cladding preserved.
-- Eight angle categories present.
-- Fuel door appears in both side profiles. Rear badges are enlarged/partly invented and small lettering is imperfect. Rear trim/exhaust are inferred.
-- No substitution with Grand Cherokee or a vintage boxy model.
+- Corrected 2026-09-10 to the user’s dark, older boxy Cherokee reference: upright rectangular headlamps, chrome seven-slot grille, factory five-spoke silver wheels and roof rails.
+- All eight requested angle categories present. Black/dark navy paint and boxy body family remain consistent.
+- Fuel door appears on the left rear quarter; the right profile does not duplicate it.
+- Unseen rear surfaces, trim and badges are inferred. Frontal/rear views are still larger relative to profiles, so this remains a concept sheet rather than continuity-locked animation frames.
 
 ### Ford Explorer
 File: explorer-eight-views.png
@@ -54,3 +54,5 @@ Original generation outputs were saved outside the Site checkout in:
 C:/Users/home/.codex/generated_images/work/fleet-turnaround-2026-09-10/
 
 The Site owner copied all five PNGs, prompts and this review into `design-proposals/scroll-animation/`. These are concept references only; no live website images or interaction were replaced.
+
+Cherokee correction sources: design-proposals/cherokee-reference/. The website now uses a separate corrected foreground; the eight-angle sheet remains a planning artifact.

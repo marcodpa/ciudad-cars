@@ -38,7 +38,7 @@ Una hoja por modelo, con ocho vistas del mismo vehículo sobre fondo de estudio 
 | Mitsubishi Lancer | Carrocería anterior corregida con la foto del usuario; gris cálido, sin apariencia Evo |
 | Chevrolet Cruze | Modelo negro representado actualmente en la web |
 | Toyota Camry | Modelo vinotinto representado actualmente en la web |
-| Jeep Cherokee | Modelo plateado representado actualmente en la web |
+| Jeep Cherokee | Carrocería cuadrada oscura, faros rectangulares y parrilla cromada, según la nueva foto del usuario |
 | Ford Explorer | Modelo plateado representado actualmente en la web |
 
 Las vistas no presentes en las referencias son interpretaciones generadas, pendientes de revisión de identidad. Estas hojas son referencias visuales; no constituyen todavía una secuencia continua de fotogramas ni una rotación 3D exacta.

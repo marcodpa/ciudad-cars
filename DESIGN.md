@@ -196,3 +196,7 @@ React 19 con Vinext (estructura compatible con Next App Router), CSS/Tailwind y 
 Comprobaciones: compilación de producción, TypeScript y lint; once pruebas de inventario, límites de selección, filtros, enlaces de reserva, validación de contacto, recuperación de navegación y transparencia/alineación de recursos. Se retiraron las pruebas del antiguo interpolador de scroll junto con ese código. Verificación HTTP de las cinco rutas y recursos usados.
 
 No se realizaron pruebas visuales o interactivas en navegador. El video sí se inspeccionó mediante fotogramas locales. El WebMCP opcional de lectura de la flota se conserva; su disponibilidad depende del navegador.
+
+## Cherokee corregida según la unidad de referencia
+
+La foto del usuario en `design-proposals/cherokee-reference/vehicle-reference.png` sustituye la Cherokee moderna plateada. La representación usa carrocería cuadrada oscura, faros rectangulares verticales, parrilla cromada de siete ranuras y rines de fábrica. No se asigna un año exacto. El carrusel, catálogo, miniaturas y detalles comparten los archivos `cherokee-reference-*`, con el mismo fondo y sombras de contacto ajustadas. Se mantienen nombre comercial, tarifa y capacidades. La hoja de ocho vistas también se corrige; los ángulos no visibles en la foto son interpretaciones para preparar la animación.

@@ -19,6 +19,14 @@
       "exportScript": "scripts/prepare-lancer-reference.mjs",
       "mode": "built-in imagegen",
       "historicalSceneEntryBelow": true
+    },
+    "cherokee": {
+      "reason": "User supplied the correct dark boxy Cherokee reference on 2026-09-10; supersedes the initial silver modern Cherokee.",
+      "manifest": "design-proposals/cherokee-reference/README.md",
+      "reference": "design-proposals/cherokee-reference/vehicle-reference.png",
+      "scene": "public/images/cherokee-reference-showroom.webp",
+      "cutout": "public/images/cherokee-reference-cutout.webp",
+      "exportScript": "scripts/prepare-cherokee-reference.mjs"
     }
   },
   "scenes": [

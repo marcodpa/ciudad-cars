@@ -1,0 +1,24 @@
+{
+  "canvas": {
+    "width": 1859,
+    "height": 846
+  },
+  "realAlpha": true,
+  "generatedForegroundHadAlpha": false,
+  "matteSource": "C:/Users/home/.codex/generated_images/work/cherokee-correction-2026-09-10/cherokee-kk-foreground-matte.png",
+  "exportMethod": "Generated matte applied to original colored foreground, neutral checkerboard fringe removed in the matte edge band and the mask contracted by two source pixels; resized and padded to match showroom canvas.",
+  "opaqueCoverage": 0.17695397891797238,
+  "vehicleBounds": {
+    "minX": 486,
+    "minY": 290,
+    "maxX": 1372,
+    "maxY": 758
+  },
+  "catalogBounds": {
+    "left": 0.058647122108660577,
+    "right": 0.9403577192038731,
+    "top": 0.10102396449704143,
+    "bottom": 0.8694855029585797
+  },
+  "foregroundSource": "C:/Users/home/.codex/generated_images/work/cherokee-correction-2026-09-10/cherokee-kk-foreground-repaired.png"
+}
