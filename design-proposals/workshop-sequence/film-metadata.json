@@ -1,0 +1,891 @@
+{
+  "created_utc": "2026-09-11T15:36:22.3743192Z",
+  "source": {
+    "path": "source.mp4",
+    "bytes": 32307576,
+    "sha256": "95035a7877961990f225ee501830d92ee1b60c834b887540645d1cecbec5efd4",
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "hevc",
+          "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+          "profile": "Main 10",
+          "codec_type": "video",
+          "codec_tag_string": "hvc1",
+          "codec_tag": "0x31637668",
+          "width": 1920,
+          "height": 1080,
+          "coded_width": 1920,
+          "coded_height": 1080,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p10le",
+          "level": 120,
+          "color_range": "tv",
+          "color_space": "bt709",
+          "color_transfer": "bt709",
+          "color_primaries": "bt709",
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "view_ids_available": "",
+          "view_pos_available": "",
+          "id": "0x1",
+          "r_frame_rate": "24/1",
+          "avg_frame_rate": "24/1",
+          "time_base": "1/90000",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 903750,
+          "duration": "10.041667",
+          "bit_rate": "25716202",
+          "nb_frames": "241",
+          "extradata_size": 2441,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler"
+          }
+        }
+      ],
+      "format": {
+        "filename": "source.mp4",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "10.041667",
+        "size": "32307576",
+        "bit_rate": "25738814",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2mp41",
+          "encoder": "Lavf58.76.100"
+        }
+      }
+    }
+  },
+  "desktop": {
+    "path": "../../../public/videos/workshop-drive.mp4",
+    "bytes": 9640081,
+    "mebibytes": 9.193,
+    "duration_seconds": 10.041667,
+    "width": 1920,
+    "height": 1080,
+    "frame_rate": "24/1",
+    "average_frame_rate": "24/1",
+    "codec": "h264",
+    "pixel_format": "yuv420p",
+    "frame_count": 241,
+    "audio_stream_count": 0,
+    "expected_gop_frames": 8,
+    "keyframe_count": 31,
+    "keyframe_frame_gaps": [
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ],
+    "keyframes": [
+      {
+        "frame_index": 0,
+        "timestamp_seconds": 0.0
+      },
+      {
+        "frame_index": 8,
+        "timestamp_seconds": 0.333333
+      },
+      {
+        "frame_index": 16,
+        "timestamp_seconds": 0.666667
+      },
+      {
+        "frame_index": 24,
+        "timestamp_seconds": 1.0
+      },
+      {
+        "frame_index": 32,
+        "timestamp_seconds": 1.333333
+      },
+      {
+        "frame_index": 40,
+        "timestamp_seconds": 1.666667
+      },
+      {
+        "frame_index": 48,
+        "timestamp_seconds": 2.0
+      },
+      {
+        "frame_index": 56,
+        "timestamp_seconds": 2.333333
+      },
+      {
+        "frame_index": 64,
+        "timestamp_seconds": 2.666667
+      },
+      {
+        "frame_index": 72,
+        "timestamp_seconds": 3.0
+      },
+      {
+        "frame_index": 80,
+        "timestamp_seconds": 3.333333
+      },
+      {
+        "frame_index": 88,
+        "timestamp_seconds": 3.666667
+      },
+      {
+        "frame_index": 96,
+        "timestamp_seconds": 4.0
+      },
+      {
+        "frame_index": 104,
+        "timestamp_seconds": 4.333333
+      },
+      {
+        "frame_index": 112,
+        "timestamp_seconds": 4.666667
+      },
+      {
+        "frame_index": 120,
+        "timestamp_seconds": 5.0
+      },
+      {
+        "frame_index": 128,
+        "timestamp_seconds": 5.333333
+      },
+      {
+        "frame_index": 136,
+        "timestamp_seconds": 5.666667
+      },
+      {
+        "frame_index": 144,
+        "timestamp_seconds": 6.0
+      },
+      {
+        "frame_index": 152,
+        "timestamp_seconds": 6.333333
+      },
+      {
+        "frame_index": 160,
+        "timestamp_seconds": 6.666667
+      },
+      {
+        "frame_index": 168,
+        "timestamp_seconds": 7.0
+      },
+      {
+        "frame_index": 176,
+        "timestamp_seconds": 7.333333
+      },
+      {
+        "frame_index": 184,
+        "timestamp_seconds": 7.666667
+      },
+      {
+        "frame_index": 192,
+        "timestamp_seconds": 8.0
+      },
+      {
+        "frame_index": 200,
+        "timestamp_seconds": 8.333333
+      },
+      {
+        "frame_index": 208,
+        "timestamp_seconds": 8.666667
+      },
+      {
+        "frame_index": 216,
+        "timestamp_seconds": 9.0
+      },
+      {
+        "frame_index": 224,
+        "timestamp_seconds": 9.333333
+      },
+      {
+        "frame_index": 232,
+        "timestamp_seconds": 9.666667
+      },
+      {
+        "frame_index": 240,
+        "timestamp_seconds": 10.0
+      }
+    ],
+    "sha256": "a30fda12df3687be587a0a892cf7163381c1a4dbe9d3451dd97d774824807e3c",
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.640032",
+          "width": 1920,
+          "height": 1080,
+          "coded_width": 1920,
+          "coded_height": 1080,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p",
+          "level": 50,
+          "color_range": "tv",
+          "color_space": "bt709",
+          "color_transfer": "bt709",
+          "color_primaries": "bt709",
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "24/1",
+          "avg_frame_rate": "24/1",
+          "time_base": "1/12288",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 123392,
+          "duration": "10.041667",
+          "bit_rate": "7677048",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "241",
+          "extradata_size": 50,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc62.28.102 libx264"
+          }
+        }
+      ],
+      "format": {
+        "filename": "../../../public/videos/workshop-drive.mp4",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "10.041667",
+        "size": "9640081",
+        "bit_rate": "7680064",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2avc1mp41",
+          "encoder": "Lavf62.12.102"
+        }
+      }
+    }
+  },
+  "mobile": {
+    "path": "../../../public/videos/workshop-drive-mobile.mp4",
+    "bytes": 4699574,
+    "mebibytes": 4.482,
+    "duration_seconds": 10.041667,
+    "width": 1280,
+    "height": 720,
+    "frame_rate": "24/1",
+    "average_frame_rate": "24/1",
+    "codec": "h264",
+    "pixel_format": "yuv420p",
+    "frame_count": 241,
+    "audio_stream_count": 0,
+    "expected_gop_frames": 4,
+    "keyframe_count": 61,
+    "keyframe_frame_gaps": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "keyframes": [
+      {
+        "frame_index": 0,
+        "timestamp_seconds": 0.0
+      },
+      {
+        "frame_index": 4,
+        "timestamp_seconds": 0.166667
+      },
+      {
+        "frame_index": 8,
+        "timestamp_seconds": 0.333333
+      },
+      {
+        "frame_index": 12,
+        "timestamp_seconds": 0.5
+      },
+      {
+        "frame_index": 16,
+        "timestamp_seconds": 0.666667
+      },
+      {
+        "frame_index": 20,
+        "timestamp_seconds": 0.833333
+      },
+      {
+        "frame_index": 24,
+        "timestamp_seconds": 1.0
+      },
+      {
+        "frame_index": 28,
+        "timestamp_seconds": 1.166667
+      },
+      {
+        "frame_index": 32,
+        "timestamp_seconds": 1.333333
+      },
+      {
+        "frame_index": 36,
+        "timestamp_seconds": 1.5
+      },
+      {
+        "frame_index": 40,
+        "timestamp_seconds": 1.666667
+      },
+      {
+        "frame_index": 44,
+        "timestamp_seconds": 1.833333
+      },
+      {
+        "frame_index": 48,
+        "timestamp_seconds": 2.0
+      },
+      {
+        "frame_index": 52,
+        "timestamp_seconds": 2.166667
+      },
+      {
+        "frame_index": 56,
+        "timestamp_seconds": 2.333333
+      },
+      {
+        "frame_index": 60,
+        "timestamp_seconds": 2.5
+      },
+      {
+        "frame_index": 64,
+        "timestamp_seconds": 2.666667
+      },
+      {
+        "frame_index": 68,
+        "timestamp_seconds": 2.833333
+      },
+      {
+        "frame_index": 72,
+        "timestamp_seconds": 3.0
+      },
+      {
+        "frame_index": 76,
+        "timestamp_seconds": 3.166667
+      },
+      {
+        "frame_index": 80,
+        "timestamp_seconds": 3.333333
+      },
+      {
+        "frame_index": 84,
+        "timestamp_seconds": 3.5
+      },
+      {
+        "frame_index": 88,
+        "timestamp_seconds": 3.666667
+      },
+      {
+        "frame_index": 92,
+        "timestamp_seconds": 3.833333
+      },
+      {
+        "frame_index": 96,
+        "timestamp_seconds": 4.0
+      },
+      {
+        "frame_index": 100,
+        "timestamp_seconds": 4.166667
+      },
+      {
+        "frame_index": 104,
+        "timestamp_seconds": 4.333333
+      },
+      {
+        "frame_index": 108,
+        "timestamp_seconds": 4.5
+      },
+      {
+        "frame_index": 112,
+        "timestamp_seconds": 4.666667
+      },
+      {
+        "frame_index": 116,
+        "timestamp_seconds": 4.833333
+      },
+      {
+        "frame_index": 120,
+        "timestamp_seconds": 5.0
+      },
+      {
+        "frame_index": 124,
+        "timestamp_seconds": 5.166667
+      },
+      {
+        "frame_index": 128,
+        "timestamp_seconds": 5.333333
+      },
+      {
+        "frame_index": 132,
+        "timestamp_seconds": 5.5
+      },
+      {
+        "frame_index": 136,
+        "timestamp_seconds": 5.666667
+      },
+      {
+        "frame_index": 140,
+        "timestamp_seconds": 5.833333
+      },
+      {
+        "frame_index": 144,
+        "timestamp_seconds": 6.0
+      },
+      {
+        "frame_index": 148,
+        "timestamp_seconds": 6.166667
+      },
+      {
+        "frame_index": 152,
+        "timestamp_seconds": 6.333333
+      },
+      {
+        "frame_index": 156,
+        "timestamp_seconds": 6.5
+      },
+      {
+        "frame_index": 160,
+        "timestamp_seconds": 6.666667
+      },
+      {
+        "frame_index": 164,
+        "timestamp_seconds": 6.833333
+      },
+      {
+        "frame_index": 168,
+        "timestamp_seconds": 7.0
+      },
+      {
+        "frame_index": 172,
+        "timestamp_seconds": 7.166667
+      },
+      {
+        "frame_index": 176,
+        "timestamp_seconds": 7.333333
+      },
+      {
+        "frame_index": 180,
+        "timestamp_seconds": 7.5
+      },
+      {
+        "frame_index": 184,
+        "timestamp_seconds": 7.666667
+      },
+      {
+        "frame_index": 188,
+        "timestamp_seconds": 7.833333
+      },
+      {
+        "frame_index": 192,
+        "timestamp_seconds": 8.0
+      },
+      {
+        "frame_index": 196,
+        "timestamp_seconds": 8.166667
+      },
+      {
+        "frame_index": 200,
+        "timestamp_seconds": 8.333333
+      },
+      {
+        "frame_index": 204,
+        "timestamp_seconds": 8.5
+      },
+      {
+        "frame_index": 208,
+        "timestamp_seconds": 8.666667
+      },
+      {
+        "frame_index": 212,
+        "timestamp_seconds": 8.833333
+      },
+      {
+        "frame_index": 216,
+        "timestamp_seconds": 9.0
+      },
+      {
+        "frame_index": 220,
+        "timestamp_seconds": 9.166667
+      },
+      {
+        "frame_index": 224,
+        "timestamp_seconds": 9.333333
+      },
+      {
+        "frame_index": 228,
+        "timestamp_seconds": 9.5
+      },
+      {
+        "frame_index": 232,
+        "timestamp_seconds": 9.666667
+      },
+      {
+        "frame_index": 236,
+        "timestamp_seconds": 9.833333
+      },
+      {
+        "frame_index": 240,
+        "timestamp_seconds": 10.0
+      }
+    ],
+    "sha256": "ebb734064bebf4d79c125ddb52521cb62fd6640ab762c0ba535e0d3e10cda14f",
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.64001f",
+          "width": 1280,
+          "height": 720,
+          "coded_width": 1280,
+          "coded_height": 720,
+          "has_b_frames": 2,
+          "pix_fmt": "yuv420p",
+          "level": 31,
+          "color_range": "tv",
+          "color_space": "bt709",
+          "color_transfer": "bt709",
+          "color_primaries": "bt709",
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "24/1",
+          "avg_frame_rate": "24/1",
+          "time_base": "1/12288",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 123392,
+          "duration": "10.041667",
+          "bit_rate": "3741194",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "241",
+          "extradata_size": 48,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc62.28.102 libx264"
+          }
+        }
+      ],
+      "format": {
+        "filename": "../../../public/videos/workshop-drive-mobile.mp4",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "10.041667",
+        "size": "4699574",
+        "bit_rate": "3744058",
+        "probe_score": 100,
+        "tags": {
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2avc1mp41",
+          "encoder": "Lavf62.12.102"
+        }
+      }
+    }
+  },
+  "posters": [
+    {
+      "path": "../../../public/videos/workshop-drive-poster.webp",
+      "bytes": 1399866,
+      "width": 1920,
+      "height": 1080,
+      "frame_index": 0,
+      "encoding": "lossless WebP",
+      "sha256": "00bf052a2e9b730985599ab4b20c8bb62c25d7a4d603aaf71b6ab9aa1f500eb7",
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "webp",
+            "codec_long_name": "WebP",
+            "codec_type": "video",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "width": 1920,
+            "height": 1080,
+            "coded_width": 1920,
+            "coded_height": 1080,
+            "has_b_frames": 0,
+            "pix_fmt": "argb",
+            "level": -99,
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/25",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            }
+          }
+        ],
+        "format": {
+          "filename": "../../../public/videos/workshop-drive-poster.webp",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "webp_pipe",
+          "format_long_name": "piped webp sequence",
+          "size": "1399866",
+          "probe_score": 99
+        }
+      }
+    },
+    {
+      "path": "../../../public/videos/workshop-drive-mobile-poster.webp",
+      "bytes": 669596,
+      "width": 1280,
+      "height": 720,
+      "frame_index": 0,
+      "encoding": "lossless WebP",
+      "sha256": "0e71120b75c0a4d63150511e39c498af0c39ad670e3f4904641bc412ea6709bd",
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "webp",
+            "codec_long_name": "WebP",
+            "codec_type": "video",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "width": 1280,
+            "height": 720,
+            "coded_width": 1280,
+            "coded_height": 720,
+            "has_b_frames": 0,
+            "pix_fmt": "argb",
+            "level": -99,
+            "r_frame_rate": "25/1",
+            "avg_frame_rate": "25/1",
+            "time_base": "1/25",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            }
+          }
+        ],
+        "format": {
+          "filename": "../../../public/videos/workshop-drive-mobile-poster.webp",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "webp_pipe",
+          "format_long_name": "piped webp sequence",
+          "size": "669596",
+          "probe_score": 99
+        }
+      }
+    }
+  ],
+  "grade": "Original source grade preserved; no sharpening, color or aesthetic filters applied.",
+  "visual_qa": "Reviewed at the user\u0027s request and rejected for camera-path and cabin-continuity errors; see film-production.json. Original source.mp4 is retained locally and not included in this repository."
+}

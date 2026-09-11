@@ -1,0 +1,30 @@
+{
+  "model": "seedance_2_5",
+  "jobId": "340422c1-e4ac-4513-a7f5-0fda99672e40",
+  "status": "completed",
+  "editorialStatus": "rejected_by_user",
+  "enabledOnHomepage": false,
+  "visualReview": "User-requested inspection confirms approach to passenger-side rear window followed by a crossfade to an inconsistent cabin. Does not meet physical continuous-camera requirement. No reroll submitted.",
+  "generationsSubmitted": 1,
+  "creditsQuoted": 90,
+  "creditsCharged": 90,
+  "durationRequestedSeconds": 10,
+  "durationActualSeconds": 10.041667,
+  "aspectRatio": "16:9",
+  "resolution": "1080p",
+  "generateAudio": false,
+  "prompt": "film-prompt.txt",
+  "assets": {
+    "desktop": "../../../public/videos/workshop-drive.mp4",
+    "mobile": "../../../public/videos/workshop-drive-mobile.mp4",
+    "desktopPoster": "../../../public/videos/workshop-drive-poster.webp",
+    "mobilePoster": "../../../public/videos/workshop-drive-mobile-poster.webp"
+  },
+  "referenceRoles": [
+    "Approved real-workshop entrance: start frame and architecture",
+    "Corrected mid-ramp: architecture only, no raised barriers",
+    "Explorer, Lancer, Cruze, Camry and Cherokee eight-view sheets: identity only",
+    "Driver-view still: workshop layout and fleet order, not dashboard identity"
+  ],
+  "verification": "Encoding metadata, duration, dimensions, frame counts and frequent keyframes verified. Visual continuity is not guaranteed by these mechanical checks."
+}

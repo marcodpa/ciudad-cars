@@ -5,6 +5,7 @@ import './pages.css';
 import './showroom.css';
 import './city.css';
 import './catalog.css';
+import './workshop.css';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 const outfit = Outfit({

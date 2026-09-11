@@ -2,6 +2,22 @@
 
 ## Referencias aprobadas
 
+### Recorrido del taller: video controlado por scroll
+
+**Estado: video rechazado por el usuario; componente preparado pero desconectado del Home.** La revisión solicitada mostró un acercamiento al lado del pasajero y a la ventana trasera, seguido de un fundido hacia una cabina de otra generación. No cumple el recorrido físico continuo pedido. No se generará otra versión sin una nueva instrucción del usuario. La descripción siguiente documenta la implementación preparada, no una sección publicada.
+
+La nueva preparación de imágenes se realiza manualmente por el usuario. El prompt actualizado de la tercera toma se conserva en `design-proposals/workshop-sequence/image-03-ramp-arrival-prompt.md`: llegada al final de la rampa y revelación de la flota, con el portón ya cerrado detrás. El acabado común de grano e imperfecciones está en `cinematic-realism-block.md`, en la misma carpeta. Estos textos documentan la nueva dirección y sustituyen las indicaciones anteriores donde entren en conflicto.
+
+La nueva sección `#recorrido`, entre «Tu viaje comienza aquí» y el carrusel de flota, usa el método de `higgsfield-websites/references/scroll-scrub.md`, adaptado a la web existente. El carrusel manual de cinco modelos conserva su interacción independiente.
+
+La sección permanece fija bajo el header mientras el scroll controla linealmente el tiempo de un único video. Al retroceder se recorre el mismo archivo hacia atrás; al detenerse se conserva el fotograma. Cuatro capítulos corresponden a entrada, descenso, cabina y descubrimiento de la flota. Un enlace visible permite saltar directamente a los vehículos. Se mantiene el scroll nativo, sin interceptar la rueda ni el gesto táctil.
+
+Se generó un único video con Seedance 2.5, 1080p, formato 16:9, duración efectiva 10,041667 s, sin audio. Costo confirmado y cobrado: 90 créditos. No se hicieron regeneraciones. El prompt completo y los datos del archivo se guardan en `design-proposals/workshop-sequence/film-prompt.txt` y `film-metadata.json`. El realismo visual y la continuidad exacta de todos los detalles son resultados generativos, no garantías derivadas del prompt.
+
+Los videos locales H.264 usan fotogramas clave frecuentes para permitir búsquedas rápidas: GOP 8 en desktop (9,19 MiB), GOP 4 en móvil (4,48 MiB). Conservan el color del original. Los posters provienen del primer fotograma exacto de cada versión. El archivo se carga al acercarse a la sección, se almacena como Blob para permitir búsquedas en todo el recorrido y se libera al desmontar. Solo se procesa el destino más reciente del scroll; nunca se acumula una cola de búsquedas. La geometría completa 16:9 se conserva en móvil para no recortar los vehículos de los extremos.
+
+Con movimiento reducido o ahorro de datos se muestra el poster, se elimina el recorrido largo y no se descarga el MP4. Un fallo de carga conserva la imagen y el acceso al catálogo. El texto y los enlaces existen desde el HTML inicial, y el video no contiene controles ni títulos incrustados.
+
 La referencia general es `DESIGN-REFERENCE.png`, entregada por el usuario. Se mantienen el header azul, el hero de Maracaibo al atardecer, los titulares contundentes, los acentos lima y los motivos Turismo, Negocios y Familia.
 
 La referencia de interacción más reciente es `C:/Users/home/Downloads/IMG_0404.MP4`. Se inspeccionó la secuencia “Choose Your Perfect Drive”, aproximadamente entre 7 y 9 segundos: un automóvil grande centrado, una plataforma y un fondo inmóviles; debajo, modelo, precio, especificaciones, acciones y miniaturas. Se adapta esta distribución a Ciudad Cars. El negro/dorado del video no se incorpora a la identidad.
