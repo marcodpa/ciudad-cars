@@ -20,7 +20,7 @@ npm run build:local
 npm start
 ```
 
-`npm run build` prepara la versión alojada en Sites. El modo local conserva el servidor Node para las auditorías y las pruebas sin conexión a servicios de alojamiento.
+`npm run build` prepara la versión para Vercel con Nitro y genera `.vercel/output`. El modo local conserva el servidor Node para las auditorías y las pruebas sin conexión a servicios de alojamiento. `npm run build:sites` mantiene disponible la compilación anterior para Sites.
 
 ## Rutas
 

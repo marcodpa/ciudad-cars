@@ -1,0 +1,19 @@
+.git
+.claude
+.local-preview
+.openai
+.next
+.vinext
+.wrangler
+node_modules
+dist
+.output
+outputs
+work
+design-proposals
+fotos para el video
+.env*
+*.tsbuildinfo
+/*.png
+cc explrer
+wrangler.sites.jsonc

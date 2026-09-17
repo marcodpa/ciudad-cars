@@ -2,11 +2,19 @@ import tailwindcss from '@tailwindcss/postcss';
 import { cloudflare } from '@cloudflare/vite-plugin';
 import { sites } from '@openai/sites-vite-plugin';
 import vinext from 'vinext';
+import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
 
-// Development and local audits run on Node; Sites builds target Workers.
+// Keep local Node previews separate from the Vercel and optional Sites builds.
 export default defineConfig(({ mode }) => ({
   resolve: { dedupe: ['react', 'react-dom'] },
+  // Bundle both server environments before Nitro packages the Vercel function.
+  ...(mode === 'vercel' ? {
+    environments: {
+      rsc: { resolve: { noExternal: true } },
+      ssr: { resolve: { noExternal: true } },
+    },
+  } : {}),
   optimizeDeps: {
     include: [
       'react',
@@ -30,9 +38,9 @@ export default defineConfig(({ mode }) => ({
   css: { postcss: { plugins: [tailwindcss()] } },
   plugins: [
     vinext(),
-    sites(),
+    ...(mode === 'vercel' ? [nitro({ preset: 'vercel' })] : []),
     ...(mode === 'sites'
-      ? [cloudflare({
+      ? [sites(), cloudflare({
           configPath: './wrangler.sites.jsonc',
           viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
         })]
