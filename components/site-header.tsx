@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { company } from '@/lib/company';
 import { siteNavigation } from '@/lib/navigation';
 
-export function SiteHeader() {
+export function SiteHeader({ afterIntro = false }: { afterIntro?: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLButtonElement>(null);
@@ -26,6 +26,9 @@ export function SiteHeader() {
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, [open]);
+  // Home's full-screen intro includes its approved overlay header. The shared
+  // navigation starts immediately after it; interior routes keep their header.
+  if (afterIntro ? pathname !== '/' : pathname === '/') return null;
   return (
     <>
       <a className="skip-link" href="#contenido">

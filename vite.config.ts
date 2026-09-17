@@ -15,6 +15,7 @@ export default defineConfig({
       '@base-ui/react/progress',
       'gsap',
       'gsap/ScrollTrigger',
+      'gsap/ScrollToPlugin',
     ],
   },
   server: {

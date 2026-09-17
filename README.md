@@ -1,6 +1,6 @@
 # Ciudad Cars
 
-Sitio responsive con Home, catálogo de vehículos, servicios, quiénes somos y contacto. El Home conserva un único escenario de Maracaibo mientras cambian el vehículo y su información con flechas, miniaturas o gestos horizontales. El carrusel es manual: la sección no se fija y el scroll vertical no cambia el vehículo.
+Sitio responsive con Home, catálogo de vehículos, servicios, quiénes somos y contacto. La portada integra la intro aérea aprobada de Ciudad Cars: Cruze y Explorer, fotogramas ligados al scroll, textos y transiciones con GSAP. Después continúa el sitio existente y su catálogo de cinco vehículos. El carrusel del catálogo sigue siendo manual, con flechas, miniaturas y gestos horizontales.
 
 ## Ejecutar localmente
 
@@ -22,7 +22,7 @@ npm start
 
 ## Rutas
 
-- `/`: Home y carrusel en `/#flota`.
+- `/`: intro en `/#recorrido`, Home y carrusel en `/#flota`.
 - `/vehiculos`: catálogo C con fichas horizontales, filtros, sombras y detalles.
 - `/servicios`: alquiler, complementos y taller.
 - `/quienes-somos`: historia y empresa.
@@ -36,12 +36,15 @@ npx tsc --noEmit
 npm test
 ```
 
-Once pruebas cubren inventario, límites de selección, filtros, consultas, recuperación de rutas y recortes de vehículos con alfa real y canvas común. El lint cubre el código creado; los componentes del scaffold se conservan sin editar.
+Trece pruebas cubren inventario, límites de selección, filtros, consultas, recuperación de rutas, recortes de vehículos y la integridad de los 397 recursos originales de la intro. El lint cubre el código creado; los componentes del scaffold se conservan sin editar.
 
 ## Estructura
 
 - `app/layout.tsx`: tipografías, navegación y footer compartidos.
-- `app/page.tsx`: hero, motivos de viaje, fotos reales de Maracaibo y cierre.
+- `app/page.tsx`: intro, motivos de viaje, fotos reales de Maracaibo y cierre.
+- `components/cinematic-intro.tsx`, `lib/cinematic-intro.js`, `app/cinema.css`: intro aprobada adaptada a React, con estilos aislados y limpieza de eventos y animaciones al desmontarse.
+- `public/cinema/`: fotogramas, miniaturas, imágenes y película originales, sin regeneración ni recodificación.
+- `docs/cinematic-intro.md`: procedencia, integración, carga de recursos y validación de la intro.
 - `app/{vehiculos,servicios,quienes-somos,contacto}/page.tsx`: páginas interiores.
 - `components/fleet-experience.tsx`: propuesta B con ficha lateral, escena única, GSAP, controles y gestos.
 - `components/vehicle-ground-shadow.tsx`, `lib/vehicle-shadows.ts`: sombras de contacto alineadas con las ruedas de cada vehículo.
@@ -53,7 +56,7 @@ Once pruebas cubren inventario, límites de selección, filtros, consultas, recu
 - `lib/navigation.ts`, `components/site-link.tsx`, `proxy.ts`: enlaces nativos y recuperación de direcciones anteriores del menú.
 - `app/globals.css`: identidad y homepage aprobada.
 - `app/showroom.css`: escenario del carrusel.
-- `app/city.css`: galería de fotografías reales del Home.
+- `components/city-discovery.tsx`, `app/city.css`: galería de cinco fotografías reales de Maracaibo, con vistas grandes de la ciudad y El Milagro, ampliación de fotos y entradas suaves con GSAP.
 - `app/catalog.css`: propuesta C del catálogo, encabezado claro, fichas horizontales y adaptación móvil.
 - `CITY-PHOTOS.json`: procedencia de las cinco fotos aportadas por el usuario, usadas en Home, Quiénes somos y Contacto.
 - `app/pages.css`: componentes y páginas interiores.

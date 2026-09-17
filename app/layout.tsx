@@ -6,6 +6,7 @@ import './showroom.css';
 import './city.css';
 import './catalog.css';
 import './workshop.css';
+import './cinema.css';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 const outfit = Outfit({
