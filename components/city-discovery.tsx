@@ -24,26 +24,6 @@ import {
 
 const places = [
   {
-    image: 'maracaibo-ciudad',
-    width: 736,
-    height: 552,
-    name: 'La ciudad',
-    title: 'Una ciudad con vida propia.',
-    detail: 'Calles, encuentros y nuevos destinos.',
-    alt: 'Vista de los edificios, avenidas y vida cotidiana de Maracaibo',
-    credit: '',
-  },
-  {
-    image: 'maracaibo-el-milagro',
-    width: 482,
-    height: 700,
-    name: 'Avenida El Milagro',
-    title: 'Siempre cerca del lago.',
-    detail: 'La ciudad se encuentra con el horizonte.',
-    alt: 'Vista elevada de la avenida El Milagro entre edificios con el lago al fondo',
-    credit: '',
-  },
-  {
     image: 'maracaibo-puente-atardecer',
     width: 720,
     height: 689,
@@ -110,7 +90,7 @@ export function CityDiscovery() {
   function renderPlace(index: number) {
     const place = places[index];
     return (
-      <figure className={`city-place city-place-${index}`} key={place.image}>
+      <figure className={`city-place city-place-${place.image}`} key={place.image}>
         <button
           className="city-photo-button"
           type="button"
@@ -184,18 +164,12 @@ export function CityDiscovery() {
             </a>
           </div>
         </div>
-        <div className="city-main-views city-reveal" id="city-views">
-          {renderPlace(0)}
-          {renderPlace(1)}
-        </div>
         <div className="city-landmarks-heading">
           <span>{t('ESOS LUGARES QUE SE QUEDAN CONTIGO')}</span>
           <span>{t('Un pedacito de lo nuestro.')}</span>
         </div>
-        <div className="city-landmarks city-reveal">
-          {renderPlace(2)}
-          {renderPlace(3)}
-          {renderPlace(4)}
+        <div className="city-landmarks city-reveal" id="city-views">
+          {places.map((_, index) => renderPlace(index))}
         </div>
         <div className="city-discovery-footer">
           <div>
@@ -234,7 +208,9 @@ export function CityDiscovery() {
               <div className="city-lightbox-top">
                 <span>
                   MARACAIBO /{' '}
-                  <span aria-live="polite">0{(active ?? 0) + 1} — 05</span>
+                  <span aria-live="polite">
+                    0{(active ?? 0) + 1} — 0{places.length}
+                  </span>
                 </span>
                 <DialogClose aria-label={t('Cerrar galería')}>
                   <X size={22} />

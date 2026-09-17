@@ -135,13 +135,6 @@ export function FleetExperience() {
         <div className="drive-stage">
           <div className="drive-shell">
             <div className="drive-overline">
-              <img
-                src="/images/logo-transparent.png"
-                width="427"
-                height="74"
-                alt="Ciudad Cars"
-                loading="lazy"
-              />
               <span>
                 MARACAIBO <i aria-hidden="true" /> VENEZUELA
               </span>
@@ -204,6 +197,9 @@ export function FleetExperience() {
                         loading="lazy"
                         decoding="async"
                       />
+                      <span className="drive-photo-name" aria-hidden="true">
+                        {car.make} <strong>{car.model}</strong>
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -272,8 +268,8 @@ export function FleetExperience() {
                         height="190"
                         loading="lazy"
                       />
+                      <span className="drive-thumb-name">{car.model}</span>
                     </span>
-                    <span className="drive-thumb-name">{car.model}</span>
                   </button>
                 ))}
               </fieldset>

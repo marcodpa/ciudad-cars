@@ -1,0 +1,29 @@
+Create a 16:9 live-action-style automotive film for Ciudad Cars in Maracaibo, with four deliberate shots and restrained continuity editing. Let the action determine the pacing within the duration selected in the video generator. The full sequence needs an unhurried entrance, descent, complete stop, approach to the open window and a final interior reveal. Preserve real-time vehicle speed and allow each action to finish naturally. Keep the driving slow and steady, and give the final reveal a comfortable hold within the selected output duration.
+
+REFERENCE ROLES
+@explorer is the single moving hero vehicle. Match its silver paint, dark mirror housings, thin multispoke wheels, roof rails, body shape and rear lamps throughout. Any multi-angle sheet depicts ONE vehicle viewed from different angles.
+@loc_exterior defines the facade, signs, plants, forecourt and right-hand garage entrance.
+@loc_taller-cmpleto defines the underground workshop layout, blue-and-white walls, columns, service equipment and parked fleet. Its roofless overhead presentation is a spatial diagram only: restore the real concrete ceiling and practical ceiling lights in every filmed interior.
+@prop_parte-de-adntro-de-la-explorer defines only the cabin, dashboard and steering-wheel appearance.
+Use location images for geography and materials. Compose new full-scale camera-level shots. Keep the actual locations, not their overhead reference viewpoint.
+
+CONTINUITY
+A single garage doorway on the right of the facade connects to a ramp descending to the basement. The car's route stays clear and the garage remains fully open. The workshop floor is below street level. Editing may omit travel time; the vehicle continues forward along the same route across cuts.
+The seven parked vehicles remain stationary in a consistent row: taupe older narrow-grille Mitsubishi Lancer, black Chevrolet Cruze, burgundy Toyota Camry, dark boxy Jeep Cherokee KK, white early-2010s Ford Explorer, silver older narrow-grille Mitsubishi Lancer, dark-blue older narrow-grille Mitsubishi Lancer.
+The silver hero Explorer is distinct from the parked white Explorer. License plates have blank surfaces.
+
+SHOT 1 | EXTERIOR ENTRANCE
+Exterior, rear three-quarter view at approximately tail-light height, natural 35 mm perspective. The Explorer is already aligned with the right-hand entrance and gently drives forward across the threshold toward the descending ramp. A restrained tracking camera follows at nearly constant distance. Tire rotation corresponds to the short distance travelled; the body settles subtly as the front wheels meet the slope. Warm afternoon light on the facade. A driver is only a subdued silhouette behind tinted glass.
+
+SHOT 2 | DESCENT AND COMPLETE STOP
+An intentional cut forward in travel time reveals the final few metres of the same descending ramp and the complete workshop ahead. Follow from behind at car height. The Explorer rolls slowly onto the level basement floor, its suspension settles once at the change in slope, then it brakes smoothly to a full stop with brake lights responding to that stop. The fleet and concrete columns stay fixed. Maintain sufficient turning and stopping clearance. Interior illumination comes from practical workshop ceiling lights.
+
+SHOT 3 | OPEN WINDOW APPROACH
+Cut to the driver's front-left window at close range. The Explorer remains fully stationary. The driver's window is already lowered. A small, slow camera push approaches the open window; silver door paint, mirror and window frame retain their shape. End near the window edge, setting up a restrained matching edit into the cabin.
+
+SHOT 4 | DRIVER VIEW AND FINAL HOLD
+A clean matched cut places the camera at the seated driver's eye position inside the stopped Explorer. Steering wheel in the lower-left foreground, correct dashboard, and the same parked fleet visible through the windshield in the same order. A subtle forward drift ends on a stable view of the workshop. The driver remains seated outside the camera's face view; hands rest naturally low on the steering wheel. The edit conveys entering the cabin without a camera passing through solid glass, metal or a seated person.
+
+LOOK AND SOUND
+Photographic full-size proportions, natural tire contact shadows, believable weight transfer, restrained optical motion blur, moderate contrast, gently rolled highlights and subtle fine 35 mm film grain. Clear architectural detail and authentic material wear. Warm exterior light transitions to neutral practical interior light. Regular real-time movement and consistent exposure within each shot.
+Only quiet engine, tire, room ambience and soft braking sounds. Clean image without dialogue, music, titles or graphics. Four distinct photographic shots connected by clean edits; preserve solid vehicle geometry and fixed building architecture throughout.

@@ -42,10 +42,6 @@
   gap: 24px;
   margin-bottom: 32px;
 }
-.drive-overline img {
-  width: clamp(190px, 22vw, 295px);
-  height: auto;
-}
 .drive-overline > span {
   display: flex;
   align-items: center;
@@ -322,6 +318,20 @@
   object-fit: contain;
   filter: none;
 }
+.drive-photo-name {
+  position: absolute;
+  left: clamp(12px, 2vw, 24px);
+  bottom: clamp(12px, 2vw, 24px);
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: #032640ed;
+  color: #fff;
+  font-size: clamp(14px, 1.6vw, 20px);
+  line-height: 1.3;
+}
+.drive-photo-name strong {
+  font-weight: 600;
+}
 .drive-navigation {
   grid-area: navigation;
   display: flex;
@@ -453,10 +463,17 @@
   object-fit: contain;
 }
 .drive-thumb-name {
-  display: block;
-  margin-top: 10px;
-  font-size: 1rem;
-  line-height: 1.4;
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  max-width: calc(100% - 10px);
+  padding: 3px 6px;
+  border-radius: 3px;
+  background: #032640ed;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
 }
 .drive-thumb::after {
   content: '';
@@ -533,9 +550,6 @@
   .drive-controls {
     gap: 12px;
   }
-  .drive-thumb-name {
-    font-size: 0.875rem;
-  }
   .drive-progress {
     display: none;
   }
@@ -557,8 +571,11 @@
   }
   .drive-configurator {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'scene' 'navigation' 'thumbnails' 'sidebar';
+    grid-template-areas: 'scene' 'navigation' 'sidebar';
     gap: 20px;
+  }
+  .drive-thumbnails {
+    display: none;
   }
   .drive-sidebar {
     display: grid;
@@ -594,27 +611,21 @@
 }
 @media (max-width: 600px) {
   .drive-stage {
-    padding: 36px 16px 44px;
+    padding: 24px 16px 36px;
   }
   .drive-overline {
-    margin-bottom: 24px;
-  }
-  .drive-overline img {
-    width: 190px;
-  }
-  .drive-overline > span {
     display: none;
   }
   .drive-heading {
-    margin-bottom: 24px;
-    gap: 12px;
+    margin-bottom: 18px;
+    gap: 8px;
   }
   .drive-heading h2 {
-    font-size: clamp(2.25rem, 9vw, 3rem);
+    font-size: clamp(1.75rem, 7.5vw, 2.25rem);
     letter-spacing: -0.045em;
   }
   .drive-heading > p {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
   .drive-heading > p br {
     display: block;
@@ -642,39 +653,76 @@
     gap: 6px;
     font-size: 0.875rem;
   }
-  .drive-thumbnails {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px 10px;
+  .drive-configurator {
+    gap: 12px;
   }
-  .drive-thumb {
-    padding-bottom: 13px;
+  .drive-photo-name {
+    max-width: calc(100% - 24px);
+    font-size: 18px;
+    line-height: 1.25;
   }
-  .drive-thumb-name {
-    font-size: 0.875rem;
-    margin-top: 7px;
-  }
-  .drive-thumb::after {
-    height: 3px;
+  .drive-photo-name strong {
+    font-weight: 700;
   }
   .drive-sidebar {
     display: flex;
-    padding: 22px;
-    gap: 22px;
+    align-items: stretch;
+    padding: 14px;
+    gap: 12px;
+  }
+  .drive-copy {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'model price' 'specs specs';
+    align-items: center;
+    gap: 12px;
+  }
+  .drive-model {
+    grid-area: model;
   }
   .drive-model h3 {
-    font-size: clamp(2rem, 8vw, 2.75rem);
+    /* The visible title is on the photo; keep this heading for screen readers. */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .drive-model .eyebrow {
-    margin-bottom: 14px;
+    margin-bottom: 0;
+    padding: 3px 9px;
+    font-size: 0.8125rem;
+  }
+  .drive-similar {
+    margin-top: 4px;
+    font-size: 0.75rem;
+  }
+  .drive-price {
+    grid-area: price;
+    text-align: right;
+  }
+  .drive-price > span {
+    font-size: 0.75rem;
+  }
+  .drive-rate {
+    gap: 8px;
+  }
+  .drive-rate > span {
+    font-size: 0.8125rem;
+  }
+  .drive-specs {
+    grid-area: specs;
   }
   .drive-specs > div {
-    grid-template-columns: 24px minmax(0, 1fr);
+    grid-template-columns: 20px minmax(0, 1fr);
     gap: 8px;
-    padding-block: 18px;
+    padding-block: 10px;
   }
   .drive-specs svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
   .drive-specs > div:nth-child(odd) {
     padding-right: 8px;
@@ -683,14 +731,20 @@
     padding-left: 8px;
   }
   .drive-rate > strong {
-    font-size: 3.75rem;
+    font-size: 2rem;
   }
   .drive-actions {
     width: 100%;
-    gap: 10px;
+    gap: 4px;
+  }
+  .drive-actions .cta {
+    min-height: 48px;
+    padding: 12px 14px;
+    font-size: 0.9375rem;
   }
   .drive-details-link {
     align-self: flex-start;
+    font-size: 0.875rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {

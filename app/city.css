@@ -78,13 +78,6 @@
 .city-introduction a svg {
   color: var(--lime);
 }
-.city-main-views {
-  display: grid;
-  grid-template-columns: 1.8fr 1fr;
-  gap: 24px;
-  align-items: start;
-  scroll-margin-top: calc(var(--header-height) + 24px);
-}
 .city-place {
   margin: 0;
   min-width: 0;
@@ -113,15 +106,6 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.city-main-views .city-photo-button {
-  height: clamp(340px, 41vw, 530px);
-}
-.city-place-0 img {
-  object-position: center;
-}
-.city-place-1 img {
-  object-position: center 42%;
 }
 .city-photo-location {
   position: absolute;
@@ -192,7 +176,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  margin: 42px 0 22px;
+  margin: 0 0 22px;
   padding-top: 26px;
   border-top: 1px solid #b5cccb35;
 }
@@ -210,17 +194,18 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
+  scroll-margin-top: calc(var(--header-height) + 24px);
 }
 .city-landmarks .city-photo-button {
   aspect-ratio: 1.28;
 }
-.city-place-2 img {
+.city-place-maracaibo-puente-atardecer img {
   object-position: 50% 38%;
 }
-.city-place-3 img {
+.city-place-maracaibo-basilica img {
   object-position: 50% 45%;
 }
-.city-place-4 img {
+.city-place-maracaibo-chinita img {
   object-position: 50% 48%;
 }
 .city-discovery-footer {
@@ -349,12 +334,8 @@
   .city-introduction > span {
     font-size: 12px;
   }
-  .city-main-views,
   .city-landmarks {
     gap: 16px;
-  }
-  .city-main-views .city-photo-button {
-    height: 380px;
   }
   .city-landmarks .city-photo-location {
     font-size: 9px;
@@ -411,20 +392,6 @@
   .city-introduction a {
     padding-top: 14px;
   }
-  .city-main-views {
-    grid-template-columns: 1fr;
-    gap: 26px;
-  }
-  .city-main-views .city-photo-button {
-    height: auto;
-    aspect-ratio: 4/3;
-  }
-  .city-main-views .city-place-1 .city-photo-button {
-    aspect-ratio: 1;
-  }
-  .city-place-1 img {
-    object-position: 50% 36%;
-  }
   .city-photo-location {
     left: 16px;
     bottom: 21px;
@@ -438,7 +405,6 @@
   }
   .city-landmarks-heading {
     display: block;
-    margin-top: 32px;
     padding-top: 23px;
   }
   .city-landmarks-heading > span {

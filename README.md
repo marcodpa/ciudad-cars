@@ -1,6 +1,6 @@
 # Ciudad Cars
 
-Sitio responsive con Home, catálogo de vehículos, servicios, quiénes somos y contacto. La portada integra la película aérea de Ciudad Cars: Cruze y Explorer, fotogramas ligados al scroll, textos y planes de viaje sincronizados con GSAP. Una sola navegación acompaña el recorrido hasta el catálogo de cinco vehículos. El carrusel del catálogo sigue siendo manual, con flechas, miniaturas y gestos horizontales.
+Sitio responsive con Home, catálogo de vehículos, servicios, quiénes somos y contacto. La portada integra la película aérea de Ciudad Cars: Cruze y Explorer, fotogramas ligados al scroll, textos y planes de viaje sincronizados con GSAP. Una sola navegación acompaña el recorrido hasta el catálogo de cinco vehículos, con un botón para saltar directamente a la flota. El carrusel es manual, con flechas y gestos horizontales; en móvil se ocultan las miniaturas y se agrupan la foto, el nombre, el precio y las características. En escritorio se mantienen las miniaturas y la ficha lateral.
 
 ## Ejecutar localmente
 
@@ -65,7 +65,7 @@ Las pruebas cubren inventario, límites de selección, filtros, consultas, recup
 - `lib/navigation.ts`, `components/site-link.tsx`, `proxy.ts`: enlaces nativos y recuperación de direcciones anteriores del menú.
 - `app/globals.css`: identidad y homepage aprobada.
 - `app/showroom.css`: escenario del carrusel.
-- `components/city-discovery.tsx`, `app/city.css`: galería de cinco fotografías reales de Maracaibo, con vistas grandes de la ciudad y El Milagro, ampliación de fotos y entradas suaves con GSAP.
+- `components/city-discovery.tsx`, `app/city.css`: galería de tres fotografías reales de Maracaibo (puente, Basílica y monumento a la Chinita), ampliación de fotos y entradas suaves con GSAP.
 - `app/catalog.css`: propuesta C del catálogo, encabezado claro, fichas horizontales y adaptación móvil.
 - `CITY-PHOTOS.json`: procedencia de las cinco fotos aportadas por el usuario, usadas en Home, Quiénes somos y Contacto.
 - `app/pages.css`: componentes y páginas interiores.

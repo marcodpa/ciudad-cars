@@ -95,8 +95,7 @@ html:has(.cc-cinema) {
 .cc-cinema .cc-intro-story-close,
 .cc-cinema .cc-intro-static-vehicle,
 .cc-cinema .cc-intro-chapter-nav,
-.cc-cinema .cc-intro-journey-cue,
-.cc-cinema .cc-intro-options > summary {
+.cc-cinema .cc-intro-journey-cue {
   text-shadow:
     0 1px 3px #032640,
     0 2px 12px #03264080;
@@ -310,55 +309,6 @@ html:has(.cc-cinema) {
 .cc-cinema #cc-intro-load-status:empty {
   display: none;
 }
-.cc-cinema .cc-intro-end-actions {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-  flex-wrap: wrap;
-  padding: 27px 0;
-  font-size: 10px;
-  color: #b7c4cc;
-}
-.cc-cinema .cc-intro-end-actions button {
-  background: none;
-  border: 0;
-  color: inherit;
-  font-size: 10px;
-  padding: 9px 0;
-}
-.cc-cinema .cc-intro-end-actions button span:first-child {
-  margin-right: 5px;
-}
-.cc-cinema #cc-intro-motion-toggle[aria-pressed='true'] {
-  color: var(--lime);
-}
-.cc-cinema dialog {
-  border: 0;
-  background: var(--ink);
-  padding: 0;
-  width: min(94vw, 1400px);
-  max-width: 94vw;
-  color: #fff;
-}
-.cc-cinema dialog::backdrop {
-  background: #000d;
-}
-.cc-cinema dialog video {
-  display: block;
-  width: 100%;
-  max-height: 85vh;
-}
-.cc-cinema #cc-intro-close-movie {
-  position: absolute;
-  z-index: 1;
-  right: 12px;
-  top: 12px;
-  background: #091727bd;
-  border: 1px solid #fff8;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-}
 .cc-cinema .cc-intro-noscript {
   position: fixed;
   z-index: 30;
@@ -478,18 +428,6 @@ html:has(.cc-cinema) {
     bottom: 77px;
     font-size: 8px;
   }
-  .cc-cinema .cc-intro-end-actions {
-    gap: 9px 22px;
-    padding: 25px 0;
-    font-size: 9px;
-  }
-  .cc-cinema .cc-intro-end-actions button {
-    font-size: 9px;
-  }
-  .cc-cinema dialog {
-    width: 100vw;
-    max-width: 100vw;
-  }
 }
 @media (max-height: 620px) and (min-width: 761px) {
   .cc-cinema .cc-intro-headline {
@@ -540,8 +478,7 @@ html:has(.cc-cinema) {
 }
 .cc-cinema.cc-intro-is-reduced-motion .cc-intro-story-panel,
 .cc-cinema.cc-intro-is-reduced-motion .cc-intro-story-close,
-.cc-cinema.cc-intro-is-reduced-motion .cc-intro-journey-cue,
-.cc-cinema.cc-intro-is-reduced-motion #cc-intro-play {
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-journey-cue {
   display: none !important;
 }
 .cc-cinema.cc-intro-is-reduced-motion .cc-intro-static-vehicle {
@@ -702,56 +639,31 @@ body:has(.cc-cinema) {
   position: absolute;
   top: calc(86% - 30.1svh);
 }
-.cc-cinema .cc-intro-options {
+.cc-cinema .cc-intro-skip-tour {
   position: absolute;
   left: var(--gutter);
   bottom: 20px;
   z-index: 8;
-  font-size: 12px;
-}
-.cc-cinema .cc-intro-options summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-height: 44px;
-  align-content: center;
-  cursor: pointer;
-  color: #e3edf4;
-}
-.cc-cinema .cc-intro-options summary:focus-visible {
-  outline: 2px solid var(--lime);
-  outline-offset: 4px;
-}
-.cc-cinema .cc-intro-options[open] summary {
-  color: var(--lime);
-}
-.cc-cinema .cc-intro-options .cc-intro-utilities {
-  position: absolute;
-  left: 0;
-  bottom: 54px;
-  width: min(320px, 86vw);
-  padding: 18px;
-  border: 1px solid #ffffff38;
-  border-radius: 8px;
-  box-shadow: 0 12px 40px #0003;
-  background: var(--ink);
-}
-.cc-cinema .cc-intro-end-actions {
-  display: grid;
-  gap: 4px;
-  padding: 0 0 14px;
-}
-.cc-cinema .cc-intro-end-actions button {
-  text-align: left;
-  font-size: 14px;
-  min-height: 44px;
-  padding: 10px;
+  padding: 10px 15px;
+  border: 1px solid #ffffff70;
+  border-radius: 6px;
+  background: #032640e6;
   color: var(--paper);
-  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 160ms, border-color 160ms;
 }
-.cc-cinema .cc-intro-end-actions button:hover {
-  background: #ffffff14;
+.cc-cinema .cc-intro-skip-tour:hover {
+  background: var(--ink);
+  border-color: var(--lime);
 }
-.cc-cinema .cc-intro-disclosure {
-  font-size: 11px;
-  color: #b6c9d7;
+.cc-cinema .cc-intro-skip-tour svg {
+  color: var(--lime);
 }
 .cc-cinema .cc-intro-chapter-nav button {
   min-height: 44px;
@@ -814,9 +726,10 @@ body:has(.cc-cinema) {
   .cc-cinema .cc-intro-plans small {
     font-size: 12px;
   }
-  .cc-cinema .cc-intro-options {
+  .cc-cinema .cc-intro-skip-tour {
     bottom: 14px;
     font-size: 11px;
+    padding-inline: 12px;
   }
   .cc-cinema .cc-intro-chapter-nav {
     bottom: 14px;
@@ -889,7 +802,7 @@ body:has(.cc-cinema) {
   visibility: visible !important;
   transform: none !important;
 }
-.cc-cinema.cc-intro-is-reduced-motion .cc-intro-options,
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-skip-tour,
 .cc-cinema.cc-intro-is-reduced-motion .cc-intro-chapter-nav {
   top: max(456px, calc(100svh - 64px));
   bottom: auto;

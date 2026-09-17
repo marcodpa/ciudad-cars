@@ -198,61 +198,12 @@ export function CinematicIntro() {
           <div className="cc-intro-scroll-progress" aria-hidden="true">
             <span />
           </div>
-          <details className="cc-intro-options">
-            <summary>{t('Opciones del recorrido')}</summary>
-            <div className="cc-intro-utilities">
-              <div className="cc-intro-end-actions">
-                <button
-                  id="cc-intro-play"
-                  type="button"
-                  aria-label={t('Reproducir recorrido automáticamente')}
-                >
-                  <span id="cc-intro-play-icon">↻</span>{' '}
-                  <span id="cc-intro-play-label">{t('Recorrer de nuevo')}</span>
-                </button>
-                <button id="cc-intro-watch-film" type="button">
-                  {t('Ver película ')}
-                  <span>↗</span>
-                </button>
-                <button
-                  id="cc-intro-motion-toggle"
-                  type="button"
-                  aria-pressed="false"
-                >
-                  {t('Reducir movimiento')}
-                </button>
-              </div>
-              <p className="cc-intro-disclosure">
-                {t(
-                  'Escenas recreadas con IA a partir de los vehículos de CC y referencias de Maracaibo.',
-                )}
-              </p>
-            </div>
-          </details>
+          <a className="cc-intro-skip-tour" href="#flota" data-skip-tour>
+            {t('Saltar recorrido')}
+            <ArrowDown size={16} aria-hidden="true" />
+          </a>
         </div>
       </section>
-      <dialog
-        id="cc-intro-movie-dialog"
-        aria-label={t('Película de Ciudad Cars')}
-      >
-        <button
-          id="cc-intro-close-movie"
-          type="button"
-          aria-label={t('Cerrar película')}
-        >
-          ✕
-        </button>
-        <video
-          id="cc-intro-movie"
-          controls
-          muted
-          playsInline
-          preload="none"
-          poster="/cinema/cruze-aerial.jpg"
-        >
-          <source src="/cinema/ciudad-cars-drone.mp4" type="video/mp4" />
-        </video>
-      </dialog>
       <noscript>
         <p className="cc-intro-noscript">
           {t('Puedes')}{' '}
