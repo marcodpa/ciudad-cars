@@ -32,7 +32,10 @@ export default defineConfig(({ mode }) => ({
     vinext(),
     sites(),
     ...(mode === 'sites'
-      ? [cloudflare({ viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] } })]
+      ? [cloudflare({
+          configPath: './wrangler.sites.jsonc',
+          viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
+        })]
       : []),
   ],
 }));
