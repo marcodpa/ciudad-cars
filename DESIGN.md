@@ -220,3 +220,10 @@ La foto del usuario en `design-proposals/cherokee-reference/vehicle-reference.pn
 ## Segunda corrección del Lancer: frente de la fotografía real
 
 El usuario rechazó el frente de la primera corrección: los faros y la parrilla habían cambiado. La familia activa pasa a `lancer-exact-*`, derivada de la nueva restauración de su foto, con faros más delgados e inclinados y parrilla baja. Portada, recorte, catálogo y miniaturas reutilizan el mismo vehículo; las ocho vistas también se corrigen. Referencia, prompts y exportación: `design-proposals/lancer-exact/README.md`. Los archivos `lancer-reference-*` quedan como historial y no son la identidad vigente.
+# Actualización de imágenes de flota
+
+El selector, el catálogo y las fichas de detalle reutilizan ahora las cinco imágenes cinematográficas generadas previamente para la intro: Lancer, Cruze, Camry, Cherokee y Explorer. Se muestran como escenas completas, con su iluminación y reflejos originales, sin separar el carro del entorno ni añadir sombras SVG. Las miniaturas usan las mismas imágenes.
+
+Se exportan en WebP a 2016 × 1140, 1008 × 570 y 336 × 190, manteniendo la proporción y sin recortar. El selector conserva la ficha lateral y los controles, y funde las escenas con GSAP. El registro `docs/fleet-photography.json` incluye procedencia, trabajos de generación previos y comprobaciones SHA-256. No se hizo ninguna generación adicional. Son imágenes ilustrativas, no fotografías documentales de unidades disponibles.
+
+Las descripciones del fondo fijo y los recortes que aparecen más abajo documentan versiones anteriores.

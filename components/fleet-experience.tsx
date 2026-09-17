@@ -1,4 +1,4 @@
-/* Preoptimized local assets retain their reserved dimensions and transparent pixels. */
+/* Complete cinematic photographs retain their original framing and lighting. */
 /* eslint-disable next/no-img-element */
 'use client';
 
@@ -17,7 +17,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { VehicleDetails } from '@/components/vehicle-details';
-import { VehicleGroundShadow } from '@/components/vehicle-ground-shadow';
 import { fleet } from '@/lib/fleet';
 import { vehicleReservation } from '@/lib/company';
 import { clampPosition } from '@/lib/fleet-motion';
@@ -43,13 +42,10 @@ export function FleetExperience() {
     media.add(
       {
         reduced: '(prefers-reduced-motion: reduce)',
-        mobile: '(max-width: 600px)',
         standard: '(min-width: 0px)',
       },
       (context) => {
-        const { reduced, mobile } = context.conditions!;
-        const distance = mobile ? 32 : 72;
-        const blur = reduced ? 'none' : mobile ? 'blur(2px)' : 'blur(4px)';
+        const { reduced } = context.conditions!;
         const layers = [...images, ...panels];
         images.forEach((image, index) => {
           gsap.set(image, {
@@ -70,14 +66,13 @@ export function FleetExperience() {
         controlsRef.current = (index) => {
           const next = Math.round(clampPosition(index, fleet.length));
           if (next === activeRef.current) return;
-          const direction = next > activeRef.current ? 1 : -1;
           // Retarget the current layers, so rapid clicks never queue intermediate cars.
           gsap.killTweensOf([...layers, root]);
           if (Number(gsap.getProperty(images[next], 'opacity')) === 0) {
             gsap.set(images[next], {
-              x: reduced ? 0 : direction * distance,
-              scale: reduced ? 1 : 0.97,
-              filter: blur,
+              x: 0,
+              scale: reduced ? 1 : 1.018,
+              filter: 'none',
             });
             gsap.set(panels[next], { y: reduced ? 0 : 8 });
           }
@@ -88,9 +83,9 @@ export function FleetExperience() {
             image.dataset.moving = String(!reduced);
             gsap.to(image, {
               autoAlpha: selected ? 1 : 0,
-              x: reduced || selected ? 0 : -direction * distance,
-              scale: reduced || selected ? 1 : 0.97,
-              filter: selected ? 'none' : blur,
+              x: 0,
+              scale: 1,
+              filter: 'none',
               duration: reduced ? 0 : 0.55,
               ease: 'power2.inOut',
               onComplete: () => {
@@ -189,31 +184,20 @@ export function FleetExperience() {
                 }}
               >
                 <div className="drive-frame">
-                  <img
-                    className="drive-backdrop"
-                    src="/images/showroom-background.webp"
-                    width="1859"
-                    height="846"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                  />
                   {fleet.map((car, index) => (
                     <div
                       className={'drive-car drive-car-' + car.id}
                       key={car.id}
                       aria-hidden={active !== index}
                     >
-                      <VehicleGroundShadow
-                        vehicleId={car.id}
-                        instance="scene"
-                      />
                       <img
-                        src={car.showroomCutout}
+                        src={car.image}
+                        srcSet={`${car.mobileImage} 1008w, ${car.image} 2016w`}
+                        sizes="(max-width: 900px) 94vw, (max-width: 1600px) 64vw, 1020px"
                         alt={car.make + ' ' + car.model + ', o similar'}
-                        width="1859"
-                        height="846"
-                        loading="eager"
+                        width="2016"
+                        height="1140"
+                        loading="lazy"
                         decoding="async"
                       />
                     </div>
@@ -276,15 +260,11 @@ export function FleetExperience() {
                     onClick={() => select(index)}
                   >
                     <span className="drive-thumb-visual" aria-hidden="true">
-                      <VehicleGroundShadow
-                        vehicleId={car.id}
-                        instance="thumb"
-                      />
                       <img
-                        src={car.showroomCutout}
+                        src={car.thumbnail}
                         alt=""
-                        width="1859"
-                        height="846"
+                        width="336"
+                        height="190"
                         loading="lazy"
                       />
                     </span>

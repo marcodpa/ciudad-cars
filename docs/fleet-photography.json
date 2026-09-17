@@ -1,0 +1,157 @@
+{
+  "description": "Existing cinematic images reused as complete scenes throughout the fleet. Generated previously with Higgsfield; illustrative, not documentary photographs.",
+  "processing": {
+    "newGeneration": false,
+    "creativeEditing": false,
+    "cropping": false,
+    "resizing": true,
+    "format": "webp"
+  },
+  "photos": [
+    {
+      "id": "lancer",
+      "source": "ciudad-cars-cinema / lancer",
+      "sourceSha256": "6d2d54c708385d652888c9672504c15a4d74e1b9f16b3ed0c1476b3f5edcb686",
+      "existingHiggsfieldJob": "9bf20211-a2eb-4be2-ad82-92462fa216e7",
+      "variants": [
+        {
+          "src": "/images/fleet-photo-lancer.webp",
+          "width": 2016,
+          "height": 1140,
+          "bytes": 319064,
+          "sha256": "00cbb53dba70b22c0a8f437772130dd666059c0475bd653776bc866ac82eec8c"
+        },
+        {
+          "src": "/images/fleet-photo-lancer-mobile.webp",
+          "width": 1008,
+          "height": 570,
+          "bytes": 110502,
+          "sha256": "e62b4accba17a112a53b3f0077074e7e4c266e8126530a68d7d801ceb9e99206"
+        },
+        {
+          "src": "/images/fleet-photo-lancer-thumb.webp",
+          "width": 336,
+          "height": 190,
+          "bytes": 15338,
+          "sha256": "7f84c934b7c5006f481467ac849b057e0dcb12e7145482a894ec1054e5dc7845"
+        }
+      ]
+    },
+    {
+      "id": "cruze",
+      "source": "ciudad-cars-cinema / cruze",
+      "sourceSha256": "f862078ee606e32002b4a5ff1d7c413d880a9edeb109d66000994c969a65d919",
+      "existingHiggsfieldJob": "6dc4de79-84f2-48fa-ba45-4ec2b8cfd90f",
+      "variants": [
+        {
+          "src": "/images/fleet-photo-cruze.webp",
+          "width": 2016,
+          "height": 1140,
+          "bytes": 345828,
+          "sha256": "6a4497c4a1c634195048e7af1731abb38ce6bcef6ee63e182ba5541958c2aaf2"
+        },
+        {
+          "src": "/images/fleet-photo-cruze-mobile.webp",
+          "width": 1008,
+          "height": 570,
+          "bytes": 119956,
+          "sha256": "4d34fcc7cc5d29cf99c97c48eb6f604139589cf9501f678993762fd5def314ce"
+        },
+        {
+          "src": "/images/fleet-photo-cruze-thumb.webp",
+          "width": 336,
+          "height": 190,
+          "bytes": 17898,
+          "sha256": "be122409ca4585ab1117a42727c090e3dfc46a2e990c4f9cbe551b205a3078e5"
+        }
+      ]
+    },
+    {
+      "id": "camry",
+      "source": "ciudad-cars-cinema / camry",
+      "sourceSha256": "6cbf66c41e44257ea92f16445eba6ee64a2a52101d2d4e3719288016e6c2ec05",
+      "existingHiggsfieldJob": "1edb579b-dd3c-4e73-8c6d-c0c901f51b23",
+      "variants": [
+        {
+          "src": "/images/fleet-photo-camry.webp",
+          "width": 2016,
+          "height": 1140,
+          "bytes": 314624,
+          "sha256": "dc725ca0ff1f5183a8fa62a92cc49f0e4bde82519fb0e79b4347514b749c5d2d"
+        },
+        {
+          "src": "/images/fleet-photo-camry-mobile.webp",
+          "width": 1008,
+          "height": 570,
+          "bytes": 107262,
+          "sha256": "736226acd51729908edce6287529e786e9a339e6c13ef3f2d33cb4f658f6b7e3"
+        },
+        {
+          "src": "/images/fleet-photo-camry-thumb.webp",
+          "width": 336,
+          "height": 190,
+          "bytes": 16150,
+          "sha256": "be689b058285c432ac7e62bcbed111404bc433d87515573fe6e820f93efec435"
+        }
+      ]
+    },
+    {
+      "id": "cherokee",
+      "source": "ciudad-cars-cinema / cherokee",
+      "sourceSha256": "c173a0218ad22facd2fd4fa825276a28f63d480163b9fc4e06ec83cfa70a4493",
+      "existingHiggsfieldJob": "75c5144f-2f64-47b7-ad93-216f6eedabf7",
+      "variants": [
+        {
+          "src": "/images/fleet-photo-cherokee.webp",
+          "width": 2016,
+          "height": 1140,
+          "bytes": 357186,
+          "sha256": "57bbc7ed300983bf480333381e4b2f1e4d74c37434759ca4f268cf4f69309efd"
+        },
+        {
+          "src": "/images/fleet-photo-cherokee-mobile.webp",
+          "width": 1008,
+          "height": 570,
+          "bytes": 121068,
+          "sha256": "f16a2105a5ee357f928795efa327ef105e342a71014563703500d3374976d374"
+        },
+        {
+          "src": "/images/fleet-photo-cherokee-thumb.webp",
+          "width": 336,
+          "height": 190,
+          "bytes": 18280,
+          "sha256": "c4dc5ab780fa2c7cda4885f2bddcb3ad9031aff94a313392a675aa34deac1a19"
+        }
+      ]
+    },
+    {
+      "id": "explorer",
+      "source": "ciudad-cars-cinema / explorer",
+      "sourceSha256": "9ae562c38fb1f402e5200d2310bfe51eb97e7f5482d1b65d5354f33f713e5ba8",
+      "existingHiggsfieldJob": "6f1143f1-a790-4aaa-96e5-2e3814afa5f5",
+      "variants": [
+        {
+          "src": "/images/fleet-photo-explorer.webp",
+          "width": 2016,
+          "height": 1140,
+          "bytes": 296308,
+          "sha256": "582c52194db463dcbffce54344edd09014e82fafb8a0ad74f6e3c1e806406ec4"
+        },
+        {
+          "src": "/images/fleet-photo-explorer-mobile.webp",
+          "width": 1008,
+          "height": 570,
+          "bytes": 99390,
+          "sha256": "14d0fe77bf1cb70e3c980fa105fa78ce91949eee050e9168071654eba98d750b"
+        },
+        {
+          "src": "/images/fleet-photo-explorer-thumb.webp",
+          "width": 336,
+          "height": 190,
+          "bytes": 15200,
+          "sha256": "8cbb680abfd5554a2b67fd0995876b6e5f953bacce849aed62b066a8b0142cbf"
+        }
+      ]
+    }
+  ]
+}

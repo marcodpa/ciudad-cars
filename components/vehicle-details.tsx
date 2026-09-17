@@ -1,4 +1,4 @@
-/* Preoptimized local assets retain their reserved dimensions and transparent pixels. */
+/* Reuse the same complete cinematic photograph shown in the vehicle selector. */
 /* eslint-disable next/no-img-element */
 'use client';
 
@@ -47,9 +47,11 @@ export function VehicleDetails({
             <DialogDescription>o similar · {car.description}</DialogDescription>
             <img
               src={car.mobileImage}
+              srcSet={`${car.mobileImage} 1008w, ${car.image} 2016w`}
+              sizes="(max-width: 600px) 90vw, 560px"
               alt={car.make + ' ' + car.model + ' o similar'}
-              width="1080"
-              height="520"
+              width="2016"
+              height="1140"
             />
             <div className="dialog-specs">
               <span>

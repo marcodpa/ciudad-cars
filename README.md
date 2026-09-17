@@ -23,7 +23,7 @@ npm start
 ## Rutas
 
 - `/`: intro en `/#recorrido`, Home y carrusel en `/#flota`.
-- `/vehiculos`: catálogo C con fichas horizontales, filtros, sombras y detalles.
+- `/vehiculos`: catálogo C con fichas horizontales, fotografías completas, filtros y detalles.
 - `/servicios`: alquiler, complementos y taller.
 - `/quienes-somos`: historia y empresa.
 - `/contacto`: datos reales, horario y consulta por WhatsApp.
@@ -46,8 +46,9 @@ Trece pruebas cubren inventario, límites de selección, filtros, consultas, rec
 - `public/cinema/`: fotogramas, miniaturas, imágenes y película originales, sin regeneración ni recodificación.
 - `docs/cinematic-intro.md`: procedencia, integración, carga de recursos y validación de la intro.
 - `app/{vehiculos,servicios,quienes-somos,contacto}/page.tsx`: páginas interiores.
-- `components/fleet-experience.tsx`: propuesta B con ficha lateral, escena única, GSAP, controles y gestos.
-- `components/vehicle-ground-shadow.tsx`, `lib/vehicle-shadows.ts`: sombras de contacto alineadas con las ruedas de cada vehículo.
+- `components/fleet-experience.tsx`: ficha lateral y escenas fotográficas completas, fundidos con GSAP, controles y gestos.
+- `docs/fleet-photography.json`: procedencia y versiones adaptables de las cinco imágenes creadas previamente con Higgsfield para la intro. El selector, las miniaturas y las fichas comparten estos recursos; no superponen recortes ni sombras artificiales.
+- `components/vehicle-ground-shadow.tsx`, `lib/vehicle-shadows.ts`: recursos conservados del diseño anterior, sin uso en las vistas actuales de la flota.
 - `components/vehicle-catalog.tsx`, `vehicle-details.tsx`: catálogo C y diálogo de detalles compartido.
 - `components/contact-form.tsx`: preparación de consultas.
 - `lib/fleet.ts`: modelos, precios, capacidades y recursos.

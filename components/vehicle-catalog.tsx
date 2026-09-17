@@ -1,4 +1,4 @@
-/* Preoptimized local assets retain their reserved dimensions and transparent pixels. */
+/* Complete cinematic photographs share their lighting with the surroundings. */
 /* eslint-disable next/no-img-element */
 'use client';
 
@@ -17,7 +17,6 @@ import {
   NativeSelectOption,
 } from '@/components/ui/native-select';
 import { VehicleDetails } from '@/components/vehicle-details';
-import { VehicleGroundShadow } from '@/components/vehicle-ground-shadow';
 import { fleet, type Vehicle } from '@/lib/fleet';
 import { defaultFilters, filterFleet } from '@/lib/catalog';
 import { vehicleReservation } from '@/lib/company';
@@ -106,12 +105,18 @@ export function VehicleCatalog() {
                 aria-labelledby={'catalog-model-' + car.id}
               >
                 <div className="vehicle-list-photo">
-                  <VehicleGroundShadow vehicleId={car.id} instance="catalog" />
                   <img
-                    src={car.showroomCutout}
-                    alt={car.make + ' ' + car.model + ', vista de tres cuartos'}
-                    width="1859"
-                    height="846"
+                    src={car.mobileImage}
+                    srcSet={`${car.mobileImage} 1008w, ${car.image} 2016w`}
+                    sizes="(max-width: 700px) 90vw, (max-width: 1000px) 42vw, 480px"
+                    alt={
+                      car.make +
+                      ' ' +
+                      car.model +
+                      ', o similar, en una escena ilustrativa de Maracaibo'
+                    }
+                    width="2016"
+                    height="1140"
                     loading="lazy"
                     decoding="async"
                   />

@@ -166,27 +166,21 @@
 .vehicle-list-photo {
   position: relative;
   isolation: isolate;
-  aspect-ratio: 1.55;
+  aspect-ratio: 2016 / 1140;
+  border-radius: 10px;
+  background: #062a3e;
   overflow: hidden;
   width: 100%;
 }
-/* Foreground and tire shadows share one canvas and exactly the same transform. */
-.vehicle-list-photo img,
-.vehicle-list-photo .drive-ground-shadow {
+/* The car, reflections and road share one original photograph. */
+.vehicle-list-photo img {
   position: absolute;
-  inset: auto;
-  top: 50%;
-  left: 50%;
-  width: 185%;
+  inset: 0;
+  width: 100%;
   max-width: none;
-  height: auto;
-  aspect-ratio: 1859 / 846;
-  transform: translate(-50%, -63%);
+  height: 100%;
+  object-fit: contain;
   pointer-events: none;
-}
-.vehicle-list-photo .drive-ground-shadow {
-  z-index: -1;
-  opacity: 0.72;
 }
 .vehicle-list-description {
   min-width: 0;
@@ -510,7 +504,7 @@
     grid-row: auto;
     max-width: 440px;
     margin: 0 auto 6px;
-    aspect-ratio: 1.65;
+    aspect-ratio: 2016 / 1140;
   }
   .vehicle-list-description h2 {
     font-size: clamp(1.875rem, 5.8vw, 2.375rem);
