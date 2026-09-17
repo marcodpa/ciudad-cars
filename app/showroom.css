@@ -1,4 +1,4 @@
-/* Sidebar with complete cinematic scenes and manual vehicle selection. */
+/* Static city plate, isolated cinematic cars and a coordinated GSAP timeline. */
 .drive-section {
   --drive-progress: 20%;
   position: relative;
@@ -294,7 +294,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  transform-origin: 50% 60%;
+  transform-origin: 50% 82%;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -304,7 +304,15 @@
   visibility: visible;
 }
 .drive-car[data-moving='true'] {
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
+}
+.drive-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
 }
 .drive-ground-shadow {
   position: absolute;
@@ -321,6 +329,20 @@
   max-width: none;
   object-fit: contain;
   filter: none;
+  transform-origin: 50% 82%;
+}
+.drive-car-lancer > img {
+  transform: scale(1.08);
+}
+.drive-car-cruze > img,
+.drive-car-camry > img {
+  transform: scale(0.84);
+}
+.drive-car-cherokee > img {
+  transform: translateY(-8%) scale(0.77);
+}
+.drive-car-explorer > img {
+  transform: scale(1.08);
 }
 .drive-navigation {
   grid-area: navigation;

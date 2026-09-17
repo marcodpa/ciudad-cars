@@ -46,8 +46,9 @@ Trece pruebas cubren inventario, límites de selección, filtros, consultas, rec
 - `public/cinema/`: fotogramas, miniaturas, imágenes y película originales, sin regeneración ni recodificación.
 - `docs/cinematic-intro.md`: procedencia, integración, carga de recursos y validación de la intro.
 - `app/{vehiculos,servicios,quienes-somos,contacto}/page.tsx`: páginas interiores.
-- `components/fleet-experience.tsx`: ficha lateral y escenas fotográficas completas, fundidos con GSAP, controles y gestos.
-- `docs/fleet-photography.json`: procedencia y versiones adaptables de las cinco imágenes creadas previamente con Higgsfield para la intro. El selector, las miniaturas y las fichas comparten estos recursos; no superponen recortes ni sombras artificiales.
+- `components/fleet-experience.tsx`: ficha lateral y fondo de ciudad fijo; una secuencia GSAP coordina salida y entrada de los vehículos, desenfoque breve y datos escalonados. Las selecciones rápidas sustituyen la animación en curso; se respeta movimiento reducido.
+- `docs/fleet-photography.json`: procedencia y versiones adaptables de las cinco escenas creadas previamente con Higgsfield para la intro, usadas en miniaturas, catálogo y fichas.
+- `docs/fleet-stage.json`: prompts y archivos del fondo común y cinco capas transparentes derivadas de esas fotos con la herramienta integrada de edición de imágenes. El selector usa `public/images/fleet-stage-*`; la ciudad permanece fuera de las animaciones.
 - `components/vehicle-ground-shadow.tsx`, `lib/vehicle-shadows.ts`: recursos conservados del diseño anterior, sin uso en las vistas actuales de la flota.
 - `components/vehicle-catalog.tsx`, `vehicle-details.tsx`: catálogo C y diálogo de detalles compartido.
 - `components/contact-form.tsx`: preparación de consultas.

@@ -1,4 +1,4 @@
-/* Complete cinematic photographs retain their original framing and lighting. */
+/* A stationary city plate sits behind independently animated vehicle layers. */
 /* eslint-disable next/no-img-element */
 'use client';
 
@@ -47,18 +47,27 @@ export function FleetExperience() {
       (context) => {
         const { reduced } = context.conditions!;
         const layers = [...images, ...panels];
-        images.forEach((image, index) => {
-          gsap.set(image, {
-            autoAlpha: index === activeRef.current ? 1 : 0,
-            x: 0,
-            scale: 1,
-            filter: 'none',
+        const copyParts = panels.flatMap((panel) => Array.from(panel.children));
+        let transition: gsap.core.Timeline | null = null;
+        let revision = 0;
+        const settle = (selected: number) => {
+          images.forEach((image, index) => {
+            gsap.set(image, {
+              autoAlpha: index === selected ? 1 : 0,
+              xPercent: 0,
+              scale: 1,
+              filter: 'blur(0px)',
+            });
+            image.dataset.moving = 'false';
+            gsap.set(panels[index], {
+              autoAlpha: index === selected ? 1 : 0,
+              y: 0,
+            });
           });
-          gsap.set(panels[index], {
-            autoAlpha: index === activeRef.current ? 1 : 0,
-            y: 0,
-          });
-        });
+          gsap.set(copyParts, { autoAlpha: 1, y: 0 });
+          root.dataset.transitioning = 'false';
+        };
+        settle(activeRef.current);
         root.style.setProperty(
           '--drive-progress',
           ((activeRef.current + 1) / fleet.length) * 100 + '%',
@@ -66,48 +75,125 @@ export function FleetExperience() {
         controlsRef.current = (index) => {
           const next = Math.round(clampPosition(index, fleet.length));
           if (next === activeRef.current) return;
-          // Retarget the current layers, so rapid clicks never queue intermediate cars.
-          gsap.killTweensOf([...layers, root]);
-          if (Number(gsap.getProperty(images[next], 'opacity')) === 0) {
-            gsap.set(images[next], {
-              x: 0,
-              scale: reduced ? 1 : 1.018,
-              filter: 'none',
-            });
-            gsap.set(panels[next], { y: reduced ? 0 : 8 });
-          }
+          const direction = next > activeRef.current ? 1 : -1;
+          const request = ++revision;
           activeRef.current = next;
           setActive(next);
-          images.forEach((image, carIndex) => {
-            const selected = carIndex === next;
-            image.dataset.moving = String(!reduced);
-            gsap.to(image, {
-              autoAlpha: selected ? 1 : 0,
-              x: 0,
-              scale: 1,
-              filter: 'none',
-              duration: reduced ? 0 : 0.55,
-              ease: 'power2.inOut',
-              onComplete: () => {
-                image.dataset.moving = 'false';
+          const animate = () => {
+            if (request !== revision) return;
+            // Kill the entire previous sequence, including scheduled text entrances.
+            transition?.kill();
+            gsap.killTweensOf([...layers, ...copyParts, root]);
+            if (reduced) {
+              settle(next);
+              gsap.set(root, {
+                '--drive-progress': ((next + 1) / fleet.length) * 100 + '%',
+              });
+              return;
+            }
+            // Retarget from the most visible layer during rapid/reversed selections.
+            const outgoing = images.reduce(
+              (best, image, candidate) =>
+                Number(gsap.getProperty(image, 'opacity')) >
+                Number(gsap.getProperty(images[best], 'opacity'))
+                  ? candidate
+                  : best,
+              0,
+            );
+            images.forEach((image, carIndex) => {
+              image.dataset.moving = String(
+                carIndex === outgoing || carIndex === next,
+              );
+              if (carIndex !== outgoing) gsap.set(image, { autoAlpha: 0 });
+            });
+            root.dataset.transitioning = 'true';
+            transition = gsap.timeline({ onComplete: () => settle(next) });
+            if (outgoing === next) {
+              transition.to(
+                images[next],
+                {
+                  autoAlpha: 1,
+                  xPercent: 0,
+                  scale: 1,
+                  filter: 'blur(0px)',
+                  duration: 0.5,
+                  ease: 'power3.out',
+                },
+                0,
+              );
+            } else {
+              transition.to(
+                images[outgoing],
+                {
+                  autoAlpha: 0,
+                  xPercent: -direction * 16,
+                  scale: 0.985,
+                  filter: 'blur(5px)',
+                  duration: 0.28,
+                  ease: 'power2.in',
+                },
+                0,
+              );
+              transition.fromTo(
+                images[next],
+                {
+                  autoAlpha: 0,
+                  xPercent: direction * 19,
+                  scale: 0.985,
+                  filter: 'blur(6px)',
+                },
+                {
+                  autoAlpha: 1,
+                  xPercent: 0,
+                  scale: 1,
+                  filter: 'blur(0px)',
+                  duration: 0.76,
+                  ease: 'power3.out',
+                  immediateRender: false,
+                },
+                0.3,
+              );
+            }
+            transition.to(
+              panels,
+              { autoAlpha: 0, y: -8, duration: 0.16, ease: 'power2.in' },
+              0,
+            );
+            transition.set(panels[next], { autoAlpha: 1, y: 0 }, 0.22);
+            transition.fromTo(
+              Array.from(panels[next].children),
+              { autoAlpha: 0, y: 14 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.44,
+                stagger: 0.06,
+                ease: 'power3.out',
+                immediateRender: false,
               },
-            });
-            gsap.to(panels[carIndex], {
-              autoAlpha: selected ? 1 : 0,
-              y: reduced || selected ? 0 : -8,
-              duration: reduced ? 0 : 0.55,
-              ease: 'power2.inOut',
-            });
-          });
-          gsap.to(root, {
-            '--drive-progress': ((next + 1) / fleet.length) * 100 + '%',
-            duration: reduced ? 0 : 0.55,
-            ease: 'power2.inOut',
-          });
+              0.22,
+            );
+            transition.to(
+              root,
+              {
+                '--drive-progress': ((next + 1) / fleet.length) * 100 + '%',
+                duration: 0.85,
+                ease: 'power3.inOut',
+              },
+              0,
+            );
+          };
+          // Keep the current car visible until the next transparent image is decoded.
+          const photo = images[next].querySelector('img');
+          if (photo && !photo.complete)
+            void photo.decode().then(animate, animate);
+          else animate();
         };
         return () => {
+          revision++;
           controlsRef.current = null;
-          gsap.killTweensOf([...layers, root]);
+          transition?.kill();
+          gsap.killTweensOf([...layers, ...copyParts, root]);
         };
       },
     );
@@ -184,6 +270,16 @@ export function FleetExperience() {
                 }}
               >
                 <div className="drive-frame">
+                  <img
+                    className="drive-backdrop"
+                    src="/images/fleet-stage-background.webp"
+                    srcSet="/images/fleet-stage-background-mobile.webp 1008w, /images/fleet-stage-background.webp 2016w"
+                    sizes="(max-width: 900px) 94vw, (max-width: 1600px) 64vw, 1020px"
+                    alt=""
+                    width="2016"
+                    height="1140"
+                    loading="lazy"
+                  />
                   {fleet.map((car, index) => (
                     <div
                       className={'drive-car drive-car-' + car.id}
@@ -191,8 +287,8 @@ export function FleetExperience() {
                       aria-hidden={active !== index}
                     >
                       <img
-                        src={car.image}
-                        srcSet={`${car.mobileImage} 1008w, ${car.image} 2016w`}
+                        src={`/images/fleet-stage-${car.id}.webp`}
+                        srcSet={`/images/fleet-stage-${car.id}-mobile.webp 1008w, /images/fleet-stage-${car.id}.webp 2016w`}
                         sizes="(max-width: 900px) 94vw, (max-width: 1600px) 64vw, 1020px"
                         alt={car.make + ' ' + car.model + ', o similar'}
                         width="2016"
