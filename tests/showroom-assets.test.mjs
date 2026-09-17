@@ -10,36 +10,32 @@ const localImage = (src) =>
   );
 
 test('all final foregrounds have real alpha and match the complete background canvas', async () => {
-  for (const suffix of ['', '-mobile']) {
-    const background = await sharp(
-      localImage(`/images/fleet-stage-background${suffix}.webp`),
-    ).metadata();
-    assert.deepEqual(
-      [background.width, background.height],
-      suffix ? [1008, 570] : [2016, 1140],
+  const background = await sharp(
+    localImage('/images/showroom-background.webp'),
+  ).metadata();
+  assert.deepEqual([background.width, background.height], [1859, 846]);
+  for (const car of fleet) {
+    const photo = await sharp(localImage(car.showroomScene)).metadata();
+    const cutout = await sharp(localImage(car.showroomCutout)).metadata();
+    assert.equal(
+      cutout.hasAlpha,
+      true,
+      car.id + ': no opaque checkerboard may replace the cutout',
     );
-    for (const car of fleet) {
-      const cutout = await sharp(
-        localImage(`/images/fleet-stage-${car.id}${suffix}.webp`),
-      ).metadata();
-      assert.equal(
-        cutout.hasAlpha,
-        true,
-        car.id + ': no opaque checkerboard may replace the cutout',
-      );
-      assert.deepEqual(
-        [cutout.width, cutout.height],
-        [background.width, background.height],
-      );
-    }
+    assert.deepEqual(
+      [photo.width, photo.height],
+      [background.width, background.height],
+    );
+    assert.deepEqual(
+      [cutout.width, cutout.height],
+      [background.width, background.height],
+    );
   }
 });
 
 test('cutout borders and sky remain transparent while each vehicle retains opaque pixels', async () => {
   for (const car of fleet) {
-    const { data, info } = await sharp(
-      localImage(`/images/fleet-stage-${car.id}.webp`),
-    )
+    const { data, info } = await sharp(localImage(car.showroomCutout))
       .ensureAlpha()
       .raw()
       .toBuffer({ resolveWithObject: true });
@@ -48,20 +44,18 @@ test('cutout borders and sky remain transparent while each vehicle retains opaqu
       for (let x = 0; x < info.width; x++) {
         const alpha = data[(y * info.width + x) * 4 + 3];
         if (
-          y < info.height / 10 ||
+          y < info.height / 4 ||
           y === info.height - 1 ||
           x === 0 ||
           x === info.width - 1
         )
-          // Generated alpha has occasional one-level residuals (<0.4% opacity).
-          assert.ok(alpha <= 1, car.id + ': backdrop leak');
-        // Car interiors are near-opaque (typically 253), with soft edge/shadow alpha.
-        if (alpha >= 250) opaque++;
+          assert.equal(alpha, 0, car.id + ': backdrop leak');
+        if (alpha === 255) opaque++;
       }
     }
     const coverage = opaque / (info.width * info.height);
     assert.ok(
-      coverage > 0.1 && coverage < 0.6,
+      coverage > 0.1 && coverage < 0.4,
       car.id + ': expected a full car with transparent margins',
     );
   }
