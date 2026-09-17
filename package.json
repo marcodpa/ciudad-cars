@@ -7,11 +7,14 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "vinext build",
+    "build": "vinext build --mode sites",
+    "build:local": "vinext build",
     "start": "vinext start",
-    "lint": "oxlint app components/cinematic-intro.tsx components/city-discovery.tsx components/fleet-experience.tsx components/vehicle-ground-shadow.tsx components/hero-motion.tsx components/workshop-journey.tsx components/site-header.tsx components/site-footer.tsx components/site-link.tsx components/page-intro.tsx components/journey-cta.tsx components/vehicle-details.tsx components/vehicle-catalog.tsx components/contact-form.tsx lib proxy.ts vite.config.ts next.config.ts",
+    "lint": "oxlint app components/cinematic-intro.tsx components/city-discovery.tsx components/fleet-experience.tsx components/vehicle-ground-shadow.tsx components/hero-motion.tsx components/workshop-journey.tsx components/site-header.tsx components/site-footer.tsx components/site-link.tsx components/page-intro.tsx components/journey-cta.tsx components/vehicle-details.tsx components/vehicle-catalog.tsx components/contact-form.tsx components/reservation-provider.tsx components/reservation-dialog.tsx components/language-provider.tsx components/pages lib proxy.ts vite.config.ts next.config.ts",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "seo:check": "node --experimental-strip-types scripts/check-seo.mjs",
+    "seo:audit": "node --experimental-strip-types scripts/audit-seo.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -45,6 +48,7 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
     "@vitejs/plugin-rsc": "0.5.26",
+    "lighthouse": "13.4.1",
     "oxfmt": "0.61.0",
     "oxlint": "1.76.0",
     "oxlint-tsgolint": "7.0.2001",

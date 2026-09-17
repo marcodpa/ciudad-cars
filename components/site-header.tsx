@@ -1,20 +1,51 @@
 /* Preoptimized local assets retain their reserved dimensions and transparent pixels. */
 /* eslint-disable next/no-img-element */
 'use client';
+import { useLanguage } from '@/components/language-provider';
 
 import Link from '@/components/site-link';
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { CalendarDays, Menu, Phone, X } from 'lucide-react';
+import { CalendarDays, Globe2, Menu, Phone, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { company } from '@/lib/company';
 import { siteNavigation } from '@/lib/navigation';
+import { localizedHref, resolveLanguageRoute } from '@/lib/seo';
+import { useReservation } from '@/components/reservation-provider';
 
-export function SiteHeader({ afterIntro = false }: { afterIntro?: boolean }) {
+export function SiteHeader() {
+  const { t, language, toggleLanguage } = useLanguage();
+  const reserve = useReservation();
   const pathname = usePathname();
+  const basePath = resolveLanguageRoute(pathname || '/')?.path;
+  const isHome = basePath === '/';
   const [open, setOpen] = useState(false);
+  const [overIntro, setOverIntro] = useState(true);
   const menuRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!isHome) return;
+    const intro = document.getElementById('recorrido');
+    if (!intro) return;
+    // Keep one navigation visible throughout the film and the vehicle catalog.
+    let observer: IntersectionObserver;
+    const observe = () => {
+      observer?.disconnect();
+      const height = headerRef.current?.offsetHeight || 84;
+      observer = new IntersectionObserver(
+        ([entry]) => setOverIntro(entry.isIntersecting),
+        { rootMargin: `-${height + 1}px 0px 0px 0px` },
+      );
+      observer.observe(intro);
+    };
+    observe();
+    window.addEventListener('resize', observe, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', observe);
+    };
+  }, [isHome]);
   useEffect(() => {
     if (!open) return;
     function close(event: KeyboardEvent) {
@@ -26,16 +57,16 @@ export function SiteHeader({ afterIntro = false }: { afterIntro?: boolean }) {
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, [open]);
-  // Home's full-screen intro includes its approved overlay header. The shared
-  // navigation starts immediately after it; interior routes keep their header.
-  if (afterIntro ? pathname !== '/' : pathname === '/') return null;
   return (
     <>
       <a className="skip-link" href="#contenido">
-        Ir al contenido
+        {t('Ir al contenido')}
       </a>
-      <header className="site-header">
-        <Link href="/" aria-label="Ciudad Cars, inicio" className="brand">
+      <header
+        ref={headerRef}
+        className={`site-header${isHome ? ' site-header-home' : ''}${isHome && overIntro && !open ? ' is-over-intro' : ''}`}
+      >
+        <Link href="/" aria-label={t('Ciudad Cars, inicio')} className="brand">
           <img
             src="/images/logo-transparent.png"
             width="427"
@@ -45,35 +76,76 @@ export function SiteHeader({ afterIntro = false }: { afterIntro?: boolean }) {
         </Link>
         <nav
           id="main-navigation"
-          aria-label="Navegación principal"
+          aria-label={t('Navegación principal')}
           className={open ? 'main-nav is-open' : 'main-nav'}
         >
           {siteNavigation.map(({ label, href }) => (
             <Link
               key={href}
               href={href}
-              aria-current={pathname === href ? 'page' : undefined}
+              aria-current={basePath === href ? 'page' : undefined}
               onClick={() => setOpen(false)}
             >
-              {label}
+              {t(label)}
             </Link>
           ))}
         </nav>
         <div className="header-actions">
+          <a
+            className="language-toggle"
+            href={localizedHref(
+              pathname || '/',
+              language === 'es' ? 'en' : 'es',
+            )}
+            hrefLang={language === 'es' ? 'en' : 'es'}
+            onClick={(event) => {
+              if (
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+              )
+                return;
+              event.preventDefault();
+              toggleLanguage();
+            }}
+            lang={language === 'es' ? 'en' : 'es'}
+            aria-label={
+              language === 'es' ? 'Switch to English' : 'Cambiar a español'
+            }
+            title={
+              language === 'es' ? 'Switch to English' : 'Cambiar a español'
+            }
+          >
+            <Globe2 size={16} aria-hidden="true" />
+            <span>{language === 'es' ? 'EN' : 'ES'}</span>
+          </a>
           <a className="header-phone" href={company.tel}>
             <Phone size={15} />
             {company.phone}
           </a>
-          <a href={company.reservation} className="cta header-cta">
-            <CalendarDays size={17} />
-            Reservar ahora
-          </a>
+          <button
+            type="button"
+            className="cta header-cta"
+            aria-label={t('Reservar ahora')}
+            data-reservation-trigger
+            onClick={() => {
+              setOpen(false);
+              reserve();
+            }}
+          >
+            <CalendarDays size={17} aria-hidden="true" />
+            <span className="header-cta-full">{t('Reservar ahora')}</span>
+            <span className="header-cta-short" aria-hidden="true">
+              {t('Reservar')}
+            </span>
+          </button>
           <Button
             ref={menuRef}
             className="menu-toggle"
             variant="ghost"
             aria-controls="main-navigation"
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            aria-label={open ? t('Cerrar menú') : t('Abrir menú')}
             aria-expanded={open}
             onClick={() => setOpen(!open)}
           >

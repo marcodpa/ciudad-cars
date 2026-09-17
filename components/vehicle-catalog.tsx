@@ -1,6 +1,7 @@
 /* Complete cinematic photographs share their lighting with the surroundings. */
 /* eslint-disable next/no-img-element */
 'use client';
+import { useLanguage } from '@/components/language-provider';
 
 import { useState } from 'react';
 import {
@@ -19,19 +20,24 @@ import {
 import { VehicleDetails } from '@/components/vehicle-details';
 import { fleet, type Vehicle } from '@/lib/fleet';
 import { defaultFilters, filterFleet } from '@/lib/catalog';
-import { vehicleReservation } from '@/lib/company';
+import { useReservation } from '@/components/reservation-provider';
 
 export function VehicleCatalog() {
+  const { t } = useLanguage();
+  const reserve = useReservation();
   const [filters, setFilters] = useState(defaultFilters);
   const [details, setDetails] = useState<Vehicle | null>(null);
   const cars = filterFleet(fleet, filters);
 
   return (
-    <section className="vehicles-catalog" aria-label="Catálogo de vehículos">
+    <section
+      className="vehicles-catalog"
+      aria-label={t('Catálogo de vehículos')}
+    >
       <div className="vehicles-filter-bar">
         <div className="page-width vehicles-filters">
           <label className="vehicles-filter-field" htmlFor="catalog-category">
-            <span>Categoría</span>
+            <span>{t('Categoría')}</span>
             <NativeSelect
               id="catalog-category"
               value={filters.category}
@@ -40,17 +46,17 @@ export function VehicleCatalog() {
               }
             >
               <NativeSelectOption value="all">
-                Todas las categorías
+                {t('Todas las categorías')}
               </NativeSelectOption>
               {fleet.map((car) => (
                 <NativeSelectOption key={car.id} value={car.category}>
-                  {car.category}
+                  {t(car.category)}
                 </NativeSelectOption>
               ))}
             </NativeSelect>
           </label>
           <label className="vehicles-filter-field" htmlFor="catalog-passengers">
-            <span>Capacidad</span>
+            <span>{t('Capacidad')}</span>
             <NativeSelect
               id="catalog-passengers"
               value={filters.passengers}
@@ -61,15 +67,17 @@ export function VehicleCatalog() {
                 })
               }
             >
-              <NativeSelectOption value="0">Todos</NativeSelectOption>
+              <NativeSelectOption value="0">{t('Todos')}</NativeSelectOption>
               <NativeSelectOption value="5">
-                5 pasajeros o más
+                {t('5 pasajeros o más')}
               </NativeSelectOption>
-              <NativeSelectOption value="7">7 pasajeros</NativeSelectOption>
+              <NativeSelectOption value="7">
+                {t('7 pasajeros')}
+              </NativeSelectOption>
             </NativeSelect>
           </label>
           <label className="vehicles-filter-field" htmlFor="catalog-sort">
-            <span>Ordenar por</span>
+            <span>{t('Ordenar por')}</span>
             <NativeSelect
               id="catalog-sort"
               value={filters.sort}
@@ -78,10 +86,10 @@ export function VehicleCatalog() {
               }
             >
               <NativeSelectOption value="price-asc">
-                Precio: menor a mayor
+                {t('Precio: menor a mayor')}
               </NativeSelectOption>
               <NativeSelectOption value="price-desc">
-                Precio: mayor a menor
+                {t('Precio: mayor a menor')}
               </NativeSelectOption>
             </NativeSelect>
           </label>
@@ -90,7 +98,7 @@ export function VehicleCatalog() {
             aria-live="polite"
             aria-atomic="true"
           >
-            {cars.length} {cars.length === 1 ? 'vehículo' : 'vehículos'}
+            {cars.length} {cars.length === 1 ? t('vehículo') : t('vehículos')}
           </output>
         </div>
       </div>
@@ -113,7 +121,7 @@ export function VehicleCatalog() {
                       car.make +
                       ' ' +
                       car.model +
-                      ', o similar, en una escena ilustrativa de Maracaibo'
+                      t(', o similar, en una escena ilustrativa de Maracaibo')
                     }
                     width="2016"
                     height="1140"
@@ -122,72 +130,83 @@ export function VehicleCatalog() {
                   />
                 </div>
                 <div className="vehicle-list-description">
-                  <span className="vehicle-list-category">{car.category}</span>
+                  <span className="vehicle-list-category">
+                    {t(car.category)}
+                  </span>
                   <h2 id={'catalog-model-' + car.id}>
                     {car.make} {car.model}
                   </h2>
-                  <p className="vehicle-list-similar">o similar</p>
+                  <p className="vehicle-list-similar">{t('o similar')}</p>
                   <dl className="vehicle-list-specs">
                     <div>
                       <dt>
                         <Settings2 aria-hidden="true" />
-                        <span className="sr-only">Transmisión</span>
+                        <span className="sr-only">{t('Transmisión')}</span>
                       </dt>
-                      <dd>Automático</dd>
+                      <dd>{t('Automático')}</dd>
                     </div>
                     <div>
                       <dt>
                         <Users aria-hidden="true" />
-                        <span className="sr-only">Capacidad</span>
+                        <span className="sr-only">{t('Capacidad')}</span>
                       </dt>
-                      <dd>{car.passengers} pasajeros</dd>
+                      <dd>
+                        {car.passengers}
+                        {t(' pasajeros')}
+                      </dd>
                     </div>
                     <div>
                       <dt>
                         <BriefcaseBusiness aria-hidden="true" />
-                        <span className="sr-only">Equipaje</span>
+                        <span className="sr-only">{t('Equipaje')}</span>
                       </dt>
-                      <dd>{car.bags} maletas</dd>
+                      <dd>
+                        {car.bags}
+                        {t(' maletas')}
+                      </dd>
                     </div>
                     <div>
                       <dt>
                         <CarFront aria-hidden="true" />
-                        <span className="sr-only">Puertas</span>
+                        <span className="sr-only">{t('Puertas')}</span>
                       </dt>
-                      <dd>{car.doors} puertas</dd>
+                      <dd>
+                        {car.doors}
+                        {t(' puertas')}
+                      </dd>
                     </div>
                   </dl>
                 </div>
                 <div className="vehicle-list-booking">
                   <div className="vehicle-list-price">
-                    <span>Desde</span>
+                    <span>{t('Desde')}</span>
                     <strong>
                       <span>${car.price}</span>
-                      <small>/día</small>
+                      <small>{t('/día')}</small>
                     </strong>
                   </div>
                   <div className="vehicle-list-actions">
-                    <a
-                      href={vehicleReservation(car)}
+                    <button
+                      type="button"
+                      onClick={() => reserve(car.id)}
                       className="cta vehicle-list-reserve"
-                      target="_blank"
-                      rel="noopener noreferrer"
                       aria-label={
-                        'Consultar reserva de ' + car.make + ' ' + car.model
+                        t('Consultar reserva de ') + car.make + ' ' + car.model
                       }
                     >
-                      Reservar ahora
+                      {t('Reservar ahora')}
                       <ArrowRight size={18} aria-hidden="true" />
-                    </a>
+                    </button>
                     <Button
                       variant="link"
                       className="vehicle-list-details"
                       onClick={() => setDetails(car)}
                       aria-label={
-                        'Ver detalles de ' + car.make + ' ' + car.model
+                        t('Ver detalles de ') + car.make + ' ' + car.model
                       }
                     >
-                      Ver detalles <ArrowRight size={18} aria-hidden="true" />
+                      {t('Ver detalles ')}
+                      <ArrowRight size={18} aria-hidden="true" />
                     </Button>
                   </div>
                 </div>
@@ -197,26 +216,29 @@ export function VehicleCatalog() {
         ) : (
           <div className="vehicles-empty">
             <CarFront size={44} aria-hidden="true" />
-            <h2>Probemos con otro plan</h2>
+            <h2>{t('Probemos con otro plan')}</h2>
             <p>
-              No hay modelos que combinen esa categoría y capacidad. Puedes ver
-              de nuevo toda la flota.
+              {t(
+                'No hay modelos que combinen esa categoría y capacidad. Puedes ver de nuevo toda la flota.',
+              )}
             </p>
             <Button className="cta" onClick={() => setFilters(defaultFilters)}>
               <RotateCcw size={17} aria-hidden="true" />
-              Restablecer filtros
+              {t('Restablecer filtros')}
             </Button>
           </div>
         )}
         <div className="vehicles-list-summary">
           <p>
-            Todos automáticos <span aria-hidden="true">·</span> Tarifas en USD /
-            día
+            {t('Todos automáticos ')}
+            <span aria-hidden="true">·</span>
+            {t(' Tarifas en USD / día')}
           </p>
         </div>
         <p className="vehicles-list-note">
-          Las imágenes son referenciales. Modelos o similares; disponibilidad y
-          tarifa final sujetas a confirmación para las fechas de tu viaje.
+          {t(
+            'Las imágenes son referenciales. Modelos o similares; disponibilidad y tarifa final sujetas a confirmación para las fechas de tu viaje.',
+          )}
         </p>
       </div>
       <VehicleDetails car={details} onClose={() => setDetails(null)} />

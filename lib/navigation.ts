@@ -20,6 +20,14 @@ export function legacyNavigationDestination(pathname: string) {
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .replace(/\s+/g, '-');
+  // Preserve inbound links from the existing public website during the redesign.
+  const previousPages: Record<string, string> = {
+    'about-us': '/quienes-somos',
+    'contact-us': '/contacto',
+    service: '/servicios',
+    'date-reservation': '/vehiculos',
+  };
+  if (Object.hasOwn(previousPages, label)) return previousPages[label];
   const destination = siteNavigation.find(
     (item) =>
       item.label

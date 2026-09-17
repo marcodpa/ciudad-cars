@@ -1,6 +1,7 @@
 /* Complete cinematic photographs retain their original framing and lighting. */
 /* eslint-disable next/no-img-element */
 'use client';
+import { useLanguage } from '@/components/language-provider';
 
 import Link from '@/components/site-link';
 
@@ -18,11 +19,13 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { VehicleDetails } from '@/components/vehicle-details';
 import { fleet } from '@/lib/fleet';
-import { vehicleReservation } from '@/lib/company';
+import { useReservation } from '@/components/reservation-provider';
 import { clampPosition } from '@/lib/fleet-motion';
 import { registerFleetReadTool } from '@/lib/webmcp';
 
 export function FleetExperience() {
+  const { t } = useLanguage();
+  const reserve = useReservation();
   const rootRef = useRef<HTMLElement>(null);
   const controlsRef = useRef<((index: number) => void) | null>(null);
   const activeRef = useRef(0);
@@ -145,22 +148,23 @@ export function FleetExperience() {
             </div>
             <div className="drive-heading">
               <h2 id="fleet-title">
-                Elige tu <span>viaje perfecto</span>
+                {t('Elige tu ')}
+                <span>{t('viaje perfecto')}</span>
               </h2>
               <p>
-                Cinco formas de moverte.
+                {t('Cinco formas de moverte.')}
                 <br />
-                <span>Encuentra la tuya.</span>
+                <span>{t('Encuentra la tuya.')}</span>
               </p>
             </div>
             <section
               className="drive-configurator"
-              aria-roledescription="carrusel"
-              aria-label="Vehículos de Ciudad Cars"
+              aria-roledescription={t('carrusel')}
+              aria-label={t('Vehículos de Ciudad Cars')}
             >
               <section
                 className="drive-showroom"
-                aria-label="Vista del vehículo en Maracaibo"
+                aria-label={t('Vista del vehículo en Maracaibo')}
                 onTouchStart={(event) => {
                   if (event.touches.length !== 1) {
                     touchRef.current = null;
@@ -194,7 +198,7 @@ export function FleetExperience() {
                         src={car.image}
                         srcSet={`${car.mobileImage} 1008w, ${car.image} 2016w`}
                         sizes="(max-width: 900px) 94vw, (max-width: 1600px) 64vw, 1020px"
-                        alt={car.make + ' ' + car.model + ', o similar'}
+                        alt={car.make + ' ' + car.model + t(', o similar')}
                         width="2016"
                         height="1140"
                         loading="lazy"
@@ -209,7 +213,7 @@ export function FleetExperience() {
                   <Button
                     variant="outline"
                     className="drive-arrow"
-                    aria-label="Vehículo anterior"
+                    aria-label={t('Vehículo anterior')}
                     disabled={active === 0}
                     onClick={() => select(activeRef.current - 1)}
                   >
@@ -222,7 +226,7 @@ export function FleetExperience() {
                   <Button
                     variant="outline"
                     className="drive-arrow"
-                    aria-label="Vehículo siguiente"
+                    aria-label={t('Vehículo siguiente')}
                     disabled={active === fleet.length - 1}
                     onClick={() => select(activeRef.current + 1)}
                   >
@@ -232,15 +236,16 @@ export function FleetExperience() {
                 <Progress
                   className="drive-progress"
                   value={((active + 1) / fleet.length) * 100}
-                  aria-label="Recorrido por los vehículos"
+                  aria-label={t('Recorrido por los vehículos')}
                 />
                 <Link href="/vehiculos">
-                  Ver catálogo <ArrowRight size={18} />
+                  {t('Ver catálogo ')}
+                  <ArrowRight size={18} />
                 </Link>
               </div>
               <fieldset
                 className="drive-thumbnails"
-                aria-label="Elegir vehículo"
+                aria-label={t('Elegir vehículo')}
               >
                 {fleet.map((car, index) => (
                   <button
@@ -252,9 +257,9 @@ export function FleetExperience() {
                       car.make +
                       ' ' +
                       car.model +
-                      ', desde ' +
+                      t(', desde ') +
                       car.price +
-                      ' dólares al día'
+                      t(' dólares al día')
                     }
                     aria-pressed={active === index}
                     onClick={() => select(index)}
@@ -282,19 +287,19 @@ export function FleetExperience() {
                       inert={active !== index}
                     >
                       <div className="drive-model">
-                        <span className="eyebrow">{car.category}</span>
+                        <span className="eyebrow">{t(car.category)}</span>
                         <h3>
                           <span>{car.make}</span>
                           <strong>{car.model}</strong>
                         </h3>
-                        <span className="drive-similar">o similar</span>
+                        <span className="drive-similar">{t('o similar')}</span>
                       </div>
                       <div className="drive-price">
-                        <span>Desde</span>
+                        <span>{t('Desde')}</span>
                         <div className="drive-rate">
                           <strong>${car.price}</strong>
                           <span>
-                            USD<small>/día</small>
+                            USD<small>{t('/día')}</small>
                           </span>
                         </div>
                       </div>
@@ -302,65 +307,82 @@ export function FleetExperience() {
                         <div>
                           <dt>
                             <Settings2 aria-hidden="true" />
-                            <span className="sr-only">Transmisión</span>
+                            <span className="sr-only">{t('Transmisión')}</span>
                           </dt>
-                          <dd>Automático</dd>
+                          <dd>{t('Automático')}</dd>
                         </div>
                         <div>
                           <dt>
                             <Users aria-hidden="true" />
-                            <span className="sr-only">Capacidad</span>
+                            <span className="sr-only">{t('Capacidad')}</span>
                           </dt>
-                          <dd>{car.passengers} pasajeros</dd>
+                          <dd>
+                            {car.passengers}
+                            {t(' pasajeros')}
+                          </dd>
                         </div>
                         <div>
                           <dt>
                             <BriefcaseBusiness aria-hidden="true" />
-                            <span className="sr-only">Equipaje</span>
+                            <span className="sr-only">{t('Equipaje')}</span>
                           </dt>
-                          <dd>{car.bags} maletas</dd>
+                          <dd>
+                            {car.bags}
+                            {t(' maletas')}
+                          </dd>
                         </div>
                         <div>
                           <dt>
                             <CarFront aria-hidden="true" />
-                            <span className="sr-only">Acceso</span>
+                            <span className="sr-only">{t('Acceso')}</span>
                           </dt>
-                          <dd>{car.doors} puertas</dd>
+                          <dd>
+                            {car.doors}
+                            {t(' puertas')}
+                          </dd>
                         </div>
                       </dl>
                     </div>
                   ))}
                 </div>
                 <div className="drive-actions">
-                  <a
+                  <button
+                    type="button"
                     className="cta"
-                    href={vehicleReservation(fleet[active])}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={() => reserve(fleet[active].id)}
                   >
-                    Reservar este carro
+                    {t('Reservar este carro')}
                     <ArrowRight size={17} />
-                  </a>
+                  </button>
                   <Button
                     className="drive-details-link"
                     variant="link"
                     onClick={() => setDetails(active)}
                   >
-                    Ver detalles <ArrowRight size={18} />
+                    {t('Ver detalles ')}
+                    <ArrowRight size={18} />
                   </Button>
                 </div>
               </div>
             </section>
             <output className="sr-only" aria-live="polite" aria-atomic="true">
-              {active + 1} de {fleet.length}. {fleet[active].make}{' '}
-              {fleet[active].model}, {fleet[active].category}, o similar. Desde{' '}
-              {fleet[active].price} dólares por día. {fleet[active].passengers}{' '}
-              pasajeros, {fleet[active].bags} maletas.
+              {active + 1}
+              {t(' de ')}
+              {fleet.length}. {fleet[active].make} {fleet[active].model},{' '}
+              {t(fleet[active].category)}
+              {t(', o similar. Desde')} {fleet[active].price}
+              {t(' dólares por día. ')}
+              {fleet[active].passengers} {t('pasajeros, ')}
+              {fleet[active].bags}
+              {t(' maletas.')}
             </output>
             <noscript>
               <p className="drive-no-script">
-                Puedes conocer los cinco carros en{' '}
-                <Link href="/vehiculos">nuestro catálogo de vehículos</Link>.
+                {t('Puedes conocer los cinco carros en')}{' '}
+                <Link href="/vehiculos">
+                  {t('nuestro catálogo de vehículos')}
+                </Link>
+                .
               </p>
             </noscript>
           </div>

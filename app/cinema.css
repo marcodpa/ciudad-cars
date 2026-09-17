@@ -1,7 +1,7 @@
 .cc-cinema {
-  --ink: #091727;
-  --paper: #f5f4eb;
-  --lime: #d0fa73;
+  --ink: #032640;
+  --paper: #f5f9fd;
+  --lime: #b6f331;
   --gutter: 5.5vw;
   color-scheme: dark;
 }
@@ -15,7 +15,7 @@ html:has(.cc-cinema) {
   margin: 0;
   background: var(--ink);
   color: var(--paper);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 .cc-cinema button,
@@ -61,7 +61,7 @@ html:has(.cc-cinema) {
   white-space: nowrap;
 }
 .cc-cinema .cc-intro-journey {
-  height: 620svh;
+  height: 600svh;
   position: relative;
 }
 .cc-cinema .cc-intro-stage {
@@ -73,18 +73,13 @@ html:has(.cc-cinema) {
   background: var(--ink);
   isolation: isolate;
 }
-.cc-cinema .cc-intro-picture,
-.cc-cinema .cc-intro-shade,
-.cc-cinema .cc-intro-end-veil,
-.cc-cinema .cc-intro-story-shade {
+.cc-cinema .cc-intro-picture {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 .cc-cinema .cc-intro-picture {
   overflow: hidden;
-  transform-origin: center;
-  will-change: transform;
   background: url(/cinema/cruze-aerial.jpg) center/cover no-repeat;
 }
 .cc-cinema #cc-intro-film {
@@ -94,112 +89,17 @@ html:has(.cc-cinema) {
   object-fit: cover;
   object-position: 50% 50%;
 }
-.cc-cinema .cc-intro-film-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse, transparent 42%, #06111d40 100%);
-}
-.cc-cinema #cc-intro-film-grain {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: soft-light;
-  opacity: 0.065;
-  pointer-events: none;
-}
-.cc-cinema .cc-intro-sky-transition {
-  position: absolute;
-  inset: -5%;
-  opacity: 0;
-  background: radial-gradient(
-    ellipse at 55% 45%,
-    #fff7e8 0%,
-    #ebeff4a6 42%,
-    transparent 78%
-  );
-}
-.cc-cinema .cc-intro-shade {
-  background:
-    linear-gradient(
-      180deg,
-      #04101f70 0%,
-      transparent 42%,
-      transparent 65%,
-      #091727bd 100%
-    ),
-    linear-gradient(90deg, #04101f70, transparent 65%);
-}
-.cc-cinema .cc-intro-story-shade {
-  opacity: 0;
-}
-.cc-cinema .cc-intro-shade-left {
-  background: linear-gradient(
-    90deg,
-    #071624c2 0%,
-    #07162466 27%,
-    transparent 64%
-  );
-}
-.cc-cinema .cc-intro-shade-right {
-  background: linear-gradient(
-    270deg,
-    #071624c2 0%,
-    #07162466 27%,
-    transparent 64%
-  );
-}
-.cc-cinema .cc-intro-end-veil {
-  opacity: 0;
-  background: linear-gradient(
-    180deg,
-    #09172705 0%,
-    #09172740 22%,
-    #091727c9 65%,
-    #091727 96%
-  );
-}
-.cc-cinema .cc-intro-header {
-  position: absolute;
-  z-index: 5;
-  top: 29px;
-  left: var(--gutter);
-  right: var(--gutter);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-.cc-cinema .cc-intro-brand {
-  line-height: 0;
-}
-.cc-cinema .cc-intro-brand img {
-  width: 180px;
-  height: auto;
-  filter: drop-shadow(0 2px 10px #0003);
-}
-.cc-cinema .cc-intro-place {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 9px;
-  letter-spacing: 2px;
-}
-.cc-cinema .cc-intro-place i {
-  width: 5px;
-  height: 5px;
-  background: var(--lime);
-  border-radius: 50%;
-}
-.cc-cinema .cc-intro-reservation {
-  font-size: 11px;
-  padding: 12px 0;
-  border-bottom: 1px solid #ffffff65;
-}
-.cc-cinema .cc-intro-reservation span {
-  margin-left: 28px;
-  color: var(--lime);
-  font-size: 16px;
+/* Keep text readable between its directional blue backdrops. */
+.cc-cinema .cc-intro-headline,
+.cc-cinema .cc-intro-story-panel,
+.cc-cinema .cc-intro-story-close,
+.cc-cinema .cc-intro-static-vehicle,
+.cc-cinema .cc-intro-chapter-nav,
+.cc-cinema .cc-intro-journey-cue,
+.cc-cinema .cc-intro-options > summary {
+  text-shadow:
+    0 1px 3px #032640,
+    0 2px 12px #03264080;
 }
 .cc-cinema .cc-intro-headline {
   position: absolute;
@@ -344,19 +244,6 @@ html:has(.cc-cinema) {
   margin: 0;
   color: #cfdae1;
 }
-.cc-cinema .cc-intro-scene-location {
-  position: absolute;
-  left: var(--gutter);
-  bottom: 34px;
-  display: flex;
-  gap: 12px;
-  letter-spacing: 1.8px;
-  font-size: 8px;
-  color: #d8e0e6;
-}
-.cc-cinema .cc-intro-scene-location span {
-  color: var(--lime);
-}
 .cc-cinema .cc-intro-journey-cue {
   position: absolute;
   left: 50%;
@@ -372,7 +259,7 @@ html:has(.cc-cinema) {
 .cc-cinema .cc-intro-cue-line {
   height: 25px;
   width: 1px;
-  background: linear-gradient(transparent, var(--lime));
+  background: var(--lime);
 }
 .cc-cinema .cc-intro-journey-cue > span:last-child {
   font-size: 15px;
@@ -442,9 +329,6 @@ html:has(.cc-cinema) {
 .cc-cinema .cc-intro-end-actions button span:first-child {
   margin-right: 5px;
 }
-.cc-cinema .cc-intro-end-actions > a:last-child {
-  margin-left: auto;
-}
 .cc-cinema #cc-intro-motion-toggle[aria-pressed='true'] {
   color: var(--lime);
 }
@@ -493,37 +377,10 @@ html:has(.cc-cinema) {
     --gutter: 6vw;
   }
   .cc-cinema .cc-intro-journey {
-    height: 560svh;
+    height: 520svh;
   }
   .cc-cinema .cc-intro-stage {
     min-height: 500px;
-  }
-  .cc-cinema .cc-intro-header {
-    top: 23px;
-    gap: 16px;
-  }
-  .cc-cinema .cc-intro-brand img {
-    width: 138px;
-  }
-  .cc-cinema .cc-intro-place {
-    display: none;
-  }
-  .cc-cinema .cc-intro-reservation {
-    font-size: 10px;
-    padding: 10px 0;
-  }
-  .cc-cinema .cc-intro-reservation span {
-    margin-left: 12px;
-    font-size: 15px;
-  }
-  .cc-cinema .cc-intro-shade {
-    background: linear-gradient(
-      180deg,
-      #04101f99,
-      transparent 55%,
-      #0917274d 74%,
-      #091727cc 100%
-    );
   }
   .cc-cinema .cc-intro-headline {
     top: 21%;
@@ -578,15 +435,6 @@ html:has(.cc-cinema) {
     font-size: 9px;
     margin-top: 14px;
   }
-  .cc-cinema .cc-intro-story-shade {
-    background: linear-gradient(
-      0deg,
-      #071624e0 0%,
-      #071624b3 24%,
-      #07162422 52%,
-      transparent 67%
-    );
-  }
   .cc-cinema .cc-intro-story-close {
     bottom: 23%;
     right: var(--gutter);
@@ -598,13 +446,6 @@ html:has(.cc-cinema) {
   }
   .cc-cinema .cc-intro-story-close .cc-intro-eyebrow {
     font-size: 8px;
-  }
-  .cc-cinema .cc-intro-scene-location {
-    left: var(--gutter);
-    bottom: 76px;
-    font-size: 7px;
-    gap: 9px;
-    letter-spacing: 1.6px;
   }
   .cc-cinema .cc-intro-journey-cue {
     left: var(--gutter);
@@ -644,10 +485,6 @@ html:has(.cc-cinema) {
   }
   .cc-cinema .cc-intro-end-actions button {
     font-size: 9px;
-  }
-  .cc-cinema .cc-intro-end-actions > a:last-child {
-    margin-left: 0;
-    padding: 9px 0;
   }
   .cc-cinema dialog {
     width: 100vw;
@@ -701,12 +538,8 @@ html:has(.cc-cinema) {
   filter: none !important;
   will-change: auto;
 }
-.cc-cinema.cc-intro-is-reduced-motion #cc-intro-film-grain,
-.cc-cinema.cc-intro-is-reduced-motion .cc-intro-sky-transition,
 .cc-cinema.cc-intro-is-reduced-motion .cc-intro-story-panel,
 .cc-cinema.cc-intro-is-reduced-motion .cc-intro-story-close,
-.cc-cinema.cc-intro-is-reduced-motion .cc-intro-story-shade,
-.cc-cinema.cc-intro-is-reduced-motion .cc-intro-end-veil,
 .cc-cinema.cc-intro-is-reduced-motion .cc-intro-journey-cue,
 .cc-cinema.cc-intro-is-reduced-motion #cc-intro-play {
   display: none !important;
@@ -731,14 +564,14 @@ html:has(.cc-cinema) {
 /* Reset inherited site typography; values below preserve the approved intro. */
 .cc-cinema {
   position: relative;
-  --ink: #091727;
-  --paper: #f5f4eb;
-  --lime: #d0fa73;
+  --ink: #032640;
+  --paper: #f5f9fd;
+  --lime: #b6f331;
   --gutter: 5.5vw;
   line-height: normal;
 }
 .cc-cinema :is(h1, h2, h3) {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), Arial, sans-serif;
   text-transform: none;
 }
 .cc-cinema .cc-intro-eyebrow {
@@ -766,7 +599,7 @@ html:has(.cc-cinema) {
   margin: 0;
 }
 html:has(.cc-cinema) {
-  scroll-padding-top: 0;
+  scroll-padding-top: var(--header-height);
 }
 @media (max-width: 760px) {
   .cc-cinema {
@@ -777,4 +610,375 @@ html:has(.cc-cinema) {
   .cc-cinema .cc-intro-journey {
     min-height: 520px;
   }
+}
+
+/* One homepage: shared navigation, film, travel plans, then the catalog. */
+body:has(.cc-cinema) {
+  --header-height: 88px;
+}
+.site-header-home {
+  position: fixed;
+  inset: 0 0 auto;
+  border: 0;
+  isolation: isolate;
+  transition: background-color 0.25s;
+}
+.site-header-home .brand {
+  width: clamp(180px, 19vw, 265px);
+}
+.site-header-home .header-phone {
+  display: none;
+}
+.site-header-home.is-over-intro {
+  background: transparent;
+}
+.site-header-home.is-over-intro .main-nav {
+  text-shadow:
+    0 1px 3px #032640,
+    0 2px 10px #03264080;
+}
+.cc-cinema .cc-intro-headline {
+  top: max(24%, calc(var(--header-height) + 44px));
+}
+.cc-cinema .cc-intro-intro {
+  font-size: 16px;
+}
+.cc-cinema .cc-intro-text-link {
+  min-height: 44px;
+  font-size: 14px;
+}
+.cc-cinema .cc-intro-text-link svg {
+  color: var(--lime);
+}
+.cc-cinema .cc-intro-story-panel {
+  top: max(23%, calc(var(--header-height) + 40px));
+}
+.cc-cinema .cc-intro-story-close {
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 17%;
+}
+.cc-cinema .cc-intro-story-close h2 {
+  font-size: clamp(52px, 6.5vw, 100px);
+  margin-bottom: 30px;
+}
+.cc-cinema .cc-intro-plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 880px;
+  margin: 0 0 22px;
+  border-top: 1px solid #ffffff38;
+}
+.cc-cinema .cc-intro-plans > a {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 22px 20px 12px 0;
+  min-height: 74px;
+}
+.cc-cinema .cc-intro-plans svg {
+  width: 24px;
+  height: 24px;
+  color: var(--lime);
+}
+.cc-cinema .cc-intro-plans strong,
+.cc-cinema .cc-intro-plans small {
+  display: block;
+}
+.cc-cinema .cc-intro-plans strong {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.cc-cinema .cc-intro-plans small {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #d2dfe9;
+}
+.cc-cinema .cc-intro-plans a:hover strong {
+  color: var(--lime);
+}
+.cc-cinema .cc-intro-plans-anchor {
+  position: absolute;
+  top: calc(86% - 30.1svh);
+}
+.cc-cinema .cc-intro-options {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 20px;
+  z-index: 8;
+  font-size: 12px;
+}
+.cc-cinema .cc-intro-options summary {
+  min-height: 44px;
+  align-content: center;
+  cursor: pointer;
+  color: #e3edf4;
+}
+.cc-cinema .cc-intro-options summary:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 4px;
+}
+.cc-cinema .cc-intro-options[open] summary {
+  color: var(--lime);
+}
+.cc-cinema .cc-intro-options .cc-intro-utilities {
+  position: absolute;
+  left: 0;
+  bottom: 54px;
+  width: min(320px, 86vw);
+  padding: 18px;
+  border: 1px solid #ffffff38;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px #0003;
+  background: var(--ink);
+}
+.cc-cinema .cc-intro-end-actions {
+  display: grid;
+  gap: 4px;
+  padding: 0 0 14px;
+}
+.cc-cinema .cc-intro-end-actions button {
+  text-align: left;
+  font-size: 14px;
+  min-height: 44px;
+  padding: 10px;
+  color: var(--paper);
+  border-radius: 4px;
+}
+.cc-cinema .cc-intro-end-actions button:hover {
+  background: #ffffff14;
+}
+.cc-cinema .cc-intro-disclosure {
+  font-size: 11px;
+  color: #b6c9d7;
+}
+.cc-cinema .cc-intro-chapter-nav button {
+  min-height: 44px;
+  font-size: 11px;
+}
+.cc-cinema .cc-intro-scroll-progress {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: #ffffff24;
+}
+.cc-cinema .cc-intro-scroll-progress span {
+  display: block;
+  height: 100%;
+  background: var(--lime);
+  transform-origin: left;
+  transform: scaleX(var(--film-progress, 0));
+}
+@media (max-width: 760px) {
+  body:has(.cc-cinema) {
+    --header-height: 84px;
+  }
+  .site-header-home .brand {
+    width: clamp(150px, 28vw, 205px);
+  }
+  .cc-cinema .cc-intro-headline {
+    top: max(24%, 132px);
+  }
+  .cc-cinema .cc-intro-intro,
+  .cc-cinema .cc-intro-headline .cc-intro-text-link {
+    font-size: 14px;
+  }
+  .cc-cinema .cc-intro-story-panel {
+    top: auto;
+    bottom: 19%;
+  }
+  .cc-cinema .cc-intro-story-close {
+    bottom: 18%;
+  }
+  .cc-cinema .cc-intro-story-close h2 {
+    font-size: clamp(38px, 10.5vw, 68px);
+    margin-bottom: 22px;
+  }
+  .cc-cinema .cc-intro-plans {
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .cc-cinema .cc-intro-plans > a {
+    display: block;
+    padding: 16px 0 0;
+  }
+  .cc-cinema .cc-intro-plans svg {
+    margin-bottom: 10px;
+    width: 21px;
+    height: 21px;
+  }
+  .cc-cinema .cc-intro-plans strong {
+    font-size: 15px;
+  }
+  .cc-cinema .cc-intro-plans small {
+    font-size: 12px;
+  }
+  .cc-cinema .cc-intro-options {
+    bottom: 14px;
+    font-size: 11px;
+  }
+  .cc-cinema .cc-intro-chapter-nav {
+    bottom: 14px;
+    gap: 14px;
+  }
+  .cc-cinema .cc-intro-chapter-nav button {
+    font-size: 10px;
+  }
+  .cc-cinema .cc-intro-journey-cue {
+    bottom: 78px;
+  }
+}
+@media (max-height: 620px) {
+  .cc-cinema .cc-intro-stage {
+    min-height: 0;
+  }
+  .cc-cinema .cc-intro-headline {
+    top: calc(var(--header-height) + 12px);
+  }
+  .cc-cinema .cc-intro-headline h1 {
+    font-size: clamp(40px, 7vw, 68px);
+  }
+  .cc-cinema .cc-intro-headline .cc-intro-eyebrow,
+  .cc-cinema .cc-intro-intro {
+    margin-block: 8px;
+  }
+  .cc-cinema .cc-intro-story-close {
+    bottom: 16%;
+  }
+  .cc-cinema .cc-intro-story-close h2 {
+    font-size: 38px;
+    margin-bottom: 14px;
+  }
+  .cc-cinema .cc-intro-story-close .cc-intro-eyebrow {
+    margin-bottom: 10px;
+  }
+  .cc-cinema .cc-intro-plans {
+    margin-bottom: 4px;
+  }
+  .cc-cinema .cc-intro-plans > a {
+    padding-top: 12px;
+    min-height: 60px;
+  }
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-journey {
+  height: auto;
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-stage {
+  height: auto;
+  padding-top: max(100svh, 520px);
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-picture {
+  bottom: auto;
+  height: max(100svh, 520px);
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-headline {
+  top: max(132px, 24svh);
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-static-vehicle {
+  top: max(320px, calc(100svh - 210px));
+  bottom: auto;
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-story-close {
+  display: block !important;
+  position: relative;
+  inset: auto;
+  padding: 54px var(--gutter) 48px;
+  background: var(--ink);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-options,
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-chapter-nav {
+  top: max(456px, calc(100svh - 64px));
+  bottom: auto;
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-scroll-progress {
+  display: none;
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-plans-anchor {
+  top: max(100svh, 520px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header-home {
+    transition: none;
+  }
+}
+
+/* Each backdrop belongs to its text, so it enters and leaves with that text. */
+.cc-cinema
+  :is(
+    .cc-intro-headline,
+    .cc-intro-story-panel,
+    .cc-intro-story-close,
+    .cc-intro-static-vehicle
+  ) {
+  isolation: isolate;
+}
+.cc-cinema
+  :is(
+    .cc-intro-headline,
+    .cc-intro-story-panel,
+    .cc-intro-story-close,
+    .cc-intro-static-vehicle
+  )::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: -12svh -14vw -12svh calc(-1 * var(--gutter));
+  background: linear-gradient(
+    90deg,
+    #032640e6 0%,
+    #032640b8 32%,
+    #03264052 66%,
+    #03264000 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 22%,
+    #000 78%,
+    transparent
+  );
+}
+.cc-cinema .cc-intro-story-explorer::before {
+  left: -14vw;
+  right: calc(-1 * var(--gutter));
+  background: linear-gradient(
+    270deg,
+    #032640e6 0%,
+    #032640b8 32%,
+    #03264052 66%,
+    #03264000 100%
+  );
+}
+.cc-cinema .cc-intro-story-close::before {
+  inset: -12svh calc(-1 * var(--gutter)) -20svh;
+  background: linear-gradient(
+    to top,
+    #032640f2 0%,
+    #032640cc 35%,
+    #03264080 65%,
+    #03264000 100%
+  );
+  mask-image: none;
+}
+@media (max-width: 760px) {
+  /* The vehicle captions sit near the bottom edge on a portrait screen. */
+  .cc-cinema :is(.cc-intro-story-panel, .cc-intro-static-vehicle)::before {
+    inset: -12svh calc(-1 * var(--gutter)) -23svh;
+    background: linear-gradient(
+      to top,
+      #032640eb 0%,
+      #032640bf 35%,
+      #03264066 65%,
+      #03264000 100%
+    );
+    mask-image: none;
+  }
+}
+.cc-cinema.cc-intro-is-reduced-motion .cc-intro-story-close::before {
+  display: none;
 }

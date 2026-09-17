@@ -1,6 +1,7 @@
 /* Original user-supplied photographs, with their natural colors preserved. */
 /* eslint-disable next/no-img-element */
 'use client';
+import { useLanguage } from '@/components/language-provider';
 
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -75,6 +76,7 @@ const places = [
 ];
 
 export function CityDiscovery() {
+  const { t } = useLanguage();
   const root = useRef<HTMLElement>(null);
   const [active, setActive] = useState<number | null>(null);
   const lastTrigger = useRef<HTMLButtonElement | null>(null);
@@ -112,7 +114,7 @@ export function CityDiscovery() {
         <button
           className="city-photo-button"
           type="button"
-          aria-label={`Ampliar foto: ${place.name}`}
+          aria-label={`${t('Ampliar foto:')} ${t(place.name)}`}
           onClick={(event) => {
             lastTrigger.current = event.currentTarget;
             setActive(index);
@@ -120,7 +122,7 @@ export function CityDiscovery() {
         >
           <img
             src={`/images/${place.image}.webp`}
-            alt={place.alt}
+            alt={t(place.alt)}
             width={place.width}
             height={place.height}
             loading="lazy"
@@ -128,7 +130,7 @@ export function CityDiscovery() {
           />
           <span className="city-photo-location" aria-hidden="true">
             <MapPin size={13} />
-            {place.name}
+            {t(place.name)}
           </span>
           <span className="city-expand" aria-hidden="true">
             <Maximize2 size={16} />
@@ -137,10 +139,15 @@ export function CityDiscovery() {
         <figcaption>
           <span className="city-place-number">0{index + 1}</span>
           <div>
-            <h3>{place.title}</h3>
-            <p>{place.detail}</p>
+            <h3>{t(place.title)}</h3>
+            <p>{t(place.detail)}</p>
           </div>
-          {place.credit && <small>Foto: {place.credit}</small>}
+          {place.credit && (
+            <small>
+              {t('Foto: ')}
+              {place.credit}
+            </small>
+          )}
         </figcaption>
       </figure>
     );
@@ -158,20 +165,22 @@ export function CityDiscovery() {
           <span>
             <i aria-hidden="true" /> ZULIA, VENEZUELA
           </span>
-          <span>LA CIUDAD QUE NOS MUEVE</span>
+          <span>{t('LA CIUDAD QUE NOS MUEVE')}</span>
         </div>
         <div className="city-discovery-heading city-reveal">
           <h2 id="city-title">
-            Maracaibo<span>te espera.</span>
+            Maracaibo<span>{t('te espera.')}</span>
           </h2>
           <div className="city-introduction">
-            <p>Hay mucho más por descubrir.</p>
+            <p>{t('Hay mucho más por descubrir.')}</p>
             <span>
-              Del lago a nuestras calles. De un atardecer a un nuevo recuerdo.
-              Sal a vivir la ciudad; nosotros te acompañamos en el camino.
+              {t(
+                'Del lago a nuestras calles. De un atardecer a un nuevo recuerdo. Sal a vivir la ciudad; nosotros te acompañamos en el camino.',
+              )}
             </span>
             <a href="#city-views">
-              Conoce nuestros lugares <ArrowRight size={17} />
+              {t('Conoce nuestros lugares ')}
+              <ArrowRight size={17} />
             </a>
           </div>
         </div>
@@ -180,8 +189,8 @@ export function CityDiscovery() {
           {renderPlace(1)}
         </div>
         <div className="city-landmarks-heading">
-          <span>ESOS LUGARES QUE SE QUEDAN CONTIGO</span>
-          <span>Un pedacito de lo nuestro.</span>
+          <span>{t('ESOS LUGARES QUE SE QUEDAN CONTIGO')}</span>
+          <span>{t('Un pedacito de lo nuestro.')}</span>
         </div>
         <div className="city-landmarks city-reveal">
           {renderPlace(2)}
@@ -190,11 +199,12 @@ export function CityDiscovery() {
         </div>
         <div className="city-discovery-footer">
           <div>
-            <span>TU DESTINO. NUESTRA RUTA.</span>
-            <p>La próxima parada la eliges tú.</p>
+            <span>{t('TU DESTINO. NUESTRA RUTA.')}</span>
+            <p>{t('La próxima parada la eliges tú.')}</p>
           </div>
           <a href="#flota">
-            Recorre Maracaibo <ArrowUpRight size={22} />
+            {t('Recorre Maracaibo ')}
+            <ArrowUpRight size={22} />
           </a>
         </div>
       </div>
@@ -226,35 +236,35 @@ export function CityDiscovery() {
                   MARACAIBO /{' '}
                   <span aria-live="polite">0{(active ?? 0) + 1} — 05</span>
                 </span>
-                <DialogClose aria-label="Cerrar galería">
+                <DialogClose aria-label={t('Cerrar galería')}>
                   <X size={22} />
                 </DialogClose>
               </div>
               <img
                 src={`/images/${photo.image}.webp`}
-                alt={photo.alt}
+                alt={t(photo.alt)}
                 width={photo.width}
                 height={photo.height}
               />
               <div className="city-lightbox-bottom">
                 <div>
-                  <DialogTitle>{photo.name}</DialogTitle>
+                  <DialogTitle>{t(photo.name)}</DialogTitle>
                   <DialogDescription>
-                    {photo.detail}
-                    {photo.credit && ` · Foto: ${photo.credit}`}
+                    {t(photo.detail)}
+                    {photo.credit && ` · ${t('Foto:')} ${photo.credit}`}
                   </DialogDescription>
                 </div>
                 <div className="city-gallery-controls">
                   <button
                     type="button"
-                    aria-label="Foto anterior"
+                    aria-label={t('Foto anterior')}
                     onClick={() => movePhoto(-1)}
                   >
                     <ArrowLeft size={20} />
                   </button>
                   <button
                     type="button"
-                    aria-label="Foto siguiente"
+                    aria-label={t('Foto siguiente')}
                     onClick={() => movePhoto(1)}
                   >
                     <ArrowRight size={20} />

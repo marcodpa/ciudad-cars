@@ -1,3 +1,5 @@
+'use client';
+import { useLanguage } from '@/components/language-provider';
 /* Preoptimized local assets retain their reserved dimensions and transparent pixels. */
 /* eslint-disable next/no-img-element */
 import Link from '@/components/site-link';
@@ -5,11 +7,12 @@ import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import { company, whatsappUrl } from '@/lib/company';
 
 export function SiteFooter() {
+  const { t } = useLanguage();
   return (
     <footer className="site-footer" id="contacto">
       <div className="page-width footer-grid">
         <div className="footer-brand">
-          <Link href="/" aria-label="Ciudad Cars, inicio">
+          <Link href="/" aria-label={t('Ciudad Cars, inicio')}>
             <img
               src="/images/logo-transparent.png"
               width="427"
@@ -18,20 +21,20 @@ export function SiteFooter() {
             />
           </Link>
           <p>
-            Tu destino. Nuestra ruta.
+            {t('Tu destino. Nuestra ruta.')}
             <br />
-            Contigo en Maracaibo desde 1984.
+            {t('Contigo en Maracaibo desde 1984.')}
           </p>
         </div>
         <div>
-          <h2>Explora Ciudad Cars</h2>
-          <Link href="/vehiculos">Nuestros vehículos</Link>
-          <Link href="/servicios">Servicios</Link>
-          <Link href="/quienes-somos">Quiénes somos</Link>
-          <Link href="/contacto">Contacto</Link>
+          <h2>{t('Explora Ciudad Cars')}</h2>
+          <Link href="/vehiculos">{t('Nuestros vehículos')}</Link>
+          <Link href="/servicios">{t('Servicios')}</Link>
+          <Link href="/quienes-somos">{t('Quiénes somos')}</Link>
+          <Link href="/contacto">{t('Contacto')}</Link>
         </div>
         <div>
-          <h2>Hablemos de tu viaje</h2>
+          <h2>{t('Hablemos de tu viaje')}</h2>
           <a href={company.tel}>
             <Phone size={16} />
             {company.phone}
@@ -57,23 +60,26 @@ export function SiteFooter() {
           <span className="handwritten">
             Maracaibo
             <br />
-            nos mueve.
+            {t('nos mueve.')}
           </span>
           <a
             className="footer-whatsapp"
             href={whatsappUrl(
-              'Hola, Ciudad Cars. Quisiera información para mi próximo viaje.',
+              t(
+                'Hola, Ciudad Cars. Quisiera información para mi próximo viaje.',
+              ),
             )}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Conversemos <ArrowUpRight size={18} />
+            {t('Conversemos ')}
+            <ArrowUpRight size={18} />
           </a>
         </div>
       </div>
       <div className="footer-legal page-width">
         <span>© {new Date().getFullYear()} Ciudad Cars</span>
-        <span>Hecho para moverte con libertad.</span>
+        <span>{t('Hecho para moverte con libertad.')}</span>
       </div>
     </footer>
   );

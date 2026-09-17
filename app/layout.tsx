@@ -1,4 +1,8 @@
-import type { Metadata } from 'next';
+import { LanguageProvider } from '@/components/language-provider';
+import { localizedMetadata, requestRoute } from '@/lib/page-metadata';
+import { createStructuredData, serializeJsonLd } from '@/lib/seo';
+import { pageCopy } from '@/lib/page-copy';
+import { company } from '@/lib/company';
 import { Barlow, Caveat, Outfit } from 'next/font/google';
 import './globals.css';
 import './pages.css';
@@ -7,6 +11,9 @@ import './city.css';
 import './catalog.css';
 import './workshop.css';
 import './cinema.css';
+import './reservation.css';
+import './language.css';
+import { ReservationProvider } from '@/components/reservation-provider';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 const outfit = Outfit({
@@ -25,25 +32,38 @@ const caveat = Caveat({
   subsets: ['latin'],
   display: 'swap',
 });
-export const metadata: Metadata = {
-  title: 'Ciudad Cars | Alquila tu carro en Maracaibo',
-  description:
-    'Tu carro en Maracaibo. Conoce la flota de Ciudad Cars: Mitsubishi Lancer, Chevrolet Cruze, Toyota Camry, Jeep Cherokee y Ford Explorer o similares. Desde $75 al día.',
+export const metadata = {
+  ...localizedMetadata('/'),
   icons: { icon: '/images/logo.png' },
 };
-export default function RootLayout({
+
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const { path, language } = await requestRoute();
   return (
-    <html lang="es">
+    <html lang={language}>
       <body
         className={
           outfit.variable + ' ' + barlow.variable + ' ' + caveat.variable
         }
       >
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <script
+          id="ciudad-cars-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializeJsonLd(
+              createStructuredData(path, language, pageCopy[path], company),
+            ),
+          }}
+        />
+        <LanguageProvider initialLanguage={language}>
+          <ReservationProvider>
+            <SiteHeader />
+            {children}
+            <SiteFooter />
+          </ReservationProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

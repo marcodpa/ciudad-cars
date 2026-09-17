@@ -1,6 +1,7 @@
 /* Reuse the same complete cinematic photograph shown in the vehicle selector. */
 /* eslint-disable next/no-img-element */
 'use client';
+import { useLanguage } from '@/components/language-provider';
 
 import {
   ArrowUpRight,
@@ -18,7 +19,7 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import type { Vehicle } from '@/lib/fleet';
-import { vehicleReservation } from '@/lib/company';
+import { useReservation } from '@/components/reservation-provider';
 
 export function VehicleDetails({
   car,
@@ -27,6 +28,8 @@ export function VehicleDetails({
   car: Vehicle | null;
   onClose: () => void;
 }) {
+  const { t } = useLanguage();
+  const reserve = useReservation();
   return (
     <Dialog
       open={car !== null}
@@ -37,56 +40,72 @@ export function VehicleDetails({
       <DialogContent className="car-dialog" showCloseButton={false}>
         {car && (
           <>
-            <DialogClose className="dialog-close" aria-label="Cerrar detalles">
+            <DialogClose
+              className="dialog-close"
+              aria-label={t('Cerrar detalles')}
+            >
               <X />
             </DialogClose>
-            <span className="eyebrow">{car.category}</span>
+            <span className="eyebrow">{t(car.category)}</span>
             <DialogTitle className="dialog-title">
               {car.make} {car.model}
             </DialogTitle>
-            <DialogDescription>o similar · {car.description}</DialogDescription>
+            <DialogDescription>
+              {t('o similar · ')}
+              {t(car.description)}
+            </DialogDescription>
             <img
               src={car.mobileImage}
               srcSet={`${car.mobileImage} 1008w, ${car.image} 2016w`}
               sizes="(max-width: 600px) 90vw, 560px"
-              alt={car.make + ' ' + car.model + ' o similar'}
+              alt={car.make + ' ' + car.model + t(' o similar')}
               width="2016"
               height="1140"
             />
             <div className="dialog-specs">
               <span>
                 <Settings2 />
-                Automático
+                {t('Automático')}
               </span>
               <span>
                 <Users />
-                {car.passengers} pasajeros
+                {car.passengers}
+                {t(' pasajeros')}
               </span>
               <span>
                 <BriefcaseBusiness />
-                {car.bags} maletas
+                {car.bags}
+                {t(' maletas')}
               </span>
               <span>
                 <CarFront />
-                {car.doors} puertas
+                {car.doors}
+                {t(' puertas')}
               </span>
             </div>
             <p className="dialog-price">
-              Desde <strong>${car.price} / día</strong>
+              {t('Desde ')}
+              <strong>
+                ${car.price}
+                {t(' / día')}
+              </strong>
             </p>
             <p className="dialog-note">
-              Modelo o similar. La disponibilidad y la tarifa final se confirman
-              para las fechas de tu viaje. Tarifas en USD.
+              {t(
+                'Modelo o similar. La disponibilidad y la tarifa final se confirman para las fechas de tu viaje. Tarifas en USD.',
+              )}
             </p>
-            <a
+            <button
+              type="button"
               className="cta"
-              href={vehicleReservation(car)}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => {
+                onClose();
+                reserve(car.id);
+              }}
             >
-              Consultar este vehículo
+              {t('Consultar este vehículo')}
               <ArrowUpRight size={18} />
-            </a>
+            </button>
           </>
         )}
       </DialogContent>

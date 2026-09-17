@@ -1,3 +1,5 @@
+'use client';
+import { useLanguage } from '@/components/language-provider';
 /* Preoptimized local assets retain their reserved dimensions and transparent pixels. */
 /* eslint-disable next/no-img-element */
 import Link from '@/components/site-link';
@@ -18,6 +20,7 @@ export function PageIntro({
   image?: string;
   compact?: boolean;
 }) {
+  const { t } = useLanguage();
   return (
     <section className={'page-intro' + (compact ? ' page-intro-compact' : '')}>
       <img
@@ -29,18 +32,18 @@ export function PageIntro({
         fetchPriority="high"
       />
       <div className="page-width page-intro-content">
-        <nav className="breadcrumbs" aria-label="Ruta de navegación">
-          <Link href="/">Inicio</Link>
+        <nav className="breadcrumbs" aria-label={t('Ruta de navegación')}>
+          <Link href="/">{t('Inicio')}</Link>
           <ArrowRight size={12} />
-          <span aria-current="page">{label}</span>
+          <span aria-current="page">{t(label)}</span>
         </nav>
         <p className="eyebrow">CIUDAD CARS · MARACAIBO</p>
         <h1>
-          {title}
+          {t(title)}
           <br />
-          <span>{accent}</span>
+          <span>{t(accent)}</span>
         </h1>
-        <p className="page-intro-description">{description}</p>
+        <p className="page-intro-description">{t(description)}</p>
       </div>
     </section>
   );

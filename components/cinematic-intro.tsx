@@ -1,29 +1,47 @@
-/* The approved standalone intro, adapted to the existing React page. */
+/* Original footage, integrated into the homepage's scroll narrative. */
 /* eslint-disable next/no-img-element */
 /* Media-file and fragment links must remain native anchors. */
 /* eslint-disable next/no-html-link-for-pages */
 /* Canvas supplies scroll-driven imagery; an img cannot render those frames. */
 /* eslint-disable jsx-a11y/prefer-tag-over-role */
 'use client';
+import { useLanguage } from '@/components/language-provider';
 import { useEffect, useRef } from 'react';
+import {
+  ArrowDown,
+  ArrowUpRight,
+  BriefcaseBusiness,
+  Palmtree,
+  Users,
+} from 'lucide-react';
 import { mountCinematicIntro } from '@/lib/cinematic-intro';
 
 export function CinematicIntro() {
+  const { t, language } = useLanguage();
   const rootRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const root = rootRef.current;
     if (root) return mountCinematicIntro(root);
   }, []);
+  useEffect(() => {
+    rootRef.current?.dispatchEvent(new Event('languagechange'));
+  }, [language]);
   return (
-    <div className="cc-cinema" id="inicio" ref={rootRef}>
+    <div
+      className="cc-cinema"
+      id="inicio"
+      ref={rootRef}
+      data-language={language}
+    >
       <a className="cc-intro-skip" href="#flota">
-        Saltar a los vehículos
+        {t('Saltar a los vehículos')}
       </a>
       <section
         className="cc-intro-journey"
         id="recorrido"
-        aria-label="Recorrido aéreo de Ciudad Cars"
+        aria-label={t('Recorrido aéreo de Ciudad Cars')}
       >
+        <span id="viaje" className="cc-intro-plans-anchor" aria-hidden="true" />
         <div className="cc-intro-stage">
           <div className="cc-intro-picture">
             {/* A canvas is required for scroll-driven frames; expose its description as an image. */}
@@ -32,62 +50,28 @@ export function CinematicIntro() {
               width="1280"
               height="720"
               role="img"
-              aria-label="Persecución aérea del Chevrolet Cruze y la Ford Explorer"
+              aria-label={t(
+                'Persecución aérea del Chevrolet Cruze y la Ford Explorer',
+              )}
             ></canvas>
-            <div className="cc-intro-film-vignette" aria-hidden="true"></div>
-            <canvas id="cc-intro-film-grain" aria-hidden="true"></canvas>
-            <div className="cc-intro-sky-transition" aria-hidden="true"></div>
           </div>
-          <div className="cc-intro-shade" aria-hidden="true"></div>
-          <div
-            className="cc-intro-story-shade cc-intro-shade-left"
-            aria-hidden="true"
-          ></div>
-          <div
-            className="cc-intro-story-shade cc-intro-shade-right"
-            aria-hidden="true"
-          ></div>
-          <div className="cc-intro-end-veil" aria-hidden="true"></div>
-          <header className="cc-intro-header">
-            <a
-              className="cc-intro-brand"
-              href="#recorrido"
-              aria-label="Ciudad Cars, inicio"
-            >
-              <img
-                src="/cinema/logo.png"
-                width="427"
-                height="74"
-                alt="Ciudad Cars · Car Rentals"
-              />
-            </a>
-            <span className="cc-intro-place">
-              <i></i> MARACAIBO, VENEZUELA
-            </span>
-            <a
-              className="cc-intro-reservation"
-              href="https://www.ciudadcars.com/date-reservation/"
-              target="_blank"
-              rel="noopener"
-            >
-              Reserva tu viaje <span>↗</span>
-            </a>
-          </header>
           <div className="cc-intro-headline">
-            <p className="cc-intro-eyebrow">LA LIBERTAD DE MOVERTE.</p>
+            <p className="cc-intro-eyebrow">MARACAIBO, VENEZUELA</p>
             <h1>
-              <span className="cc-intro-headline-line">Tu viaje</span>
+              <span className="cc-intro-headline-line">{t('Tu viaje')}</span>
               <span className="cc-intro-headline-line">
-                comienza <em>aquí.</em>
+                {t('comienza ')}
+                <em>{t('aquí.')}</em>
               </span>
             </h1>
             <p className="cc-intro-intro">
-              Una ciudad por descubrir.
+              {t('Alquila tu carro. Descubre la ciudad.')}
               <br />
-              Un camino que empieza contigo.
+              {t('Un camino que empieza contigo.')}
             </p>
             <a className="cc-intro-text-link" href="#flota">
-              Encuentra tu vehículo <span>↗</span>
+              {t('Encuentra tu vehículo')}{' '}
+              <ArrowUpRight size={18} aria-hidden="true" />
             </a>
           </div>
           <section
@@ -101,11 +85,14 @@ export function CinematicIntro() {
               Cruze.
             </h2>
             <p className="cc-intro-story-copy cc-intro-story-piece">
-              La ciudad.
-              <br />A tu ritmo.
+              {t('La ciudad.')}
+              <br />
+              {t('A tu ritmo.')}
             </p>
             <p className="cc-intro-story-spec cc-intro-story-piece">
-              5 pasajeros <span>·</span> 2 maletas
+              {t('5 pasajeros ')}
+              <span>·</span>
+              {t(' 2 maletas')}
             </p>
           </section>
           <section
@@ -119,25 +106,54 @@ export function CinematicIntro() {
               Explorer.
             </h2>
             <p className="cc-intro-story-copy cc-intro-story-piece">
-              Más espacio.
+              {t('Más espacio.')}
               <br />
-              Más historias juntos.
+              {t('Más historias juntos.')}
             </p>
             <p className="cc-intro-story-spec cc-intro-story-piece">
-              7 pasajeros <span>·</span> 4 maletas
+              {t('7 pasajeros ')}
+              <span>·</span>
+              {t(' 4 maletas')}
             </p>
           </section>
-          <div className="cc-intro-story-close">
-            <p className="cc-intro-eyebrow">EL CAMINO SIGUE.</p>
-            <h2>
-              El siguiente destino
+          <section
+            className="cc-intro-story-close"
+            aria-labelledby="cc-intro-plans-title"
+          >
+            <p className="cc-intro-eyebrow">{t('TÚ ELIGES EL DESTINO.')}</p>
+            <h2 id="cc-intro-plans-title">
+              {t('Un carro')}
               <br />
-              <em>es tuyo.</em>
+              {t('para cada plan.')}
             </h2>
+            <div className="cc-intro-plans">
+              <a href="#flota">
+                <Palmtree aria-hidden="true" />
+                <span>
+                  <strong>{t('Turismo')}</strong>
+                  <small>{t('Descubre Maracaibo.')}</small>
+                </span>
+              </a>
+              <a href="#flota">
+                <BriefcaseBusiness aria-hidden="true" />
+                <span>
+                  <strong>{t('Negocios')}</strong>
+                  <small>{t('Muévete a tu ritmo.')}</small>
+                </span>
+              </a>
+              <a href="#flota">
+                <Users aria-hidden="true" />
+                <span>
+                  <strong>{t('Familia')}</strong>
+                  <small>{t('Más espacio para compartir.')}</small>
+                </span>
+              </a>
+            </div>
             <a href="#flota" className="cc-intro-text-link">
-              Elige cómo llegar <span>↓</span>
+              {t('Conoce nuestros vehículos')}{' '}
+              <ArrowDown size={18} aria-hidden="true" />
             </a>
-          </div>
+          </section>
           <div className="cc-intro-static-vehicle">
             <span id="cc-intro-category" className="cc-intro-eyebrow">
               01 / CHEVROLET
@@ -145,20 +161,19 @@ export function CinematicIntro() {
             <h2 id="cc-intro-model">
               Chevrolet <strong>Cruze</strong>
             </h2>
-            <p id="cc-intro-tagline">Una nueva perspectiva.</p>
+            <p id="cc-intro-tagline">{t('Una nueva perspectiva.')}</p>
           </div>
-          <div className="cc-intro-scene-location">
-            ZULIA <span>—</span> VENEZUELA
-          </div>
-          <output id="cc-intro-load-status">Preparando recorrido…</output>
+          <output id="cc-intro-load-status">
+            {t('Preparando recorrido…')}
+          </output>
           <div className="cc-intro-journey-cue">
             <span className="cc-intro-cue-line" aria-hidden="true"></span>
-            <span>DESLIZA Y DESCUBRE</span>
+            <span>{t('DESLIZA Y DESCUBRE')}</span>
             <span aria-hidden="true">↓</span>
           </div>
           <nav
             className="cc-intro-chapter-nav"
-            aria-label="Vehículos del recorrido"
+            aria-label={t('Vehículos del recorrido')}
           >
             <button type="button" data-scene="0" aria-current="step">
               <span className="cc-intro-chapter-dot" aria-hidden="true"></span>
@@ -180,41 +195,50 @@ export function CinematicIntro() {
           >
             0%
           </span>
+          <div className="cc-intro-scroll-progress" aria-hidden="true">
+            <span />
+          </div>
+          <details className="cc-intro-options">
+            <summary>{t('Opciones del recorrido')}</summary>
+            <div className="cc-intro-utilities">
+              <div className="cc-intro-end-actions">
+                <button
+                  id="cc-intro-play"
+                  type="button"
+                  aria-label={t('Reproducir recorrido automáticamente')}
+                >
+                  <span id="cc-intro-play-icon">↻</span>{' '}
+                  <span id="cc-intro-play-label">{t('Recorrer de nuevo')}</span>
+                </button>
+                <button id="cc-intro-watch-film" type="button">
+                  {t('Ver película ')}
+                  <span>↗</span>
+                </button>
+                <button
+                  id="cc-intro-motion-toggle"
+                  type="button"
+                  aria-pressed="false"
+                >
+                  {t('Reducir movimiento')}
+                </button>
+              </div>
+              <p className="cc-intro-disclosure">
+                {t(
+                  'Escenas recreadas con IA a partir de los vehículos de CC y referencias de Maracaibo.',
+                )}
+              </p>
+            </div>
+          </details>
         </div>
       </section>
-
-      <div className="cc-intro-utilities">
-        <div className="cc-intro-end-actions">
-          <button
-            id="cc-intro-play"
-            type="button"
-            aria-label="Reproducir recorrido automáticamente"
-          >
-            <span id="cc-intro-play-icon">↻</span>{' '}
-            <span id="cc-intro-play-label">Recorrer de nuevo</span>
-          </button>
-          <button id="cc-intro-watch-film" type="button">
-            Ver película <span>↗</span>
-          </button>
-          <button
-            id="cc-intro-motion-toggle"
-            type="button"
-            aria-pressed="false"
-          >
-            Reducir movimiento
-          </button>
-          <a href="#recorrido">Volver arriba ↑</a>
-        </div>
-        <p className="cc-intro-disclosure">
-          Escenas recreadas con IA a partir de los vehículos de CC y referencias
-          de Maracaibo.
-        </p>
-      </div>
-      <dialog id="cc-intro-movie-dialog" aria-label="Película de Ciudad Cars">
+      <dialog
+        id="cc-intro-movie-dialog"
+        aria-label={t('Película de Ciudad Cars')}
+      >
         <button
           id="cc-intro-close-movie"
           type="button"
-          aria-label="Cerrar película"
+          aria-label={t('Cerrar película')}
         >
           ✕
         </button>
@@ -231,9 +255,11 @@ export function CinematicIntro() {
       </dialog>
       <noscript>
         <p className="cc-intro-noscript">
-          Puedes{' '}
-          <a href="/cinema/ciudad-cars-drone.mp4">ver la película completa</a> o{' '}
-          <a href="#flota">consultar los vehículos</a>.
+          {t('Puedes')}{' '}
+          <a href="/cinema/ciudad-cars-drone.mp4">
+            {t('ver la película completa')}
+          </a>
+          {t(' o')} <a href="#flota">{t('consultar los vehículos')}</a>.
         </p>
       </noscript>
     </div>

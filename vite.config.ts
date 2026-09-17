@@ -1,9 +1,11 @@
 import tailwindcss from '@tailwindcss/postcss';
+import { cloudflare } from '@cloudflare/vite-plugin';
+import { sites } from '@openai/sites-vite-plugin';
 import vinext from 'vinext';
 import { defineConfig } from 'vite';
 
-// Local frontend preview runs on Node; no remote bindings or Workers runtime needed.
-export default defineConfig({
+// Development and local audits run on Node; Sites builds target Workers.
+export default defineConfig(({ mode }) => ({
   resolve: { dedupe: ['react', 'react-dom'] },
   optimizeDeps: {
     include: [
@@ -26,5 +28,11 @@ export default defineConfig({
     },
   },
   css: { postcss: { plugins: [tailwindcss()] } },
-  plugins: [vinext()],
-});
+  plugins: [
+    vinext(),
+    sites(),
+    ...(mode === 'sites'
+      ? [cloudflare({ viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] } })]
+      : []),
+  ],
+}));
