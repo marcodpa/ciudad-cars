@@ -1,0 +1,4 @@
+# Copy these two variables into .env.local for local development, or Vercel project settings.
+# Only use the project's PUBLIC publishable key. No secret/service-role key is required.
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_YOUR-PUBLIC-KEY

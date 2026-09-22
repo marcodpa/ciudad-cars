@@ -7,7 +7,7 @@ import Link from '@/components/site-link';
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { CalendarDays, Globe2, Menu, Phone, X } from 'lucide-react';
+import { CalendarDays, Globe2, Menu, Phone, UserRound, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { company } from '@/lib/company';
 import { siteNavigation } from '@/lib/navigation';
@@ -57,6 +57,7 @@ export function SiteHeader() {
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, [open]);
+  if (['/ingresar', '/dashboard', '/reservar'].includes(pathname || '')) return null;
   return (
     <>
       <a className="skip-link" href="#contenido">
@@ -91,6 +92,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="header-actions">
+          <Link className="header-login" href="/ingresar"><UserRound size={16} aria-hidden="true" />{language === 'en' ? 'Log in' : 'Ingresar'}</Link>
           <a
             className="language-toggle"
             href={localizedHref(

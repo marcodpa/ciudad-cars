@@ -13,6 +13,7 @@ import './workshop.css';
 import './cinema.css';
 import './reservation.css';
 import './language.css';
+import './header-account.css';
 import { ReservationProvider } from '@/components/reservation-provider';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -48,7 +49,7 @@ export default async function RootLayout({
           outfit.variable + ' ' + barlow.variable + ' ' + caveat.variable
         }
       >
-        <script
+        {pageCopy[path] && <script
           id="ciudad-cars-structured-data"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -56,7 +57,7 @@ export default async function RootLayout({
               createStructuredData(path, language, pageCopy[path], company),
             ),
           }}
-        />
+        />}
         <LanguageProvider initialLanguage={language}>
           <ReservationProvider>
             <SiteHeader />

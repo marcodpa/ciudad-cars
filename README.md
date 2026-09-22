@@ -1,5 +1,9 @@
 # Ciudad Cars
 
+## Sistema de alquileres
+
+Esta rama incorpora ingreso, panel de cliente/administración y órdenes con pago coordinado por WhatsApp. Consulta [la guía del sistema](docs/rental-system.md) para conectar Supabase y registrar la flota real. Sin esa conexión, `/ingresar` ofrece una demostración explícita; no guarda reservas reales. Prueba `/dashboard?demo=1&role=admin` o `/dashboard?demo=1&role=customer`.
+
 Sitio responsive con Home, catálogo de vehículos, servicios, quiénes somos y contacto. La portada integra la película aérea de Ciudad Cars: Cruze y Explorer, fotogramas ligados al scroll, textos y planes de viaje sincronizados con GSAP. Una sola navegación acompaña el recorrido hasta el catálogo de cinco vehículos, con un botón para saltar directamente a la flota. El carrusel es manual, con flechas y gestos horizontales; en móvil se ocultan las miniaturas y se agrupan la foto, el nombre, el precio y las características. En escritorio se mantienen las miniaturas y la ficha lateral.
 
 ## Ejecutar localmente

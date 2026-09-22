@@ -1,5 +1,6 @@
 'use client';
 import { useLanguage } from '@/components/language-provider';
+import { usePathname } from 'next/navigation';
 /* Preoptimized local assets retain their reserved dimensions and transparent pixels. */
 /* eslint-disable next/no-img-element */
 import Link from '@/components/site-link';
@@ -8,6 +9,8 @@ import { company, whatsappUrl } from '@/lib/company';
 
 export function SiteFooter() {
   const { t } = useLanguage();
+  const pathname = usePathname();
+  if (['/ingresar', '/dashboard', '/reservar'].includes(pathname || '')) return null;
   return (
     <footer className="site-footer" id="contacto">
       <div className="page-width footer-grid">

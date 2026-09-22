@@ -65,6 +65,7 @@ export function LanguageProvider({
 
   useEffect(() => {
     document.documentElement.lang = language;
+    if (['/ingresar', '/dashboard', '/reservar'].includes(pathname || '')) return;
     const path = resolveLanguageRoute(pathname || '/')?.path || '/';
     const copy = pageCopy[path];
     const metadata = createSeoMetadata(path, language, copy);

@@ -7,7 +7,7 @@ export async function requestRoute() {
   const requestHeaders = await headers();
   return (
     resolveLanguageRoute(requestHeaders.get('x-ciudad-cars-path') || '/') ?? {
-      path: '/',
+      path: requestHeaders.get('x-ciudad-cars-path') || '/',
       language: 'es' as const,
     }
   );

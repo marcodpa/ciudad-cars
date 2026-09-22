@@ -1,0 +1,78 @@
+.header-login {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 10px;
+  border: 1px solid #ffffff40;
+  border-radius: 8px;
+  color: #fff;
+  white-space: nowrap;
+}
+.header-login:hover {
+  background: #ffffff16;
+}
+@media (max-width: 1500px) {
+  .site-header .header-phone {
+    display: none;
+  }
+}
+@media (max-width: 740px) {
+  .header-login {
+    font-size: 11px;
+    min-width: 44px;
+    padding: 0 7px;
+    gap: 0;
+  }
+  .header-login svg {
+    display: none;
+  }
+  .site-header .brand {
+    width: clamp(106px, 26vw, 170px);
+  }
+  .site-header .header-actions {
+    gap: 4px;
+  }
+  .site-header .language-toggle {
+    padding-inline: 8px;
+    min-width: 36px;
+  }
+  .site-header {
+    padding-inline: 12px;
+    gap: 6px;
+  }
+  .site-header .header-cta {
+    padding-inline: 8px;
+    min-width: 0;
+  }
+  .site-header .menu-toggle {
+    width: 32px;
+    min-width: 32px;
+  }
+  .site-header .header-cta > svg {
+    display: none;
+  }
+}
+@media (max-width: 370px) {
+  .site-header .brand {
+    width: 99px;
+  }
+  .site-header .header-cta {
+    font-size: 11px;
+    padding-inline: 6px;
+  }
+  .site-header .language-toggle {
+    font-size: 11px;
+    min-width: 32px;
+    padding-inline: 5px;
+  }
+  .header-login {
+    font-size: 10px;
+  }
+  .site-header {
+    padding-inline: 8px;
+  }
+}
