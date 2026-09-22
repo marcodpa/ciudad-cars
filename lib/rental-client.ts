@@ -63,6 +63,8 @@ export async function fetchRentalData(client: SupabaseClient) {
     'profiles',
     'payments',
     'events',
+    'billing_settings',
+    'billing_documents',
   ] as const;
   const results = await Promise.all(
     tables.map(async (table) => {
@@ -80,9 +82,16 @@ export async function fetchRentalData(client: SupabaseClient) {
       }
     }),
   );
-  return Object.fromEntries(
+  const result = Object.fromEntries(
     tables.map((table, i) => [table, results[i]]),
-  ) as RentalData;
+  );
+  return {
+    ...result,
+    billing: {
+      settings: result.billing_settings,
+      documents: result.billing_documents,
+    },
+  } as unknown as RentalData;
 }
 export async function fetchRentalProfile(
   client: SupabaseClient,

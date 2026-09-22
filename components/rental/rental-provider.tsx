@@ -35,7 +35,20 @@ import {
   type RentalUnit,
 } from '@/lib/rental-domain';
 
+import {
+  ensureBillingData,
+  demoBillingAction,
+  demoBillingSettings,
+} from '@/lib/billing-demo';
+import type {
+  BillingInput,
+  BillingDocument,
+  BillingSettings,
+} from '@/lib/billing-domain';
+
 type Context = {
+  billingAction: (input: BillingInput) => Promise<BillingDocument>;
+  billingSettings: (input: BillingSettings) => Promise<void>;
   loading: boolean;
   configured: boolean;
   demo: boolean;
@@ -104,7 +117,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
           }
           if (!alive) return;
           setDemo(true);
-          publishDemo(next);
+          publishDemo(ensureBillingData(next));
           const role =
             params.get('role') ||
             sessionStorage.getItem('cc-demo-role') ||
@@ -248,6 +261,37 @@ export function RentalProvider({ children }: { children: ReactNode }) {
     if (error) throw error;
     await refresh();
   }
+  async function billingAction(input: BillingInput): Promise<BillingDocument> {
+    if (user?.role !== 'admin') throw new Error('Solo administradores.');
+    if (demo) {
+      const next = structuredClone(dataRef.current);
+      const doc = demoBillingAction(next, input);
+      publishDemo(next);
+      return doc;
+    }
+    if (!client) throw new Error('Conexión no disponible.');
+    const { data: doc, error } = await client.rpc('rental_billing_action', {
+      p_input: input,
+    });
+    if (error) throw error;
+    await refresh();
+    return doc;
+  }
+  async function billingSettings(input: BillingSettings) {
+    if (user?.role !== 'admin') throw new Error('Solo administradores.');
+    if (demo) {
+      const next = structuredClone(dataRef.current);
+      demoBillingSettings(next, input);
+      publishDemo(next);
+      return;
+    }
+    if (!client) throw new Error('Conexión no disponible.');
+    const { error } = await client.rpc('rental_billing_settings_save', {
+      p_input: input,
+    });
+    if (error) throw error;
+    await refresh();
+  }
   const availability = useCallback(
     async (start: string, end: string) => {
       if (demo)
@@ -280,7 +324,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
     location.assign('/ingresar');
   }
   const resetDemo = () => {
-    publishDemo(createDemoData());
+    publishDemo(ensureBillingData(createDemoData()));
     location.assign('/dashboard?demo=1');
   };
   return (
@@ -296,6 +340,8 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         refresh,
         href,
         createOrder,
+        billingAction,
+        billingSettings,
         action,
         saveUnit,
         setRate,

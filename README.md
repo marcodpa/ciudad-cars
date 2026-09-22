@@ -86,3 +86,5 @@ Fuentes de historia, contacto y servicios: páginas oficiales enlazadas en DESIG
 El entorno local usa Node; el runtime Workers del scaffold no se necesita. Se conserva la estructura Sites sin registrar ni publicar un sitio remoto.
 
 Los archivos bajo `sources/` del proyecto ChatGPT son referencias de solo lectura y no se modificaron.
+
+El dashboard incluye facturación comercial por orden, borradores, numeración, impuestos, descuentos, notas de crédito/débito, saldos, reembolsos y PDF. Configuración y límites en [docs/billing-system.md](docs/billing-system.md).

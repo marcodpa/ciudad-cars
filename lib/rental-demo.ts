@@ -1,3 +1,5 @@
+import { refundableAmount } from './billing-domain';
+import { orderTotal } from './rental-domain';
 import { fleet } from './fleet';
 import {
   addDays,
@@ -224,13 +226,13 @@ export function demoAction(
         throw new Error('Esta referencia ya está registrada en la orden.');
       if (
         input.action === 'payment' &&
-        (!['pending', 'approved', 'active'].includes(o.status) ||
-          paid + amount > o.total)
+        (!['pending', 'approved', 'active', 'completed'].includes(o.status) ||
+          Math.round((paid + amount) * 100) > Math.round(orderTotal(o) * 100))
       )
         throw new Error('El pago supera el saldo o la orden está cerrada.');
       if (
         input.action === 'refund' &&
-        (!['cancelled', 'rejected'].includes(o.status) || amount > paid)
+        Math.round(amount * 100) > Math.round(refundableAmount(data, o) * 100)
       )
         throw new Error(
           'El reembolso supera el saldo o la orden no está cancelada.',
@@ -247,7 +249,7 @@ export function demoAction(
       break;
     }
     case 'approve':
-      if (o.status !== 'pending' || paid < o.total)
+      if (o.status !== 'pending' || orderTotal(o) <= 0 || paid < orderTotal(o))
         throw new Error(
           'Verifica primero el pago completo de una orden pendiente.',
         );

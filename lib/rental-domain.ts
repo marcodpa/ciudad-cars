@@ -44,6 +44,7 @@ export type BookingInput = {
   consent: boolean;
 };
 export type RentalOrder = BookingInput & {
+  billing_total?: number | null;
   id: string;
   code: string;
   customer_id: string;
@@ -68,6 +69,7 @@ export type RentalEvent = {
   created_at: string;
 };
 export type RentalData = {
+  billing?: import('./billing-domain').BillingData;
   models: RentalModel[];
   units: RentalUnit[];
   orders: RentalOrder[];
@@ -185,6 +187,9 @@ export function paidTotal(data: RentalData, orderId: string) {
     ) / 100
   );
 }
+export function orderTotal(order: RentalOrder) {
+  return order.billing_total ?? order.total;
+}
 export function money(value: number) {
   return new Intl.NumberFormat('es-VE', {
     style: 'currency',
@@ -200,7 +205,7 @@ export function shortDate(value: string) {
   }).format(new Date(value + 'T12:00:00Z'));
 }
 export function orderMessage(order: RentalOrder, model?: RentalModel) {
-  return `Hola, Ciudad Cars. Ya completé mi solicitud ${order.code}.\n\nConductor: ${order.full_name}\nVehículo: ${model ? model.make + ' ' + model.model : order.model_id}\nRetiro: ${order.pickup} · ${order.pickup_location}\nDevolución: ${order.dropoff} · ${order.return_location}\nDuración: ${rentalDays(order.pickup, order.dropoff)} días\nTotal de alquiler: ${money(order.total)}\n\nQuisiera coordinar el pago y la aprobación de esta orden. Entiendo que aún no está confirmada.`;
+  return `Hola, Ciudad Cars. Ya completé mi solicitud ${order.code}.\n\nConductor: ${order.full_name}\nVehículo: ${model ? model.make + ' ' + model.model : order.model_id}\nRetiro: ${order.pickup} · ${order.pickup_location}\nDevolución: ${order.dropoff} · ${order.return_location}\nDuración: ${rentalDays(order.pickup, order.dropoff)} días\nTotal de alquiler: ${money(orderTotal(order))}\n\nQuisiera coordinar el pago y la aprobación de esta orden. Entiendo que aún no está confirmada.`;
 }
 export type OrderAction =
   | 'payment'

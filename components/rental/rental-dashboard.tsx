@@ -1,7 +1,7 @@
 /* Optimized local WebP images. Native navigation deliberately resets account-bound state. */
 /* eslint-disable next/no-img-element, next/no-html-link-for-pages */
 'use client';
-import { useRef, useState, type SubmitEvent } from 'react';
+import { lazy, Suspense, useRef, useState, type SubmitEvent } from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -46,8 +46,13 @@ import {
 import { rentalError } from '@/lib/rental-client';
 import { useBrowserSearch } from './use-browser-search';
 import { formText } from '@/lib/rental-domain';
+import { orderTotal } from '@/lib/rental-domain';
+import { refundableAmount } from '@/lib/billing-domain';
 import { whatsappUrl } from '@/lib/company';
 
+const BillingPanel = lazy(() =>
+  import('./billing-panel').then((m) => ({ default: m.BillingPanel })),
+);
 function Status({ status }: { status: OrderStatus }) {
   return (
     <span className={'rental-status ' + status}>
@@ -94,14 +99,20 @@ export function RentalDashboard() {
   const admin = user.role === 'admin',
     safeView = admin
       ? view
-      : ['overview', 'orders'].includes(view)
+      : ['overview', 'orders', 'billing'].includes(view)
         ? view
         : 'overview';
   const orders = (
     admin ? data.orders : data.orders.filter((o) => o.customer_id === user.id)
   ).toSorted((a, b) => b.created_at.localeCompare(a.created_at));
   const selectedOrder = orders.find(
-    (o) => o.id === (selected === undefined ? params.get('order') : selected),
+    (o) =>
+      o.id ===
+      (selected === undefined
+        ? view === 'billing'
+          ? null
+          : params.get('order')
+        : selected),
   );
   const today = rentalToday(),
     pending = orders.filter((o) => o.status === 'pending'),
@@ -157,7 +168,7 @@ export function RentalDashboard() {
         o.pickup,
         o.dropoff,
         statusLabels[o.status],
-        o.total,
+        orderTotal(o),
         paidTotal(data, o.id),
       ]),
     ];
@@ -204,7 +215,9 @@ export function RentalDashboard() {
                       ? 'La información de tus clientes, organizada por sus solicitudes.'
                       : safeView === 'payments'
                         ? 'Pagos verificados y reembolsos registrados por tu equipo.'
-                        : 'Tarifas y reglas de operación.'}
+                        : safeView === 'billing'
+                          ? 'Facturas, notas y saldos de cada alquiler.'
+                          : 'Tarifas y reglas de operación.'}
           </p>
         </div>
         <button
@@ -668,10 +681,13 @@ export function RentalDashboard() {
               value={money(
                 orders
                   .filter((o) =>
-                    ['pending', 'approved', 'active'].includes(o.status),
+                    ['pending', 'approved', 'active', 'completed'].includes(
+                      o.status,
+                    ),
                   )
                   .reduce(
-                    (s, o) => s + Math.max(0, o.total - paidTotal(data, o.id)),
+                    (s, o) =>
+                      s + Math.max(0, orderTotal(o) - paidTotal(data, o.id)),
                     0,
                   ),
               )}
@@ -681,12 +697,10 @@ export function RentalDashboard() {
             <Stat
               icon={<RefreshCw />}
               value={money(
-                orders
-                  .filter((o) => ['cancelled', 'rejected'].includes(o.status))
-                  .reduce((s, o) => s + paidTotal(data, o.id), 0),
+                orders.reduce((s, o) => s + refundableAmount(data, o), 0),
               )}
               label="Por reembolsar"
-              hint="Órdenes canceladas o rechazadas"
+              hint="Cancelaciones y saldos a favor"
             />
           </div>
           <section className="rental-card rental-flush">
@@ -741,6 +755,11 @@ export function RentalDashboard() {
             )}
           </section>
         </>
+      )}
+      {safeView === 'billing' && (
+        <Suspense fallback={<p>Cargando facturación…</p>}>
+          <BillingPanel orderId={params.get('order')} />
+        </Suspense>
       )}
       {safeView === 'settings' && (
         <div className="rental-settings-grid">
@@ -862,7 +881,7 @@ function OrderDetail({
   order: RentalOrder;
   onClose: () => void;
 }) {
-  const { data, user, demo, action } = useRental(),
+  const { data, user, demo, action, href } = useRental(),
     admin = user?.role === 'admin',
     model = data.models.find((m) => m.id === o.model_id);
   const [operation, setOperation] = useState<OrderAction | null>(null),
@@ -874,8 +893,8 @@ function OrderDetail({
     units = availableUnits(data, o.model_id, o.pickup, o.dropoff, o.id);
   const operations: { id: OrderAction; label: string }[] = admin
     ? [
-        ...(['pending', 'approved', 'active'].includes(o.status) &&
-        paid < o.total
+        ...(['pending', 'approved', 'active', 'completed'].includes(o.status) &&
+        paid < orderTotal(o)
           ? [{ id: 'payment' as const, label: 'Registrar pago' }]
           : []),
         ...(o.status === 'pending'
@@ -893,7 +912,7 @@ function OrderDetail({
         ...(['pending', 'approved'].includes(o.status)
           ? [{ id: 'cancel' as const, label: 'Cancelar orden' }]
           : []),
-        ...(['cancelled', 'rejected'].includes(o.status) && paid > 0
+        ...(refundableAmount(data, o) > 0
           ? [{ id: 'refund' as const, label: 'Registrar reembolso' }]
           : []),
       ]
@@ -965,24 +984,28 @@ function OrderDetail({
         </div>
         <div className="rental-detail-totals">
           <span>
-            Total<strong>{money(o.total)}</strong>
+            Total<strong>{money(orderTotal(o))}</strong>
           </span>
           <span>
             Pagado neto<strong>{money(paid)}</strong>
           </span>
           <span>
-            {['cancelled', 'rejected'].includes(o.status)
-              ? 'Por reembolsar'
-              : 'Saldo'}
+            {refundableAmount(data, o) > 0 ? 'Saldo a favor' : 'Saldo'}
             <strong>
               {money(
-                ['cancelled', 'rejected'].includes(o.status)
-                  ? paid
-                  : Math.max(0, o.total - paid),
+                refundableAmount(data, o) > 0
+                  ? refundableAmount(data, o)
+                  : Math.max(0, orderTotal(o) - paid),
               )}
             </strong>
           </span>
         </div>
+        <a
+          className="rental-button secondary"
+          href={href('/dashboard?view=billing&order=' + o.id)}
+        >
+          Facturación de esta orden <ArrowUpRight size={16} />
+        </a>
         <details className="rental-order-info">
           <summary>Datos del conductor y del viaje</summary>
           <dl>
@@ -1074,10 +1097,16 @@ function OrderDetail({
                     name="amount"
                     type="number"
                     min="0.01"
-                    max={operation === 'refund' ? paid : o.total - paid}
+                    max={
+                      operation === 'refund'
+                        ? refundableAmount(data, o)
+                        : orderTotal(o) - paid
+                    }
                     step="0.01"
                     defaultValue={
-                      operation === 'refund' ? paid : o.total - paid
+                      operation === 'refund'
+                        ? refundableAmount(data, o)
+                        : orderTotal(o) - paid
                     }
                     required
                   />
@@ -1109,10 +1138,10 @@ function OrderDetail({
                   Se confirmará el alquiler y se bloqueará la unidad para estas
                   fechas.
                 </p>
-                {paid < o.total && (
+                {paid < orderTotal(o) && (
                   <p className="rental-error">
                     Primero registra el pago completo. Saldo:{' '}
-                    {money(o.total - paid)}.
+                    {money(orderTotal(o) - paid)}.
                   </p>
                 )}
                 <label>
@@ -1168,7 +1197,8 @@ function OrderDetail({
                 className="rental-button"
                 disabled={
                   busy ||
-                  (operation === 'approve' && (paid < o.total || !units.length))
+                  (operation === 'approve' &&
+                    (paid < orderTotal(o) || !units.length))
                 }
               >
                 {busy ? 'Guardando…' : 'Confirmar operación'}
@@ -1383,9 +1413,9 @@ function OrdersTable({
                   <Status status={o.status} />
                 </td>
                 <td>
-                  <strong>{money(o.total)}</strong>
+                  <strong>{money(orderTotal(o))}</strong>
                   <small>
-                    {paidTotal(data, o.id) >= o.total
+                    {paidTotal(data, o.id) >= orderTotal(o)
                       ? 'Pago completo'
                       : `Pagado ${money(paidTotal(data, o.id))}`}
                   </small>

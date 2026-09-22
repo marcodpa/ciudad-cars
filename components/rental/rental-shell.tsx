@@ -10,6 +10,7 @@ import {
   ClipboardList,
   Users,
   Wallet,
+  FileText,
   Settings2,
   LogOut,
 } from 'lucide-react';
@@ -21,6 +22,7 @@ export const rentalViews = [
   { id: 'calendar', label: 'Disponibilidad', icon: CalendarDays },
   { id: 'fleet', label: 'Flota', icon: CarFront },
   { id: 'customers', label: 'Clientes', icon: Users },
+  { id: 'billing', label: 'Facturación', icon: FileText },
   { id: 'payments', label: 'Pagos', icon: Wallet },
   { id: 'settings', label: 'Configuración', icon: Settings2 },
 ];
@@ -42,7 +44,9 @@ export function RentalShell({
         </span>
         <nav aria-label="Panel de alquileres">
           {rentalViews
-            .filter((v) => admin || ['overview', 'orders'].includes(v.id))
+            .filter(
+              (v) => admin || ['overview', 'orders', 'billing'].includes(v.id),
+            )
             .map((v) => (
               <a
                 key={v.id}
