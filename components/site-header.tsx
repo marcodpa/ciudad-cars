@@ -57,7 +57,8 @@ export function SiteHeader() {
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, [open]);
-  if (['/ingresar', '/dashboard', '/reservar'].includes(pathname || '')) return null;
+  if (['/ingresar', '/dashboard', '/reservar'].includes(pathname || ''))
+    return null;
   return (
     <>
       <a className="skip-link" href="#contenido">
@@ -92,7 +93,10 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="header-actions">
-          <Link className="header-login" href="/ingresar"><UserRound size={16} aria-hidden="true" />{language === 'en' ? 'Log in' : 'Ingresar'}</Link>
+          <Link className="header-login" href="/ingresar">
+            <UserRound size={16} aria-hidden="true" />
+            {language === 'en' ? 'Staff' : 'Equipo'}
+          </Link>
           <a
             className="language-toggle"
             href={localizedHref(

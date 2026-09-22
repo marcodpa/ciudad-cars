@@ -8,8 +8,6 @@ import {
   CalendarDays,
   CarFront,
   CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
   Clock3,
   CreditCard,
   Download,
@@ -30,7 +28,6 @@ import { RentalShell, rentalViews } from './rental-shell';
 import {
   addDays,
   availableUnits,
-  blocksUnit,
   money,
   paidTotal,
   rentalDays,
@@ -48,6 +45,7 @@ import { useBrowserSearch } from './use-browser-search';
 import { formText } from '@/lib/rental-domain';
 import { orderTotal } from '@/lib/rental-domain';
 import { refundableAmount } from '@/lib/billing-domain';
+import { FleetCalendar } from './fleet-calendar';
 import { whatsappUrl } from '@/lib/company';
 
 const BillingPanel = lazy(() =>
@@ -91,11 +89,10 @@ export function RentalDashboard() {
     [status, setStatus] = useState('all'),
     [notice, setNotice] = useState(''),
     [busy, setBusy] = useState(false),
-    [unitEdit, setUnitEdit] = useState<RentalUnit | 'new' | null>(null),
-    [calendarStart, setCalendarStart] = useState(rentalToday);
+    [unitEdit, setUnitEdit] = useState<RentalUnit | 'new' | null>(null);
 
   if (loading) return <RentalLoading />;
-  if (!user) return <RentalLogin />;
+  if (!user || user.role !== 'admin') return <RentalLogin />;
   const admin = user.role === 'admin',
     safeView = admin
       ? view
@@ -437,115 +434,7 @@ export function RentalDashboard() {
           />
         </section>
       )}
-      {safeView === 'calendar' && (
-        <section className="rental-card">
-          <div className="rental-card-heading">
-            <div>
-              <h2>Calendario de flota</h2>
-              <p>Desliza para ver los próximos 14 días.</p>
-            </div>
-            <div className="rental-inline">
-              <button
-                className="rental-icon-button"
-                aria-label="14 días anteriores"
-                onClick={() => setCalendarStart(addDays(calendarStart, -14))}
-              >
-                <ChevronLeft />
-              </button>
-              <label>
-                <span className="sr-only">Inicio del calendario</span>
-                <input
-                  type="date"
-                  value={calendarStart}
-                  onChange={(e) =>
-                    e.target.value && setCalendarStart(e.target.value)
-                  }
-                />
-              </label>
-              <button
-                className="rental-icon-button"
-                aria-label="14 días siguientes"
-                onClick={() => setCalendarStart(addDays(calendarStart, 14))}
-              >
-                <ChevronRight />
-              </button>
-            </div>
-          </div>
-          <section
-            className="rental-table-wrap"
-            aria-label="Calendario de disponibilidad por vehículo"
-          >
-            <table className="rental-calendar">
-              <thead>
-                <tr>
-                  <th>Unidad</th>
-                  {Array.from({ length: 14 }, (_, i) =>
-                    addDays(calendarStart, i),
-                  ).map((day) => (
-                    <th key={day} className={day === today ? 'today' : ''}>
-                      {shortDate(day)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.units.map((u) => (
-                  <tr key={u.id}>
-                    <th>
-                      {u.label}
-                      <small>{u.plate}</small>
-                    </th>
-                    {Array.from({ length: 14 }, (_, i) =>
-                      addDays(calendarStart, i),
-                    ).map((day) => {
-                      const o = orders.find(
-                        (o) =>
-                          o.unit_id === u.id &&
-                          blocksUnit(o, day, addDays(day, 1)),
-                      );
-                      return (
-                        <td key={day}>
-                          {o ? (
-                            <button
-                              className={'rental-calendar-booking ' + o.status}
-                              onClick={() => setSelected(o.id)}
-                              title={`${o.code}: ${o.full_name}`}
-                              aria-label={`${u.label}, ${day}, ${statusLabels[o.status]}, ${o.code}`}
-                            >
-                              {o.status === 'active' ? 'Alquiler' : 'Reserva'}
-                            </button>
-                          ) : (
-                            <span
-                              className={'rental-calendar-free ' + u.status}
-                            >
-                              {u.status === 'available'
-                                ? 'Libre'
-                                : u.status === 'maintenance'
-                                  ? 'Taller'
-                                  : 'Inactivo'}
-                            </span>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-          {!data.units.length && (
-            <Empty
-              title="Registra tus vehículos"
-              body="Añade las unidades reales de tu flota para empezar a contar disponibilidad."
-            />
-          )}
-          <p className="rental-small">
-            El día de devolución puede usarse para un nuevo retiro. Una
-            devolución atrasada mantiene la unidad ocupada hasta registrar su
-            regreso.
-          </p>
-        </section>
-      )}
+      {safeView === 'calendar' && <FleetCalendar onOrder={setSelected} />}
       {safeView === 'fleet' && (
         <>
           <div className="rental-section-actions">
@@ -1015,6 +904,8 @@ function OrderDetail({
             <dd>{o.email}</dd>
             <dt>Teléfono</dt>
             <dd>{o.phone}</dd>
+            <dt>Domicilio</dt>
+            <dd>{o.home_address || 'No registrado en esta orden'}</dd>
             <dt>Documento</dt>
             <dd>{o.document}</dd>
             <dt>Licencia</dt>

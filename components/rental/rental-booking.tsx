@@ -13,14 +13,16 @@ import {
   Users,
 } from 'lucide-react';
 import { useRental } from './rental-provider';
-import { RentalLogin, RentalLoading } from './rental-login';
-import { RentalShell } from './rental-shell';
+import { RentalLoading } from './rental-login';
+import { PublicBookingShell } from './public-booking-shell';
+import { BookingVerification } from './booking-verification';
 import {
   addDays,
   money,
   rentalDays,
   rentalToday,
   validateBooking,
+  validateGuestBooking,
   orderMessage,
   shortDate,
   type BookingInput,
@@ -31,21 +33,53 @@ import { rentalError } from '@/lib/rental-client';
 import { whatsappUrl } from '@/lib/company';
 
 export function RentalBooking() {
-  const { loading, user } = useRental();
+  const { loading, demo, bookingEnabled, error } = useRental();
   if (loading) return <RentalLoading />;
-  if (!user) return <RentalLogin />;
+  if (!demo && !bookingEnabled)
+    return (
+      <PublicBookingShell>
+        <section className="rental-card rental-booking-success">
+          <h1>Reserva tu próximo carro</h1>
+          <p>
+            {error ||
+              'Estamos habilitando las solicitudes en línea. Por ahora, coordina tu alquiler con nuestro equipo.'}
+          </p>
+          <a
+            className="rental-button"
+            href={whatsappUrl(
+              'Hola, quiero consultar un alquiler en Ciudad Cars.',
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Consultar por WhatsApp <ArrowUpRight size={18} />
+          </a>
+        </section>
+      </PublicBookingShell>
+    );
   return <RentalBookingForm />;
 }
 function RentalBookingForm() {
-  const { user, demo, data, href, availability, createOrder } = useRental();
+  const { demo, data, availability, createOrder, captchaSitekey } = useRental();
   const [input, setInput] = useState<BookingInput>(() => ({
     ...demoBooking(),
-    ...(demo ? {} : { document: '', license: '', license_expiry: '' }),
-    full_name: user!.full_name,
-    email: user!.email,
-    phone: user!.phone,
+    ...(demo
+      ? { email: 'andrea@example.com', phone: '+584120000000' }
+      : {
+          document: '',
+          license: '',
+          license_expiry: '',
+          full_name: '',
+          email: '',
+          phone: '',
+        }),
+    home_address: demo ? 'Maracaibo, sector de ejemplo, calle 10, casa 20' : '',
+    pickup_location: 'Por coordinar con Ciudad Cars',
+    return_location: 'Por coordinar con Ciudad Cars',
     model_id: new URLSearchParams(location.search).get('modelo') || 'lancer',
   }));
+  const [captcha, setCaptcha] = useState(''),
+    [challenge, setChallenge] = useState(0);
   const [step, setStep] = useState(1),
     [counts, setCounts] = useState<Record<string, number>>({}),
     [checking, setChecking] = useState(true),
@@ -58,7 +92,6 @@ function RentalBookingForm() {
     days = rentalDays(input.pickup, input.dropoff);
 
   useEffect(() => {
-    if (!user) return;
     let alive = true;
     if (!(days > 0 && days <= 90) || input.pickup < rentalToday()) {
       return;
@@ -88,7 +121,7 @@ function RentalBookingForm() {
       clearTimeout(timer);
     };
     // Availability is fetched when dates/account change, and verified again in the database on submit.
-  }, [input.pickup, input.dropoff, user, demo, days, availability]);
+  }, [input.pickup, input.dropoff, demo, days, availability]);
   function update<K extends keyof BookingInput>(
     key: K,
     value: BookingInput[K],
@@ -135,24 +168,43 @@ function RentalBookingForm() {
       }
       return;
     }
+    if (step === 3) {
+      try {
+        validateGuestBooking({ ...input, consent: true });
+        go(4);
+      } catch (e) {
+        setError(rentalError(e));
+      }
+      return;
+    }
+    if (!demo && !captcha) {
+      setError('Completa la verificación antes de enviar.');
+      return;
+    }
     setBusy(true);
     try {
-      validateBooking(input);
+      validateGuestBooking(input);
       const key = JSON.stringify(input);
       if (!requests.current.has(key))
         requests.current.set(key, crypto.randomUUID());
-      const order = await createOrder(input, requests.current.get(key)!);
+      const order = await createOrder(
+        input,
+        requests.current.get(key)!,
+        captcha,
+      );
       setCreated(order);
       window.scrollTo({ top: 0, behavior: 'instant' });
     } catch (err) {
       setError(rentalError(err));
+      setCaptcha('');
+      setChallenge((v) => v + 1);
     } finally {
       setBusy(false);
     }
   }
   if (created)
     return (
-      <RentalShell view="orders">
+      <PublicBookingShell>
         <section className="rental-card rental-booking-success">
           <span className="rental-success-icon">
             <CheckCircle2 size={44} />
@@ -201,40 +253,42 @@ function RentalBookingForm() {
               Continuar por WhatsApp <ArrowUpRight size={18} />
             </a>
           )}
-          <a
-            className="rental-button secondary"
-            href={href('/dashboard?order=' + created.id)}
-          >
-            Ver y seguir mi orden <ArrowRight size={18} />
+          <p className="rental-notice">
+            Guarda tu número de orden. El equipo te confirmará el alquiler y te
+            compartirá los documentos por WhatsApp.
+          </p>
+          <a className="rental-button secondary" href="/">
+            Volver a la página principal <ArrowRight size={18} />
           </a>
         </section>
-      </RentalShell>
+      </PublicBookingShell>
     );
   return (
-    <RentalShell view="booking">
-      <a className="rental-back" href={href('/dashboard')}>
-        <ArrowLeft size={16} /> Volver a mi panel
-      </a>
+    <PublicBookingShell>
       <div className="rental-page-heading">
         <div>
           <span className="rental-eyebrow">UN NUEVO DESTINO TE ESPERA</span>
           <h1 ref={heading} tabIndex={-1}>
             Organiza tu próximo viaje.
           </h1>
-          <p>Completa tu solicitud. Nosotros nos encargamos del camino.</p>
+          <p>Reserva en cuatro pasos, sin crear una cuenta.</p>
         </div>
       </div>
       <ol className="rental-steps" aria-label="Progreso de la solicitud">
-        {['Carro y fechas', 'Tus datos', 'Revisar y crear'].map((label, i) => (
-          <li
-            key={label}
-            className={step === i + 1 ? 'current' : step > i + 1 ? 'done' : ''}
-            aria-current={step === i + 1 ? 'step' : undefined}
-          >
-            <span>{step > i + 1 ? <Check size={16} /> : i + 1}</span>
-            {label}
-          </li>
-        ))}
+        {['Carro y fechas', 'Tus datos', 'Domicilio', 'Revisar'].map(
+          (label, i) => (
+            <li
+              key={label}
+              className={
+                step === i + 1 ? 'current' : step > i + 1 ? 'done' : ''
+              }
+              aria-current={step === i + 1 ? 'step' : undefined}
+            >
+              <span>{step > i + 1 ? <Check size={16} /> : i + 1}</span>
+              {label}
+            </li>
+          ),
+        )}
       </ol>
       <form className="rental-booking-grid" onSubmit={submit}>
         <section className="rental-card rental-form rental-booking-main">
@@ -266,11 +320,11 @@ function RentalBookingForm() {
               <div className="rental-card-heading">
                 <h2>Elige tu carro</h2>
                 <output className="rental-small">
-                {!(days > 0 && days <= 90) || input.pickup < rentalToday()
-                  ? 'Elige una devolución posterior al retiro (hasta 90 días).'
-                  : checking
-                    ? 'Consultando disponibilidad…'
-                    : 'Disponibilidad para tus fechas'}
+                  {!(days > 0 && days <= 90) || input.pickup < rentalToday()
+                    ? 'Elige una devolución posterior al retiro (hasta 90 días).'
+                    : checking
+                      ? 'Consultando disponibilidad…'
+                      : 'Disponibilidad para tus fechas'}
                 </output>
               </div>
               <div className="rental-booking-cars">
@@ -405,24 +459,27 @@ function RentalBookingForm() {
                   />
                 </label>
               </div>
-              <h2>Retiro y devolución</h2>
+            </>
+          )}
+          {step === 3 && (
+            <>
+              <h2>¿Dónde vives?</h2>
+              <p>
+                Escribe tu dirección de domicilio. El punto de retiro y
+                devolución del carro se coordina por WhatsApp.
+              </p>
               <div className="rental-form-grid">
-                <label>
-                  Lugar de retiro
-                  <input
-                    value={input.pickup_location}
+                <label className="wide">
+                  Dirección de domicilio
+                  <textarea
+                    value={input.home_address || ''}
                     required
-                    maxLength={160}
-                    onChange={(e) => update('pickup_location', e.target.value)}
-                  />
-                </label>
-                <label>
-                  Lugar de devolución
-                  <input
-                    value={input.return_location}
-                    required
-                    maxLength={160}
-                    onChange={(e) => update('return_location', e.target.value)}
+                    minLength={8}
+                    maxLength={500}
+                    rows={4}
+                    autoComplete="street-address"
+                    placeholder="Ciudad, sector, calle o avenida, edificio o casa y número"
+                    onChange={(e) => update('home_address', e.target.value)}
                   />
                 </label>
                 <label className="wide">
@@ -438,7 +495,7 @@ function RentalBookingForm() {
               </div>
             </>
           )}
-          {step === 3 && (
+          {step === 4 && (
             <>
               <h2>Todo listo para crear tu orden</h2>
               <p>
@@ -454,6 +511,10 @@ function RentalBookingForm() {
                   <br />
                   {input.email}
                 </dd>
+                <dt>Cédula o pasaporte</dt>
+                <dd>{input.document}</dd>
+                <dt>Domicilio</dt>
+                <dd>{input.home_address}</dd>
                 <dt>Retiro</dt>
                 <dd>
                   {input.pickup}
@@ -467,7 +528,9 @@ function RentalBookingForm() {
                   {input.return_location}
                 </dd>
                 <dt>Licencia</dt>
-                <dd>Vigente hasta {input.license_expiry}</dd>
+                <dd>
+                  {input.license} · Vigente hasta {input.license_expiry}
+                </dd>
                 {input.notes && (
                   <>
                     <dt>Notas</dt>
@@ -483,6 +546,13 @@ function RentalBookingForm() {
                   las fechas no están bloqueadas.
                 </p>
               </div>
+              {!demo && (
+                <BookingVerification
+                  key={challenge}
+                  sitekey={captchaSitekey}
+                  onToken={setCaptcha}
+                />
+              )}
               <label className="rental-checkbox">
                 <input
                   type="checkbox"
@@ -517,12 +587,14 @@ function RentalBookingForm() {
             <button
               className="rental-button"
               disabled={
-                busy || (step === 1 && (checking || !counts[input.model_id]))
+                busy ||
+                (step === 1 && (checking || !counts[input.model_id])) ||
+                (step === 4 && !demo && !captcha)
               }
             >
               {busy
                 ? 'Guardando tu orden…'
-                : step === 3
+                : step === 4
                   ? 'Crear orden y continuar'
                   : 'Continuar'}
               <ArrowRight size={18} />
@@ -582,6 +654,6 @@ function RentalBookingForm() {
           </small>
         </aside>
       </form>
-    </RentalShell>
+    </PublicBookingShell>
   );
 }

@@ -4,7 +4,7 @@
 
 Acceso en **Dashboard → Facturación** y desde el detalle de cada orden. El administrador selecciona una orden, revisa los datos del cliente y su dirección de facturación, añade conceptos y guarda un borrador. La revisión muestra los importes antes de confirmar la emisión. El borrador no ocupa una numeración ni modifica saldos.
 
-Al emitir se asigna una serie correlativa independiente por tipo: `CC-F-000001`, `CC-NC-000001` y `CC-ND-000001`. Una orden admite una factura base vigente. Los documentos emitidos no se borran ni editan; los ajustes se hacen mediante notas de crédito o débito vinculadas a la factura. Solo los borradores pueden anularse, con motivo. Los clientes solo pueden consultar y descargar sus documentos emitidos.
+Al emitir se asigna una serie correlativa independiente por tipo: `CC-F-000001`, `CC-NC-000001` y `CC-ND-000001`. Una orden admite una factura base vigente. Los documentos emitidos no se borran ni editan; los ajustes se hacen mediante notas de crédito o débito vinculadas a la factura. Solo los borradores pueden anularse, con motivo. El equipo descarga los documentos y los comparte por WhatsApp; no existe un panel de clientes. El domicilio de la reserva se propone como dirección de facturación y puede revisarse antes de emitir.
 
 Los conceptos admiten cantidad (hasta tres decimales), precio USD, descuento monetario por línea e impuesto porcentual por línea. Los importes se calculan en centavos, con redondeo positivo de mitades hacia arriba, aplicando el impuesto después del descuento. La base recalcula los valores; no confía en el total del navegador. Límite: 50 conceptos por documento y 10 millones USD por documento/orden facturada.
 
@@ -26,7 +26,7 @@ La aprobación requiere pago completo y una unidad disponible. Las notas y factu
 
 ## Puesta en funcionamiento
 
-1. Conectar Supabase siguiendo `docs/rental-system.md`. Aplicar primero la migración `202609220001_rental_system.sql` y después `202609220002_billing.sql`. La segunda requiere la primera y se ejecuta una sola vez de forma transaccional. Si ya existe la instalación de alquileres, aplicar únicamente la segunda.
+1. Conectar Supabase siguiendo `docs/rental-system.md`. Aplicar en orden las migraciones `202609220001_rental_system.sql`, `202609220002_billing.sql` y `202609220003_guest_reservations.sql`. En instalaciones existentes, ejecutar solo las pendientes. La tercera limita todos los documentos al equipo.
 2. Entrar con el administrador autorizado y abrir **Datos de facturación**. Completar razón social, RIF/identificación, dirección, contactos, serie, impuesto y condiciones. Los valores iniciales reales están vacíos y el impuesto comienza en cero; no se presuponen datos legales ni una tasa.
 3. La serie se bloquea después de la primera emisión. Los cambios de datos afectan a nuevos borradores/guardados, nunca a documentos emitidos. Si se completa el emisor después de crear un borrador, editar y guardar ese borrador antes de emitir.
 4. La moneda operativa es USD. Puede registrarse manualmente una tasa VES/USD para mostrar una equivalencia en el documento; no consulta BCV ni actualiza documentos anteriores. Las notas heredan la tasa como valor inicial.
@@ -36,6 +36,6 @@ Hasta conectar Supabase, `/dashboard?view=billing&demo=1&role=admin` permite pro
 
 ## Integridad y pruebas
 
-RLS restringe borradores/configuración al administrador y documentos emitidos a su cliente. Las funciones verifican roles; las tablas no admiten escrituras directas desde los clientes. El bloqueo por orden serializa pagos y ajustes; la fila de configuración serializa numeración. Versiones de borrador evitan sobrescrituras, claves de operación evitan duplicados al reintentar y un trigger protege documentos emitidos/anulados. No se expone la clave de servicio de Supabase.
+RLS restringe configuración, borradores y documentos emitidos al administrador. Las funciones verifican roles; las tablas no admiten escrituras directas desde los clientes. El bloqueo por orden serializa pagos y ajustes; la fila de configuración serializa numeración. Versiones de borrador evitan sobrescrituras, claves de operación evitan duplicados al reintentar y un trigger protege documentos emitidos/anulados. No se expone la clave de servicio de Supabase.
 
 `npm test` comprueba redondeo, fechas y límites, conciliación de notas/pagos, PDF multipágina y ambas migraciones con PostgreSQL embebido: roles, visibilidad, recálculo, numeración, reintentos, inmutabilidad, límites de crédito y reembolsos. Faltan las credenciales del proyecto real para validar Auth/correo y persistencia real de extremo a extremo.

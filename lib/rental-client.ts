@@ -106,9 +106,17 @@ export async function fetchRentalProfile(
     .from('rental_profiles')
     .select('*')
     .eq('id', user.id)
-    .single();
+    .maybeSingle();
   if (profileError) throw profileError;
   return data;
+}
+export async function fetchRentalModels(client: SupabaseClient) {
+  const { data, error } = await client
+    .from('rental_models')
+    .select('*')
+    .order('id');
+  if (error) throw error;
+  return data as RentalData['models'];
 }
 export async function createRentalOrder(
   client: SupabaseClient,

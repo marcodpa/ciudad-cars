@@ -13,7 +13,7 @@ import {
   rentalConnection,
   fetchRentalProfile,
   fetchRentalData,
-  createRentalOrder,
+  fetchRentalModels,
   runRentalAction,
   saveRentalUnit,
   rentalError,
@@ -21,7 +21,6 @@ import {
 import {
   createDemoData,
   demoAdmin,
-  demoCustomer,
   demoCreateOrder,
   demoAction,
 } from '@/lib/rental-demo';
@@ -49,6 +48,8 @@ import type {
 type Context = {
   billingAction: (input: BillingInput) => Promise<BillingDocument>;
   billingSettings: (input: BillingSettings) => Promise<void>;
+  bookingEnabled: boolean;
+  captchaSitekey: string;
   loading: boolean;
   configured: boolean;
   demo: boolean;
@@ -58,7 +59,11 @@ type Context = {
   data: RentalData;
   refresh: () => Promise<void>;
   href: (path: string) => string;
-  createOrder: (input: BookingInput, request: string) => Promise<RentalOrder>;
+  createOrder: (
+    input: BookingInput,
+    request: string,
+    captcha?: string,
+  ) => Promise<RentalOrder>;
   action: (input: ActionInput) => Promise<void>;
   saveUnit: (unit: Omit<RentalUnit, 'id'> & { id?: string }) => Promise<void>;
   setRate: (model: string, rate: number) => Promise<void>;
@@ -77,6 +82,8 @@ const empty: RentalData = {
 const RentalContext = createContext<Context | null>(null);
 const demoKey = 'ciudad-cars-rental-demo-v1';
 export function RentalProvider({ children }: { children: ReactNode }) {
+  const [bookingEnabled, setBookingEnabled] = useState(false),
+    [captchaSitekey, setCaptchaSitekey] = useState('');
   const [loading, setLoading] = useState(true),
     [configured, setConfigured] = useState(false),
     [demo, setDemo] = useState(false),
@@ -93,6 +100,11 @@ export function RentalProvider({ children }: { children: ReactNode }) {
   const refresh = useCallback(async () => {
     if (demo) return;
     if (!client) return;
+    if (location.pathname === '/reservar') {
+      const models = await fetchRentalModels(client);
+      setData({ ...empty, models });
+      return;
+    }
     const profile = await fetchRentalProfile(client);
     setUser(profile);
     if (profile) {
@@ -106,7 +118,13 @@ export function RentalProvider({ children }: { children: ReactNode }) {
     async function init() {
       try {
         const params = new URLSearchParams(location.search);
-        if (params.get('demo') === '1') {
+        const publicBooking = location.pathname === '/reservar';
+        const connection = await rentalConnection();
+        if (!alive) return;
+        if (
+          params.get('demo') === '1' ||
+          (publicBooking && !connection.configured)
+        ) {
           let next: RentalData;
           try {
             const saved = sessionStorage.getItem(demoKey);
@@ -118,19 +136,28 @@ export function RentalProvider({ children }: { children: ReactNode }) {
           if (!alive) return;
           setDemo(true);
           publishDemo(ensureBillingData(next));
-          const role =
-            params.get('role') ||
-            sessionStorage.getItem('cc-demo-role') ||
-            'admin';
-          sessionStorage.setItem('cc-demo-role', role);
-          setUser(role === 'customer' ? demoCustomer : demoAdmin);
+          setUser(publicBooking ? null : demoAdmin);
           return;
         }
-        const connection = await rentalConnection();
         if (!alive) return;
         setConfigured(connection.configured);
         setClient(connection.client);
         if (connection.client) {
+          if (publicBooking) {
+            const [models, cfg] = await Promise.all([
+              fetchRentalModels(connection.client),
+              fetch('/api/booking-config').then(
+                (r) =>
+                  r.json() as Promise<{ enabled: boolean; sitekey: string }>,
+              ),
+            ]);
+            if (alive) {
+              setData({ ...empty, models });
+              setBookingEnabled(cfg.enabled);
+              setCaptchaSitekey(cfg.sitekey);
+            }
+            return;
+          }
           const profile = await fetchRentalProfile(connection.client);
           if (!alive) return;
           setUser(profile);
@@ -158,7 +185,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
     const { data: subscription } = client.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_OUT') {
         setUser(null);
-        setData(empty);
+        if (location.pathname !== '/reservar') setData(empty);
       }
       if (event === 'PASSWORD_RECOVERY')
         location.replace('/ingresar?recovery=1');
@@ -178,19 +205,44 @@ export function RentalProvider({ children }: { children: ReactNode }) {
   }, [client, demo, refresh]);
   const href = (path: string) =>
     demo ? path + (path.includes('?') ? '&' : '?') + 'demo=1' : path;
-  async function createOrder(input: BookingInput, request: string) {
-    if (!user) throw new Error('Inicia sesión para crear la orden.');
+  async function createOrder(
+    input: BookingInput,
+    request: string,
+    captcha = '',
+  ) {
     if (demo) {
       const next = structuredClone(dataRef.current);
-      const order = demoCreateOrder(next, input, user, request);
+      let contact = next.profiles.find(
+        (p) => p.role === 'customer' && p.email === input.email,
+      );
+      if (!contact) {
+        contact = {
+          id: crypto.randomUUID(),
+          full_name: input.full_name,
+          email: input.email,
+          phone: input.phone,
+          role: 'customer',
+        };
+        next.profiles.push(contact);
+      }
+      const order = demoCreateOrder(next, input, contact, request);
       publishDemo(next);
       return order;
     }
     if (!client)
       throw new Error('Las reservas reales todavía no están habilitadas.');
-    const order = await createRentalOrder(client, input, request);
-    await refresh();
-    return order;
+    const response = await fetch('/api/reservations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input, request_id: request, captcha }),
+    });
+    const result = (await response.json()) as {
+      order: RentalOrder;
+      error?: string;
+    };
+    if (!response.ok)
+      throw new Error(result.error || 'No se pudo guardar la solicitud.');
+    return result.order as RentalOrder;
   }
   async function action(input: ActionInput) {
     if (!user) throw new Error('Inicia sesión.');
@@ -330,6 +382,8 @@ export function RentalProvider({ children }: { children: ReactNode }) {
   return (
     <RentalContext
       value={{
+        bookingEnabled,
+        captchaSitekey,
         loading,
         configured,
         demo,

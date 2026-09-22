@@ -2,7 +2,7 @@
 
 ## Sistema de alquileres
 
-Esta rama incorpora ingreso, panel de cliente/administración y órdenes con pago coordinado por WhatsApp. Consulta [la guía del sistema](docs/rental-system.md) para conectar Supabase y registrar la flota real. Sin esa conexión, `/ingresar` ofrece una demostración explícita; no guarda reservas reales. Prueba `/dashboard?demo=1&role=admin` o `/dashboard?demo=1&role=customer`.
+Esta rama incorpora reserva pública en cuatro pasos, sin cuentas ni panel de clientes, y administración exclusiva del equipo. Consulta [la guía del sistema](docs/rental-system.md) para conectar Supabase y Turnstile. Sin configuración solo hay demostración explícita: `/reservar?demo=1` y `/dashboard?view=calendar&demo=1`.
 
 Sitio responsive con Home, catálogo de vehículos, servicios, quiénes somos y contacto. La portada integra la película aérea de Ciudad Cars: Cruze y Explorer, fotogramas ligados al scroll, textos y planes de viaje sincronizados con GSAP. Una sola navegación acompaña el recorrido hasta el catálogo de cinco vehículos, con un botón para saltar directamente a la flota. El carrusel es manual, con flechas y gestos horizontales; en móvil se ocultan las miniaturas y se agrupan la foto, el nombre, el precio y las características. En escritorio se mantienen las miniaturas y la ficha lateral.
 
@@ -79,7 +79,7 @@ Las pruebas cubren inventario, límites de selección, filtros, consultas, recup
 
 El botón ES/EN cambia el idioma de las páginas, la animación, los filtros, los detalles y los formularios sin reiniciar la posición del recorrido. El idioma se conserva al navegar o recargar. El contenido que escribe el visitante no se traduce ni se borra.
 
-Los botones de reserva abren el nuevo formulario de órdenes. El cliente ingresa, selecciona fechas y vehículo, completa sus datos y guarda la solicitud antes de coordinar el pago por WhatsApp. La aprobación y la disponibilidad se gestionan desde el panel de administración cuando Supabase esté conectado. Sin conexión, solo se ofrece la demostración. Consulta `docs/rental-system.md` para las reglas y configuración.
+Los botones de reserva abren un formulario sin registro: carro y fechas, datos personales, domicilio y revisión. La orden se guarda antes de continuar por WhatsApp. El equipo verifica pagos, aprueba y asigna unidades desde administración. Sin conexión al servicio, solo se ofrece una demostración con datos ficticios. Consulta `docs/rental-system.md` para las reglas y configuración.
 
 Fuentes de historia, contacto y servicios: páginas oficiales enlazadas en DESIGN.md. Modelos o similares; las imágenes del hero y catálogo son ilustrativas.
 

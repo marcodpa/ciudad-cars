@@ -1,6 +1,8 @@
 import { RentalProvider } from '@/components/rental/rental-provider';
 import '@/app/rental.css';
 import '@/app/billing.css';
+import '@/app/fleet-calendar.css';
+import '@/app/public-booking.css';
 export const metadata = {
   title: 'Mi cuenta | Ciudad Cars',
   robots: {

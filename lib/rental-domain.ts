@@ -29,6 +29,7 @@ export type RentalProfile = {
   role: 'customer' | 'admin';
 };
 export type BookingInput = {
+  home_address?: string;
   model_id: string;
   pickup: string;
   dropoff: string;
@@ -145,6 +146,21 @@ export function validateBooking(input: BookingInput, today = rentalToday()) {
     throw new Error('Las notas pueden tener hasta 1.000 caracteres.');
   if (!input.consent)
     throw new Error('Acepta el uso de tus datos para gestionar la solicitud.');
+  return days;
+}
+export function validateGuestBooking(
+  input: BookingInput,
+  today = rentalToday(),
+) {
+  const days = validateBooking(input, today);
+  if (
+    !input.home_address ||
+    input.home_address.trim().length < 8 ||
+    input.home_address.length > 500
+  )
+    throw new Error(
+      'Escribe tu dirección de domicilio: ciudad, sector, calle y número.',
+    );
   return days;
 }
 // Daily rentals use [pickup, return): the return date can be the next pickup.

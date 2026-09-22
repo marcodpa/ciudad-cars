@@ -51,7 +51,8 @@ function initialDraft(
     customer: parent?.customer || {
       name: order.full_name,
       tax_id: order.document,
-      address: demo ? 'Dirección de ejemplo, Maracaibo' : '',
+      address:
+        order.home_address || (demo ? 'Dirección de ejemplo, Maracaibo' : ''),
       email: order.email,
       phone: order.phone,
     },

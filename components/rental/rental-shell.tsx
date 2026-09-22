@@ -110,13 +110,8 @@ export function RentalShell({
               <strong>Demostración</strong> Datos de ejemplo en este navegador.
               No crea reservas ni envía mensajes. No ingreses datos reales.
             </div>
-            <a
-              href={
-                href('/dashboard') + '&role=' + (admin ? 'customer' : 'admin')
-              }
-            >
-              Ver como {admin ? 'cliente' : 'administrador'}{' '}
-              <ArrowUpRight size={14} />
+            <a href={href('/reservar')}>
+              Probar reserva desde la web <ArrowUpRight size={14} />
             </a>
           </div>
         )}

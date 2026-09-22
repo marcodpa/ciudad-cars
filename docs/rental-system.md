@@ -1,66 +1,66 @@
 # Sistema de alquileres de Ciudad Cars
 
-## Recorrido disponible
+## Reserva pública, sin cuentas de clientes
 
-- `/ingresar`: registro por correo y contraseña, confirmación del correo, ingreso, recuperación y cambio de contraseña.
-- `/reservar`: selección del modelo y fechas, disponibilidad, conductor, documento y licencia, lugares de entrega, revisión y creación de orden.
-- `/dashboard`: panel del cliente o administrador según el rol verificado en la base de datos.
-- El cliente primero guarda la orden. Después abre WhatsApp con el número de orden, carro, fechas, lugares y total. Los números de documento y licencia **no** se añaden al mensaje.
-- Un administrador registra los pagos ya verificados y sus referencias. Al completar el pago, puede aprobar y asignar una unidad disponible.
-- Entrega y devolución registran notas de kilometraje, combustible y estado del vehículo. El historial es acumulativo.
-- Administración incluye órdenes con búsqueda y filtros, exportación CSV, calendario, unidades por modelo, mantenimiento/inactivación, clientes, pagos, reembolsos y tarifas.
+El botón Reservar del sitio abre `/reservar`. El cliente completa cuatro pasos:
+
+1. Carro y fechas: modelos y conteos de disponibilidad para el período elegido.
+2. Datos personales: nombre completo, teléfono/WhatsApp, correo, número de cédula o pasaporte, número y vencimiento de licencia. No se adjuntan fotos.
+3. Domicilio: dirección de donde vive (ciudad, sector, calle y número), más observaciones opcionales. Retiro y devolución se coordinan con el equipo.
+4. Revisión, consentimiento para gestionar los datos y verificación contra envíos automatizados. Se guarda la orden antes de ofrecer el enlace de WhatsApp.
+
+El mensaje lleva el número de orden y el resumen del viaje; no incluye el domicilio, cédula ni licencia. El cliente conserva su número y coordina pago, confirmación, cambios y documentos con el equipo. No hay registro, inicio de sesión ni panel para clientes.
+
+`/ingresar` es exclusivo del equipo: ingreso y recuperación de contraseña. `/dashboard` exige un administrador verificado en la base, también para lecturas directas por API. Administración mantiene órdenes, pagos, disponibilidad, flota, contactos comerciales y facturación. Los contactos no son cuentas de acceso.
+
+## Calendario para flotas grandes
+
+Las vistas de mes y semana muestran conteos diarios de vehículos disponibles, ocupados y fuera de servicio. Seleccionar un día abre el detalle: unidades, entregas/devoluciones, solicitudes pendientes y atrasos actuales. Incluye filtros por modelo, búsqueda de matrícula/nombre y resumen desplegable por modelo. El detalle muestra 20 filas por página; nunca genera una tabla con todos los vehículos por cada día. El cálculo se prueba con 2.000 unidades.
+
+Los conteos representan la planificación según el estado actual de órdenes y unidades, no un informe histórico de ocupación. Los pendientes no bloquean inventario. Las devoluciones atrasadas bloquean la unidad hasta registrar su regreso y avisan de conflictos con reservas futuras.
 
 ## Demostración
 
-Abrir `/dashboard?demo=1&role=admin` o `/dashboard?demo=1&role=customer`. Se muestra permanentemente una etiqueta de demostración. Los datos ficticios se guardan en `sessionStorage` del navegador, separados de Supabase. Las acciones de demostración nunca envían WhatsApp ni escriben en la base real. No introducir información real. Configuración permite restablecer los ejemplos.
+`/reservar?demo=1` y `/dashboard?view=calendar&demo=1` permiten probar el recorrido con datos ficticios. Si falta Supabase, la reserva pública abre esta demostración con un aviso permanente. Nunca introducir información real: los ejemplos se guardan en `sessionStorage`, no se sincronizan entre dispositivos y no crean reservas ni mensajes reales. Configuración permite restablecerlos. La primera entrega se publica como preview para revisar antes de sustituir producción.
 
-Si Supabase no está configurado, el ingreso muestra este recorrido de prueba; no finge guardar reservas reales. La base no se crea automáticamente ni se asignan administradores desde la interfaz. La primera entrega se publica como **preview** para revisar este nuevo flujo antes de sustituir el sistema actual en producción.
+## Conectar el servicio real
 
-## Conectar Supabase
-
-1. Crear un proyecto de Supabase propio. Ejecutar una vez, en orden, `supabase/migrations/202609220001_rental_system.sql` y `supabase/migrations/202609220002_billing.sql` en su editor SQL, o aplicar la migración con Supabase CLI. No ejecutarla sobre un esquema parcialmente creado; la migración es transaccional.
-2. Configurar las dos variables de `supabase/environment.example` en Vercel para el entorno deseado y volver a desplegar. Para desarrollo se colocan en `.env.local`, que está ignorado por Git. No se requiere clave `service_role`, `sb_secret_` ni contraseña de base de datos en la app.
-3. En Auth, habilitar Email/Password y confirmación de correo, establecer una contraseña mínima de 12 caracteres y configurar el servicio de correo de producción. Añadir la URL exacta de la app como Site URL y sus `/ingresar` y `/ingresar?recovery=1` a las redirecciones permitidas. Para localhost, añadir `http://127.0.0.1:3001/ingresar` y la variante de recuperación. No usar redirecciones comodín hacia sitios de terceros.
-4. Crear y verificar la cuenta del propietario. Un operador con acceso al editor SQL promueve **esa cuenta concreta**, después de comprobar su dirección. Sustituir el marcador antes de ejecutar:
+1. Crear el proyecto Supabase. Aplicar en orden las migraciones `202609220001_rental_system.sql`, `202609220002_billing.sql` y `202609220003_guest_reservations.sql`. Son transaccionales y se ejecutan una sola vez; en una instalación existente, aplicar únicamente las pendientes. La tercera conserva los datos antiguos y retira el acceso de cuentas de cliente.
+2. Configurar las variables de `supabase/environment.example` en Vercel y volver a desplegar. En desarrollo usar `.env.local`, ignorado por Git. URL y clave publicable pueden llegar al navegador. La clave secreta de Supabase y la de Turnstile son exclusivamente del servidor: nunca usar el prefijo `NEXT_PUBLIC_` para ellas, ni subirlas a Git.
+3. Crear un widget Cloudflare Turnstile y autorizar los dominios exactos de la app, incluidos los previews que se vayan a probar. Configurar sus claves pública y privada. La app valida el token en servidor, el hostname y la acción `booking`; sin las claves no admite reservas reales.
+4. Deshabilitar registros públicos en Supabase Auth. Crear la cuenta del propietario desde el panel de Supabase y confirmar su correo. Configurar Email/Password, contraseña mínima de 12 caracteres y servicio de correo. Registrar la URL de la app y las redirecciones exactas `/ingresar` y `/ingresar?recovery=1` (también localhost cuando corresponda).
+5. Promover solo la cuenta concreta del propietario desde el editor SQL, después de verificar su dirección:
 
    ```sql
-   update public.rental_profiles
-   set role = 'admin'
-   where id = (
+   update public.rental_profiles set role = 'admin'
+   where auth_user_id = (
      select id from auth.users
      where email = 'CORREO-DEL-PROPIETARIO'
        and email_confirmed_at is not null
    ) returning id, email, role;
    ```
 
-   El registro siempre crea un cliente, incluso si manipula los metadatos del formulario.
-5. Ingresar como administrador y registrar **las unidades reales** con matrícula, modelo y nombre interno en Flota. La migración solo añade los cinco modelos del catálogo; no inventa carros disponibles. Revisar las tarifas antes de abrir reservas.
-6. Probar con dos cuentas distintas: cada cliente ve solo sus órdenes, pagos e historial. Crear solicitud, verificar pago, aprobar, entregar y devolver. Configurar copias de seguridad del proyecto y el acceso del equipo responsable.
-7. Una vez revisado el sistema conectado, desplegar a producción con las mismas variables, registrar el dominio definitivo y las URL de correo correspondientes.
+   El alta de Auth nunca concede permisos de administrador por metadatos. Repetir únicamente para miembros autorizados del equipo.
+6. Ingresar como administrador, registrar las unidades reales con matrícula y revisar tarifas. Las migraciones añaden modelos, no inventario disponible. Configurar los datos comerciales de facturación siguiendo `docs/billing-system.md`.
+7. Probar una reserva anónima completa, acceso administrativo, pago verificado, aprobación/asignación, entrega, devolución y factura. Comprobar correo de recuperación y Turnstile en el dominio final. Configurar copias de seguridad antes de activar producción.
 
-Documentación de referencia: [claves públicas de Supabase](https://supabase.com/docs/guides/getting-started/api-keys), [autenticación por contraseña](https://supabase.com/docs/guides/auth/passwords), [seguridad por fila](https://supabase.com/docs/guides/database/postgres/row-level-security).
+Referencias: [claves de Supabase](https://supabase.com/docs/guides/getting-started/api-keys), [RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [validación de Turnstile](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/).
 
-## Reglas de la primera versión
+## Reglas operativas
 
-- Moneda USD. Alquiler por días, de 1 a 90 días, usando la fecha de Caracas. No se cobra una tarjeta ni se conecta una API de pagos o WhatsApp; el operador verifica el pago externamente y lo registra.
-- Las solicitudes pendientes no retienen inventario. La aprobación requiere el pago completo, verifica de nuevo la disponibilidad y asigna una unidad física del modelo pedido.
-- Una restricción de exclusión de PostgreSQL impide fechas solapadas para una misma unidad, incluso si se omite la comprobación de la interfaz. Las operaciones bloquean la fila de la orden/unidad cuando corresponde. Los reintentos de creación, pagos y estados usan identificadores para evitar duplicados.
-- Las fechas usan `[retiro, devolución)`: el día de devolución puede usarse en el siguiente alquiler. No existe planificación por horas ni tiempo de limpieza configurable en esta versión. Las entregas solo se registran dentro del período acordado. Un carro con devolución atrasada sigue indisponible hasta registrar su devolución.
-- El cliente solo puede cancelar solicitudes pendientes; el administrador puede cancelar confirmadas. Las órdenes con pagos que se cancelan muestran el saldo por reembolsar; la cancelación no finge devolver dinero.
-- Las unidades con órdenes confirmadas o activas no se pueden modificar hasta resolver esos alquileres. Las unidades en mantenimiento o inactivas no cuentan como disponibles.
-- El cambio de fechas se hace cancelando y creando otra orden, preservando el historial. Los conceptos comerciales adicionales se gestionan mediante facturas y notas de débito. No incluye depósitos de garantía contables, emisión fiscal autorizada, firma digital, documentos adjuntos ni reconocimiento automático de pagos.
-- El catálogo público mantiene sus precios informativos y la indicación de tarifa final sujeta a confirmación. El formulario conectado usa la tarifa vigente en la base, y cada orden conserva una copia de la tarifa al crearse. Si se cambian precios base de la marca, actualizar también `lib/fleet.ts` y los textos públicos correspondientes.
-- La app de operaciones está en español. El sitio comercial conserva sus rutas ES/EN. Las rutas privadas tienen `noindex` y no figuran en el sitemap.
+- USD; alquiler diario de 1 a 90 días, fecha de Caracas. El operador verifica pagos externamente y registra su referencia; no hay cobro automático ni API de WhatsApp.
+- Pendientes no retienen unidades. Aprobar exige pago completo y disponibilidad comprobada de nuevo; PostgreSQL impide solapamientos en una unidad, incluso con solicitudes concurrentes.
+- Períodos `[retiro, devolución)`: el día de devolución permite otro alquiler. No incluye horas ni margen de limpieza configurable. Un alquiler atrasado sigue bloqueando su unidad.
+- Solo el equipo cancela y cambia estados. Cancelar con saldo a favor indica lo pendiente por reembolsar; no devuelve dinero automáticamente. Cambios de fechas requieren cancelar y crear otra orden, conservando el historial.
+- Mantenimiento/inactivación excluye unidades disponibles; no se modifica una unidad con alquileres confirmados o activos sin resolverlos.
+- Precios y totales se calculan en servidor y se conservan por orden. El catálogo público mantiene tarifas informativas; revisar también `lib/fleet.ts` al cambiar precios de marca.
+- Facturas, notas, pagos y reembolsos comparten saldos. No incluye emisión fiscal autorizada, depósitos de garantía contables, firma digital, adjuntos ni reconocimiento automático de pagos.
+- Operaciones y formulario están en español; el sitio comercial conserva ES/EN. Las rutas operativas y el formulario tienen `noindex` y no figuran en el sitemap.
 
 ## Seguridad y validación
 
-Todas las tablas tienen RLS; los clientes solo leen registros propios. Las matrículas y el listado completo de clientes solo están disponibles para administradores. Las escrituras se realizan mediante funciones autorizadas en Postgres, no mediante permisos genéricos de escritura. El cálculo de importes, el rol, las transiciones y la asignación de unidades se validan en la base. La disponibilidad pública devuelve únicamente conteos agregados por modelo. No se registran contraseñas ni claves privadas en el repositorio.
+La reserva pública lee únicamente modelos y conteos agregados. El servidor comprueba origen, tamaño, campos y Turnstile antes de invocar la función exclusiva de su clave secreta. RLS limita órdenes, contactos, pagos, historial y facturas al equipo. Las antiguas funciones de creación para clientes están revocadas y las cuentas antiguas tampoco pueden cancelar órdenes.
 
-`npm test` ejecuta las pruebas existentes, validaciones de fechas/mensajes/configuración y la migración completa en PostgreSQL embebido (PGlite con btree_gist). Las pruebas de la base ejercitan RLS, roles, precios inmutables, reintentos, pagos, restricciones de solapamiento, cancelación y reembolsos. Esta validación no sustituye la prueba de correo/Auth contra el proyecto de Supabase real, que aún debe conectarse.
+La creación tiene reintentos sin duplicados y límites transaccionales: cinco solicitudes por origen de red en quince minutos, veinte al día y cinco pendientes por contacto. Los límites de red almacenan un HMAC, no la IP original. Cambiar la clave secreta cambia esos identificadores y reinicia su agrupación; las órdenes conservan sus datos. No se persisten borradores reales ni información personal del formulario en el almacenamiento del navegador.
 
-Las colecciones del panel se leen con paginación explícita para no truncar en el límite de PostgREST. Para operaciones de gran volumen, la siguiente mejora será paginar también la presentación y agregar informes en SQL.
-
-
-## Facturación integrada
-
-Ver `docs/billing-system.md` para emisión, notas, conciliación, PDF y configuración comercial.
+`npm test` verifica dominio, API y las migraciones en PostgreSQL embebido (PGlite): permisos, precios, privacidad, reintentos, límites, pagos, solapamientos y facturación. No sustituye la prueba contra el proyecto Supabase y Turnstile reales, que aún deben conectarse. El panel obtiene todas las colecciones mediante paginación de red; para volúmenes mayores conviene trasladar también las agregaciones al servidor.

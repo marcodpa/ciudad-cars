@@ -1,4 +1,9 @@
-# Copy these two variables into .env.local for local development, or Vercel project settings.
-# Only use the project's PUBLIC publishable key. No secret/service-role key is required.
+# Public configuration (safe for the browser)
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_YOUR-PUBLIC-KEY
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=YOUR-PUBLIC-TURNSTILE-SITE-KEY
+
+# Server only. Never add NEXT_PUBLIC_ or commit actual values.
+# Accepts a new sb_secret_ key or the legacy service_role JWT.
+SUPABASE_SERVICE_ROLE_KEY=sb_secret_YOUR-SERVER-KEY
+TURNSTILE_SECRET_KEY=YOUR-PRIVATE-TURNSTILE-SECRET

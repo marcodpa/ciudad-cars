@@ -1,0 +1,114 @@
+.public-booking {
+  min-height: 100vh;
+  background: #f3f6f7;
+}
+.public-booking-header {
+  background: #062b3b;
+  padding: 22px max(24px, calc((100vw - 1200px) /2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: white;
+}
+.public-booking-header .rental-brand {
+  max-width: 200px;
+  margin: 0;
+}
+.public-booking-header > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  min-height: 44px;
+}
+.public-booking-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+.public-booking-demo {
+  background: #eff4d8;
+  color: #40512d;
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.public-booking .rental-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.public-booking .rental-page-heading h1 {
+  scroll-margin-top: 24px;
+}
+.public-booking .rental-booking-success {
+  max-width: 780px;
+  margin: auto;
+}
+.public-booking .rental-booking-main {
+  min-width: 0;
+}
+.public-booking .rental-booking-actions {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 16px 0 4px;
+  margin-top: 18px;
+  z-index: 1;
+  border-top: 1px solid var(--r-line);
+}
+.booking-verification {
+  min-height: 140px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.public-booking .rental-review dd {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.public-booking textarea {
+  min-height: 110px;
+}
+@media (max-width: 700px) {
+  .public-booking-header {
+    padding: 16px;
+    gap: 12px;
+  }
+  .public-booking-header .rental-brand {
+    max-width: 150px;
+  }
+  .public-booking-header > a {
+    font-size: 11px;
+  }
+  .public-booking-content {
+    padding: 26px 16px 40px;
+  }
+  .public-booking .rental-steps {
+    gap: 5px;
+  }
+  .public-booking .rental-steps li {
+    font-size: 12px;
+    gap: 6px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .public-booking .rental-steps li:after {
+    display: none;
+  }
+  .public-booking .rental-booking-actions {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    bottom: 0;
+  }
+  .public-booking .rental-page-heading h1 {
+    font-size: 30px;
+  }
+  .public-booking .rental-booking-summary {
+    position: static;
+  }
+  .public-booking .rental-form-grid input,
+  .public-booking .rental-form-grid textarea {
+    font-size: 16px;
+  }
+}
