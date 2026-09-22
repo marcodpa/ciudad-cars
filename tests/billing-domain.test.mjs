@@ -21,6 +21,14 @@ test('billing validation: real dates, customer data and reasons are required',()
  assert.throws(()=>validateBillingInput({...input,kind:'credit'}));
  assert.throws(()=>validateBillingInput({...input,fx_rate:-1}));
 });
+test('billing CSV: credit amounts stay numeric and customer formulas are escaped',()=>{
+ const csv=domain.billingCsv([['Total','Cliente'],[-58,'  =SUM(A1:A9)'],[10,'Compañía "Demo"']]);
+ assert.ok(csv.includes('"-58","\'  =SUM(A1:A9)"'));
+ assert.ok(csv.includes('"Compañía ""Demo"""'));
+});
+test('billing dates: evening issuance stays on the Caracas business date',()=>{
+ assert.equal(domain.billingDate('2026-09-23T02:00:00Z'),'2026-09-22');
+});
 test('billing reconciliation: signed notes and refunds use the same ledger',()=>{
  const order={id:'o'},invoice={id:'i',order_id:'o',kind:'invoice',status:'issued',due_date:'2026-01-01',total_cents:10000};
  const data={orders:[order],payments:[{order_id:'o',amount:100}],billing:{documents:[invoice,{...invoice,id:'c',kind:'credit',total_cents:2000}]}};

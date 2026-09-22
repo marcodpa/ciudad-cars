@@ -1,6 +1,10 @@
 import { PDFDocument, rgb, type PDFPage } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
-import { documentLabels, type BillingDocument } from './billing-domain';
+import {
+  documentLabels,
+  billingDate,
+  type BillingDocument,
+} from './billing-domain';
 import type { RentalOrder } from './rental-domain';
 
 // Loaded only on export; no PDF/font payload is part of the public landing page.
@@ -117,7 +121,7 @@ export async function createBillingPdf(
   pdf.setLanguage('es-VE');
   text(title, 22);
   text(
-    `Orden ${order.code} · Emisión: ${doc.issued_at?.slice(0, 10) || 'Pendiente'} · Vencimiento: ${doc.due_date}`,
+    `Orden ${order.code} · Emisión: ${doc.issued_at ? billingDate(doc.issued_at) : 'Pendiente'} · Vencimiento: ${doc.due_date}`,
     9,
     muted,
   );

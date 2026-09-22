@@ -21,6 +21,8 @@ import { rentalError } from '@/lib/rental-client';
 import { rentalToday, rentalDays, type RentalOrder } from '@/lib/rental-domain';
 import {
   calculateInvoice,
+  billingCsv,
+  billingDate,
   documentLabels,
   defaultBillingSettings,
   documentState,
@@ -90,7 +92,7 @@ export function BillingPanel({ orderId }: { orderId?: string | null }) {
   const orders = data.orders.filter((o) => admin || o.customer_id === user?.id);
   const filtered = docs
     .filter((d) => {
-      const date = (d.issued_at || d.created_at).slice(0, 10);
+      const date = billingDate(d.issued_at || d.created_at);
       return (
         (!orderId || d.order_id === orderId) &&
         (!from || date >= from) &&
@@ -150,29 +152,14 @@ export function BillingPanel({ orderId }: { orderId?: string | null }) {
         documentState(d, data, rentalToday()),
         orders.find((o) => o.id === d.order_id)?.code || '',
         d.customer.name,
-        (d.issued_at || d.created_at).slice(0, 10),
+        billingDate(d.issued_at || d.created_at),
         d.subtotal_cents / 100,
         d.discount_cents / 100,
         d.tax_cents / 100,
         ((d.kind === 'credit' ? -1 : 1) * d.total_cents) / 100,
       ]),
     ];
-    const value =
-      '\uFEFF' +
-      rows
-        .map((row) =>
-          row
-            .map(
-              (v) =>
-                '"' +
-                String(v)
-                  .replace(/^[=+@\-\t\r]/, "'$&")
-                  .replaceAll('"', '""') +
-                '"',
-            )
-            .join(','),
-        )
-        .join('\r\n');
+    const value = billingCsv(rows);
     downloadBlob(
       new Blob([value], { type: 'text/csv;charset=utf-8' }),
       'ciudad-cars-facturacion.csv',
@@ -324,7 +311,7 @@ export function BillingPanel({ orderId }: { orderId?: string | null }) {
               </span>
               <span className="billing-row-customer">
                 <strong>{d.customer.name}</strong>
-                <small>{(d.issued_at || d.created_at).slice(0, 10)}</small>
+                <small>{billingDate(d.issued_at || d.created_at)}</small>
               </span>
               <span className="billing-row-total">
                 <strong>
@@ -918,7 +905,7 @@ function BillingDocumentView({
           <p>
             Orden {order.code} ·{' '}
             {doc.issued_at
-              ? `Emisión: ${doc.issued_at.slice(0, 10)}`
+              ? `Emisión: ${billingDate(doc.issued_at)}`
               : 'Pendiente de emisión'}{' '}
             · Vencimiento: {doc.due_date}
           </p>

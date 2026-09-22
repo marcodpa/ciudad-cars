@@ -240,6 +240,32 @@ export function moneyCents(cents: number) {
     currency: 'USD',
   }).format(cents / 100);
 }
+export function billingDate(timestamp: string) {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Caracas',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date(timestamp));
+}
+export function billingCsv(rows: (string | number)[][]) {
+  return (
+    '\uFEFF' +
+    rows
+      .map((row) =>
+        row
+          .map((value) => {
+            const cell =
+              typeof value === 'number'
+                ? String(value)
+                : value.replace(/^[\s]*[=+@\-\t\r\n]/, "'$&");
+            return '"' + cell.replaceAll('"', '""') + '"';
+          })
+          .join(','),
+      )
+      .join('\r\n')
+  );
+}
 export function refundableAmount(data: RentalData, order: RentalOrder) {
   const paid = data.payments
     .filter((p) => p.order_id === order.id)
