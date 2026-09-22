@@ -266,7 +266,9 @@ function RentalBookingForm() {
               <div className="rental-card-heading">
                 <h2>Elige tu carro</h2>
                 <output className="rental-small">
-                  {checking
+                {!(days > 0 && days <= 90) || input.pickup < rentalToday()
+                  ? 'Elige una devolución posterior al retiro (hasta 90 días).'
+                  : checking
                     ? 'Consultando disponibilidad…'
                     : 'Disponibilidad para tus fechas'}
                 </output>

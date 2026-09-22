@@ -61,7 +61,7 @@ Las pruebas cubren inventario, límites de selección, filtros, consultas, recup
 - `components/vehicle-ground-shadow.tsx`, `lib/vehicle-shadows.ts`: recursos conservados del diseño anterior, sin uso en las vistas actuales de la flota.
 - `components/vehicle-catalog.tsx`, `vehicle-details.tsx`: catálogo C y diálogo de detalles compartido.
 - `components/contact-form.tsx`: preparación de consultas.
-- `components/reservation-provider.tsx`, `reservation-dialog.tsx`, `app/reservation.css`: calendario de reservas compartido por cabecera, flota y catálogo, cargado al abrirlo; selección de rango, vista previa del mensaje y enlace a WhatsApp.
+- `components/reservation-provider.tsx`: dirige las reservas de cabecera, flota y catálogo al nuevo formulario `/reservar`, conservando el modelo elegido. El diálogo anterior se conserva como código de referencia.
 - `lib/reservation.ts`: fechas de Maracaibo, validación del intervalo y composición de solicitudes, comprobadas en `tests/reservation.test.mjs`.
 - `lib/fleet.ts`: modelos, precios, capacidades y recursos.
 - `lib/fleet-motion.ts`, `catalog.ts`, `contact.ts`: lógica comprobable.
@@ -79,7 +79,7 @@ Las pruebas cubren inventario, límites de selección, filtros, consultas, recup
 
 El botón ES/EN cambia el idioma de las páginas, la animación, los filtros, los detalles y los formularios sin reiniciar la posición del recorrido. El idioma se conserva al navegar o recargar. El contenido que escribe el visitante no se traduce ni se borra.
 
-Los botones de reserva abren un calendario en español o inglés, según la preferencia elegida, para seleccionar retiro, devolución y vehículo. La solicitud y su enlace al WhatsApp oficial se actualizan automáticamente en ese idioma; el visitante decide enviar el mensaje. Las fechas se validan con el día actual de Maracaibo y la devolución debe ser posterior al retiro. El sitio no confirma disponibilidad, cobros o reservas por sí solo.
+Los botones de reserva abren el nuevo formulario de órdenes. El cliente ingresa, selecciona fechas y vehículo, completa sus datos y guarda la solicitud antes de coordinar el pago por WhatsApp. La aprobación y la disponibilidad se gestionan desde el panel de administración cuando Supabase esté conectado. Sin conexión, solo se ofrece la demostración. Consulta `docs/rental-system.md` para las reglas y configuración.
 
 Fuentes de historia, contacto y servicios: páginas oficiales enlazadas en DESIGN.md. Modelos o similares; las imágenes del hero y catálogo son ilustrativas.
 
