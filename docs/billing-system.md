@@ -26,7 +26,7 @@ La aprobación requiere pago completo y una unidad disponible. Las notas y factu
 
 ## Puesta en funcionamiento
 
-1. Conectar Supabase siguiendo `docs/rental-system.md`. Aplicar en orden las migraciones `202609220001_rental_system.sql`, `202609220002_billing.sql` y `202609220003_guest_reservations.sql`. En instalaciones existentes, ejecutar solo las pendientes. La tercera limita todos los documentos al equipo.
+1. Conectar Supabase siguiendo `docs/rental-system.md`. Aplicar en orden las cuatro migraciones de `supabase/migrations`. En instalaciones existentes, ejecutar solo las pendientes. La tercera limita todos los documentos al equipo; la cuarta añade fechas de modificación y auditoría de cada cambio. Ver `docs/database-supabase.md`.
 2. Entrar con el administrador autorizado y abrir **Datos de facturación**. Completar razón social, RIF/identificación, dirección, contactos, serie, impuesto y condiciones. Los valores iniciales reales están vacíos y el impuesto comienza en cero; no se presuponen datos legales ni una tasa.
 3. La serie se bloquea después de la primera emisión. Los cambios de datos afectan a nuevos borradores/guardados, nunca a documentos emitidos. Si se completa el emisor después de crear un borrador, editar y guardar ese borrador antes de emitir.
 4. La moneda operativa es USD. Puede registrarse manualmente una tasa VES/USD para mostrar una equivalencia en el documento; no consulta BCV ni actualiza documentos anteriores. Las notas heredan la tasa como valor inicial.
