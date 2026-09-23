@@ -22,7 +22,7 @@ Dominio de producción confirmado: **https://ciudadcars.com**. El rediseño se r
 
 ## Preguntas frecuentes y opiniones
 
-El inicio incluye ocho preguntas desplegables, renderizadas en el HTML inicial en español e inglés. La misma fuente alimenta el contenido visible y el marcado FAQPage para evitar discrepancias. El marcado describe el contenido y no promete resultados enriquecidos en Google.
+El inicio incluye ocho preguntas desplegables, renderizadas en el HTML inicial en español e inglés. La misma fuente alimenta el contenido visible y el marcado FAQPage para evitar discrepancias. El marcado describe el contenido para consumidores de Schema.org. [Google retiró los resultados enriquecidos de FAQ en mayo de 2026](https://developers.google.com/search/updates#may-2026); no se promete ese formato de búsqueda.
 
 Las reseñas son una selección editorial de fragmentos originales, con enlaces individuales a Google Maps. La ficha real de Ciudad Cars se comprobó el **23 de septiembre de 2026**: **4,8/5 y 143 opiniones**. La fecha de consulta aparece junto a las tarjetas. No se presentan como compras certificadas ni como un feed en tiempo real. Los datos y enlaces están en `lib/home-content.js`; deben revisarse en la ficha antes de actualizar la puntuación o el contador. No se carga Trustindex ni otro script externo para mostrar las tarjetas.
 
@@ -47,6 +47,8 @@ Ambos comandos aceptan una URL base como argumento. `seo:check` comprueba el HTM
 Los informes completos se guardan en `outputs/seo/`, junto a `summary.json` y una tabla `README.md`. El comando falla si alguna medición no alcanza 100. En Windows, Lighthouse puede producir un error EPERM al limpiar el perfil de Chrome después de completar la auditoría; se acepta únicamente ese error de limpieza cuando existe un informe nuevo, completo y sin errores de ejecución.
 
 ## Resultado y publicación
+
+Revalidación del **23 de septiembre de 2026**, con las preguntas frecuentes y reseñas integradas: **100/100 en las 20 mediciones** de Lighthouse 13.4.1 sobre la compilación de producción local. También pasaron las 55 pruebas del sistema, lint, TypeScript y las comprobaciones HTTP de las diez rutas, incluido el contenido visible de FAQ y sus datos estructurados. La vista previa de Vercel se verificó con las reseñas originales enlazadas y el acordeón funcionando; el dominio definitivo todavía no se ha cambiado. Se comprobó el diseño a 390 px y en escritorio, incluida la navegación del acordeón con teclado.
 
 La medición inicial del catálogo obtuvo 91/100 en SEO con Lighthouse 13.4.1: la descripción se emitía fuera del `<head>`. La auditoría final del **17 de septiembre de 2026** obtuvo **100/100 en las 20 mediciones**: las diez URLs de la tabla anterior, cada una en móvil y escritorio, sobre la compilación de producción local en `http://127.0.0.1:3002`. Ninguna medición presentó controles automáticos fallidos. Los informes completos están en `outputs/seo/`, y `outputs/seo/summary.json` registra fecha, versión, URL y dispositivo de cada medición.
 
