@@ -5,14 +5,17 @@ import type { ReactNode } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { RentalBrand } from './rental-login';
 import { useRental } from './rental-provider';
+import { useLanguage } from '../language-provider';
+import { localizedHref } from '@/lib/seo';
 export function PublicBookingShell({ children }: { children: ReactNode }) {
   const { demo } = useRental();
+  const { language } = useLanguage();
   return (
     <div className="rental-app public-booking">
       <header className="public-booking-header">
         <RentalBrand />
-        <a href="/">
-          <ArrowLeft size={16} /> Volver a la web
+        <a href={localizedHref('/vehiculos', language)}>
+          <ArrowLeft size={16} /> Volver a vehículos
         </a>
       </header>
       {demo && (

@@ -2,7 +2,7 @@
 
 ## Reserva pública, sin cuentas de clientes
 
-El botón Reservar del sitio abre `/reservar`. El cliente completa cuatro pasos:
+El botón general Reservar abre el catálogo `/vehiculos` (o su versión en inglés). Al reservar un carro concreto, se abre `/reservar?modelo=...` con ese modelo seleccionado. Todo el recorrido es público, sin entrar al panel ni iniciar sesión. El cliente completa cuatro pasos:
 
 1. Carro y fechas: modelos y conteos de disponibilidad para el período elegido.
 2. Datos personales: nombre completo, teléfono/WhatsApp, correo, número de cédula o pasaporte, número y vencimiento de licencia. No se adjuntan fotos.

@@ -93,9 +93,17 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="header-actions">
-          <Link className="header-login" href="/ingresar">
+          <Link
+            className="header-login"
+            href="/ingresar"
+            aria-label={
+              language === 'en'
+                ? 'Administration access'
+                : 'Acceso de administración'
+            }
+          >
             <UserRound size={16} aria-hidden="true" />
-            {language === 'en' ? 'Staff' : 'Equipo'}
+            Admin
           </Link>
           <a
             className="language-toggle"
