@@ -53,14 +53,73 @@
 .public-booking-modal .rental-booking-calendar {
   margin: 16px 0 22px;
   border: 1px solid var(--r-line);
-  border-radius: 12px;
-  background: #fff;
+  border-radius: 16px;
+  background: #f8fbfc;
   display: flex;
   justify-content: center;
-  overflow-x: auto;
+  min-width: 0;
 }
 .public-booking-modal .rental-booking-calendar .rdp-root {
-  max-width: 100%;
+  width: min(100%, 440px);
+  padding: 18px;
+  --cell-size: clamp(40px, calc((100vw - 64px) / 7), 52px);
+  --cell-radius: 10px;
+}
+.public-booking-modal .rental-booking-calendar .rdp-months,
+.public-booking-modal .rental-booking-calendar .rdp-month,
+.public-booking-modal .rental-booking-calendar .rdp-month_grid {
+  width: 100%;
+}
+.public-booking-modal .rental-booking-calendar .rdp-month_caption {
+  margin-bottom: 4px;
+  color: #123245;
+}
+.public-booking-modal .rental-booking-calendar .rdp-caption_label {
+  font-size: 16px;
+  font-weight: 700;
+}
+.public-booking-modal .rental-booking-calendar .rdp-button_previous,
+.public-booking-modal .rental-booking-calendar .rdp-button_next {
+  background: #e7f0f3;
+  color: #123245;
+  border-radius: 50%;
+}
+.public-booking-modal .rental-booking-calendar .rdp-weekday {
+  padding-block: 4px;
+  color: #577182;
+  font-size: 13px;
+  font-weight: 600;
+}
+.public-booking-modal .rental-booking-calendar .rdp-day {
+  min-width: 0;
+}
+.public-booking-modal .rental-booking-calendar .rdp-day_button {
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #123245;
+}
+.public-booking-modal
+  .rental-booking-calendar
+  .rdp-day_button:hover:not(:disabled):not([data-range-start='true']):not(
+    [data-range-end='true']
+  ):not([data-range-middle='true']) {
+  background: #e1edf1;
+}
+.public-booking-modal
+  .rental-booking-calendar
+  .rdp-day_button[data-range-start='true'],
+.public-booking-modal
+  .rental-booking-calendar
+  .rdp-day_button[data-range-end='true'] {
+  background: #b9f73a;
+  color: #102b3c;
+}
+.public-booking-modal
+  .rental-booking-calendar
+  .rdp-day_button[data-range-middle='true'] {
+  background: #e6f6c7;
+  color: #123245;
 }
 .public-booking-modal .rental-selected-car {
   display: flex;
@@ -120,10 +179,11 @@
     padding: 18px;
   }
   .public-booking-modal .rental-booking-calendar {
-    margin-inline: -10px;
+    margin-inline: -18px;
+    border-radius: 14px;
   }
   .public-booking-modal .rental-booking-calendar [data-slot='calendar'] {
-    font-size: 12px;
+    padding: 4px;
   }
   .public-booking-modal
     .rental-booking-main
@@ -136,5 +196,19 @@
   .public-booking-modal .rental-selected-car button {
     width: 100%;
     justify-content: flex-start;
+  }
+}
+@media (max-width: 360px) {
+  .public-booking-modal {
+    padding-inline: 8px;
+  }
+  .public-booking-modal .rental-card {
+    padding: 14px;
+  }
+  .public-booking-modal .rental-booking-main > h2:first-child {
+    padding-right: 48px;
+  }
+  .public-booking-modal .rental-booking-calendar {
+    margin-inline: -14px;
   }
 }

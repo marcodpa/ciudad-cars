@@ -409,7 +409,6 @@ function RentalBookingForm({
                   startMonth={calendarDate(rentalToday())}
                   disabled={{ before: calendarDate(rentalToday())! }}
                   showOutsideDays={false}
-                  fixedWeeks
                   aria-label={
                     language === 'en'
                       ? 'Choose pickup and return dates'
