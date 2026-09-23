@@ -61,9 +61,6 @@ export function SiteHeader() {
     return null;
   return (
     <>
-      <a className="skip-link" href="#contenido">
-        {t('Ir al contenido')}
-      </a>
       <header
         ref={headerRef}
         className={`site-header${isHome ? ' site-header-home' : ''}${isHome && overIntro && !open ? ' is-over-intro' : ''}`}

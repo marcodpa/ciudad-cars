@@ -115,17 +115,6 @@ footer :focus-visible {
   padding-inline: var(--page-gutter);
   margin-inline: auto;
 }
-.skip-link {
-  position: fixed;
-  top: -70px;
-  left: 15px;
-  padding: 14px;
-  background: var(--lime);
-  z-index: 100;
-}
-.skip-link:focus {
-  top: 12px;
-}
 .site-header {
   height: var(--header-height);
   padding-inline: clamp(20px, 3.5vw, 58px);
