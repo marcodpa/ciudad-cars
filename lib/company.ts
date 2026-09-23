@@ -1,4 +1,5 @@
 import type { Vehicle } from './fleet';
+import { googleReviews } from './home-content.js';
 
 export const company = {
   phone: '+58 414 651-1446',
@@ -7,11 +8,7 @@ export const company = {
   address:
     'Calle 70 entre Av. 4 y Av. 8, Bella Vista, Maracaibo, Estado Zulia.',
   reservation: 'https://www.ciudadcars.com/date-reservation/',
-  directions:
-    'https://www.google.com/maps/search/?api=1&query=' +
-    encodeURIComponent(
-      'Ciudad Cars, Calle 70 entre Av. 4 y Av. 8, Bella Vista, Maracaibo, Venezuela',
-    ),
+  directions: googleReviews.url,
 };
 
 export function whatsappUrl(message: string) {

@@ -6,6 +6,7 @@ import { ArrowRight, CarFront, MessageCircle, KeyRound } from 'lucide-react';
 import { FleetExperience } from '@/components/fleet-experience';
 import { CinematicIntro } from '@/components/cinematic-intro';
 import { CityDiscovery } from '@/components/city-discovery';
+import { HomeTrust } from '@/components/pages/home-trust';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -46,6 +47,7 @@ export default function Home() {
           </div>
         </section>
         <CityDiscovery />
+        <HomeTrust />
         <section className="city-banner" aria-label={t('Maracaibo nos mueve')}>
           <span className="handwritten">
             {t('Gente real.')}

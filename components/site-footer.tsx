@@ -8,9 +8,10 @@ import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import { company, whatsappUrl } from '@/lib/company';
 
 export function SiteFooter() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const pathname = usePathname();
-  if (['/ingresar', '/dashboard', '/reservar'].includes(pathname || '')) return null;
+  if (['/ingresar', '/dashboard', '/reservar'].includes(pathname || ''))
+    return null;
   return (
     <footer className="site-footer" id="contacto">
       <div className="page-width footer-grid">
@@ -35,6 +36,14 @@ export function SiteFooter() {
           <Link href="/servicios">{t('Servicios')}</Link>
           <Link href="/quienes-somos">{t('Quiénes somos')}</Link>
           <Link href="/contacto">{t('Contacto')}</Link>
+          <Link href="/#preguntas-frecuentes">
+            {language === 'en'
+              ? 'Frequently asked questions'
+              : 'Preguntas frecuentes'}
+          </Link>
+          <Link href="/#opiniones">
+            {language === 'en' ? 'Google reviews' : 'Reseñas en Google'}
+          </Link>
         </div>
         <div>
           <h2>{t('Hablemos de tu viaje')}</h2>

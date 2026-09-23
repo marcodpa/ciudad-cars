@@ -1,4 +1,5 @@
 import { translate, type Language } from './language.js';
+import { homeFaq } from './home-content.js';
 
 // Confirmed production domain. Previews never become canonical search results.
 export const siteOrigin = 'https://ciudadcars.com';
@@ -188,7 +189,19 @@ export function createStructuredData(
         ...(path === '/' ? {} : { breadcrumb: { '@id': url + '#breadcrumb' } }),
       },
       ...(path === '/'
-        ? []
+        ? [
+            {
+              '@type': 'FAQPage',
+              '@id': url + '#preguntas-frecuentes',
+              inLanguage: language,
+              isPartOf: { '@id': url + '#webpage' },
+              mainEntity: homeFaq[language].map((item) => ({
+                '@type': 'Question',
+                name: item.question,
+                acceptedAnswer: { '@type': 'Answer', text: item.answer },
+              })),
+            },
+          ]
         : [
             {
               '@type': 'BreadcrumbList',

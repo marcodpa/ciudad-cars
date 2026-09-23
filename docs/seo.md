@@ -1,6 +1,6 @@
 # SEO de Ciudad Cars
 
-Dominio de producción confirmado: **https://ciudadcars.com**. La versión actual sigue siendo local; esta configuración no publica el sitio ni modifica DNS.
+Dominio de producción confirmado: **https://ciudadcars.com**. El rediseño se revisa en previews de Vercel; esta configuración no cambia el dominio ni sustituye por sí sola la web actual.
 
 ## Implementación
 
@@ -12,15 +12,23 @@ Dominio de producción confirmado: **https://ciudadcars.com**. La versión actua
 - JSON-LD con AutoRental, WebSite, WebPage/ContactPage/AboutPage/CollectionPage y BreadcrumbList en páginas interiores. Dirección, teléfono y horarios coinciden con el contenido visible. No se inventan reseñas, coordenadas, disponibilidad ni calificaciones.
 - Redirecciones permanentes para `/about-us/`, `/contact-us/`, `/service/` y `/date-reservation/`; los destinos inexistentes devuelven 404.
 
-| Español | Inglés |
-|---|---|
-| `/` | `/en` |
-| `/vehiculos` | `/en/vehicles` |
-| `/servicios` | `/en/services` |
+| Español          | Inglés         |
+| ---------------- | -------------- |
+| `/`              | `/en`          |
+| `/vehiculos`     | `/en/vehicles` |
+| `/servicios`     | `/en/services` |
 | `/quienes-somos` | `/en/about-us` |
-| `/contacto` | `/en/contact` |
+| `/contacto`      | `/en/contact`  |
 
-## Repetir las comprobaciones
+## Preguntas frecuentes y opiniones
+
+El inicio incluye ocho preguntas desplegables, renderizadas en el HTML inicial en español e inglés. La misma fuente alimenta el contenido visible y el marcado FAQPage para evitar discrepancias. El marcado describe el contenido y no promete resultados enriquecidos en Google.
+
+Las reseñas son una selección editorial de fragmentos originales, con enlaces individuales a Google Maps. La ficha real de Ciudad Cars se comprobó el **23 de septiembre de 2026**: **4,8/5 y 143 opiniones**. La fecha de consulta aparece junto a las tarjetas. No se presentan como compras certificadas ni como un feed en tiempo real. Los datos y enlaces están en `lib/home-content.js`; deben revisarse en la ficha antes de actualizar la puntuación o el contador. No se carga Trustindex ni otro script externo para mostrar las tarjetas.
+
+No se añade Review ni AggregateRating al negocio: [Google no admite estrellas de reseñas del propio negocio en estos resultados](https://developers.google.com/search/docs/appearance/structured-data/review-snippet), incluso si proceden de un widget externo. Mostrar opiniones auténticas ayuda a los visitantes, pero no garantiza posiciones ni una mejora automática del ranking.
+
+## Comprobar la versión actual
 
 ```sh
 npm run build:local

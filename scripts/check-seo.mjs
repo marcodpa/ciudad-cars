@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { localizedRoutes, pageUrl, siteOrigin } from '../lib/seo.ts';
+import { homeFaq, googleReviews } from '../lib/home-content.js';
 
 const origin = process.argv[2] || 'http://127.0.0.1:3002';
 const attributes = (tag) =>
@@ -64,6 +65,39 @@ for (const route of localizedRoutes)
     assert.ok(
       data?.['@graph'].some((item) => item['@type'] === 'AutoRental'),
       `${path}: business data`,
+    );
+    const faq = data['@graph'].find((item) => item['@type'] === 'FAQPage');
+    if (route.path === '/') {
+      const details = [
+        ...html.matchAll(/<details\b[^>]*>([\s\S]*?)<\/details>/g),
+      ].map((match) => match[1]);
+      assert.equal(faq.mainEntity.length, homeFaq[language].length);
+      for (const item of homeFaq[language]) {
+        assert.ok(
+          details.some(
+            (text) =>
+              text.includes(item.question) && text.includes(item.answer),
+          ),
+          `${path}: FAQ is server-rendered and readable without JavaScript`,
+        );
+        assert.ok(
+          faq.mainEntity.some(
+            (question) =>
+              question.name === item.question &&
+              question.acceptedAnswer.text === item.answer,
+          ),
+        );
+      }
+      for (const review of googleReviews.reviews) {
+        assert.ok(
+          tags(html, 'a').some((link) => link.href === review.url),
+          `${path}: original review link`,
+        );
+      }
+    } else assert.equal(faq, undefined, `${path}: no unrelated FAQ schema`);
+    assert.ok(
+      !JSON.stringify(data).includes('aggregateRating'),
+      `${path}: no self-serving review markup`,
     );
     assert.ok(
       data['@graph'].some(
