@@ -153,4 +153,8 @@ for (const [oldPath, newPath] of [
   }
   assert.equal(destination.pathname, newPath, oldPath);
 }
+const bookingLink = await fetch(origin + '/reservar?modelo=explorer', { redirect: 'manual' });
+assert.equal(bookingLink.status, 307);
+assert.equal(new URL(bookingLink.headers.get('location'), origin).pathname, '/vehiculos');
+assert.equal(new URL(bookingLink.headers.get('location'), origin).searchParams.get('reservar'), 'explorer');
 console.log('PASS robots.txt, sitemap.xml (10 URLs), real 404 responses');

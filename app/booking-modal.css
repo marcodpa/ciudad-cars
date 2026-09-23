@@ -1,0 +1,140 @@
+.public-booking-modal {
+  width: min(1100px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(92dvh, 940px);
+  min-height: 0;
+  overflow-y: auto;
+  display: block;
+  padding: 32px;
+  background: #f5f7f8;
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+}
+.public-booking-modal .booking-modal-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: -16px -16px 0 0;
+  background: #e6edef;
+  border: 0;
+  border-radius: 50%;
+  color: #123245;
+  cursor: pointer;
+}
+.public-booking-modal .public-booking-content {
+  padding: 0;
+  max-width: none;
+}
+.public-booking-modal .public-booking-header {
+  display: none;
+}
+.public-booking-modal .public-booking {
+  min-height: 0;
+  background: transparent;
+}
+.public-booking-modal .rental-page-heading {
+  padding-right: 44px;
+}
+.public-booking-modal .rental-booking-main {
+  margin-bottom: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+.public-booking-modal .rental-booking-actions {
+  position: static;
+}
+.public-booking-modal .rental-booking-summary {
+  top: 0;
+}
+.public-booking-modal .rental-booking-calendar {
+  margin: 16px 0 22px;
+  border: 1px solid var(--r-line);
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+.public-booking-modal .rental-booking-calendar .rdp-root {
+  max-width: 100%;
+}
+.public-booking-modal .rental-selected-car {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--r-line);
+  border-radius: 10px;
+  padding: 12px;
+}
+.public-booking-modal .rental-selected-car img {
+  width: 92px;
+  height: 66px;
+  object-fit: cover;
+  border-radius: 7px;
+}
+.public-booking-modal .rental-selected-car div {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+}
+.public-booking-modal .rental-selected-car strong {
+  font-size: 15px;
+}
+.public-booking-modal .rental-selected-car span {
+  font-size: 12px;
+  color: var(--r-muted);
+}
+.public-booking-modal .rental-selected-car button {
+  font-size: 13px;
+}
+.public-booking-modal .public-booking-demo {
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+@media (max-width: 800px) {
+  .public-booking-modal {
+    width: 100vw;
+    max-width: none;
+    max-height: 100dvh;
+    min-height: 100dvh;
+    border-radius: 0;
+    padding: 16px 16px max(24px, env(safe-area-inset-bottom));
+  }
+  .public-booking-modal .booking-modal-close {
+    margin: -4px -4px 0 0;
+  }
+  .public-booking-modal .rental-booking-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .public-booking-modal .rental-booking-summary {
+    position: static;
+  }
+  .public-booking-modal .booking-step-1 .rental-booking-summary {
+    display: none;
+  }
+  .public-booking-modal .rental-card {
+    padding: 18px;
+  }
+  .public-booking-modal .rental-booking-calendar {
+    margin-inline: -10px;
+  }
+  .public-booking-modal .rental-booking-calendar [data-slot='calendar'] {
+    font-size: 12px;
+  }
+  .public-booking-modal
+    .rental-booking-main
+    .rental-form-grid:has(input[type='date']) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .public-booking-modal .rental-selected-car {
+    flex-wrap: wrap;
+  }
+  .public-booking-modal .rental-selected-car button {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

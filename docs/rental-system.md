@@ -2,7 +2,7 @@
 
 ## Reserva pública, sin cuentas de clientes
 
-El botón general Reservar abre el catálogo `/vehiculos` (o su versión en inglés). Al reservar un carro concreto, se abre `/reservar?modelo=...` con ese modelo seleccionado. Todo el recorrido es público, sin entrar al panel ni iniciar sesión. El cliente completa cuatro pasos:
+Los botones «Reservar ahora» del encabezado, inicio y catálogo abren una ventana sobre la misma página pública. La ventana empieza con un calendario para marcar retiro y devolución. Cuando el cliente llega desde un carro, aparece ese modelo seleccionado; desde el encabezado puede elegir entre todos. No se entra al panel ni se inicia sesión. Los enlaces antiguos `/reservar?modelo=...` redirigen al catálogo y abren la misma ventana con el modelo conservado. El cliente completa cuatro pasos:
 
 1. Carro y fechas: modelos y conteos de disponibilidad para el período elegido.
 2. Datos personales: nombre completo, teléfono/WhatsApp, correo, número de cédula o pasaporte, número y vencimiento de licencia. No se adjuntan fotos.
@@ -21,7 +21,7 @@ Los conteos representan la planificación según el estado actual de órdenes y 
 
 ## Demostración
 
-`/reservar?demo=1` y `/dashboard?view=calendar&demo=1` permiten probar el recorrido con datos ficticios. Si falta Supabase, la reserva pública abre esta demostración con un aviso permanente. Nunca introducir información real: los ejemplos se guardan en `sessionStorage`, no se sincronizan entre dispositivos y no crean reservas ni mensajes reales. Configuración permite restablecerlos. La primera entrega se publica como preview para revisar antes de sustituir producción.
+`/vehiculos?reservar=1&demo=1` y `/dashboard?view=calendar&demo=1` permiten probar el recorrido con datos ficticios. Si falta Supabase, la ventana de reserva abre esta demostración con un aviso visible. Nunca introducir información real: los ejemplos se guardan en `sessionStorage`, no se sincronizan entre dispositivos y no crean reservas ni mensajes reales. Configuración permite restablecerlos. La primera entrega se publica como preview para revisar antes de sustituir producción.
 
 ## Conectar el servicio real
 

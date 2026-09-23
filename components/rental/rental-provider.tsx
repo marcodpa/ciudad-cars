@@ -81,7 +81,13 @@ const empty: RentalData = {
 };
 const RentalContext = createContext<Context | null>(null);
 const demoKey = 'ciudad-cars-rental-demo-v1';
-export function RentalProvider({ children }: { children: ReactNode }) {
+export function RentalProvider({
+  children,
+  publicBooking: publicBookingProp = false,
+}: {
+  children: ReactNode;
+  publicBooking?: boolean;
+}) {
   const [bookingEnabled, setBookingEnabled] = useState(false),
     [captchaSitekey, setCaptchaSitekey] = useState('');
   const [loading, setLoading] = useState(true),
@@ -100,7 +106,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
   const refresh = useCallback(async () => {
     if (demo) return;
     if (!client) return;
-    if (location.pathname === '/reservar') {
+    if (publicBookingProp || location.pathname === '/reservar') {
       const models = await fetchRentalModels(client);
       setData({ ...empty, models });
       return;
@@ -112,13 +118,14 @@ export function RentalProvider({ children }: { children: ReactNode }) {
       dataRef.current = next;
       setData(next);
     } else setData(empty);
-  }, [client, demo]);
+  }, [client, demo, publicBookingProp]);
   useEffect(() => {
     let alive = true;
     async function init() {
       try {
         const params = new URLSearchParams(location.search);
-        const publicBooking = location.pathname === '/reservar';
+        const publicBooking =
+          publicBookingProp || location.pathname === '/reservar';
         const connection = await rentalConnection();
         if (!alive) return;
         if (
@@ -179,13 +186,14 @@ export function RentalProvider({ children }: { children: ReactNode }) {
     return () => {
       alive = false;
     };
-  }, [publishDemo]);
+  }, [publishDemo, publicBookingProp]);
   useEffect(() => {
     if (!client || demo) return;
     const { data: subscription } = client.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_OUT') {
         setUser(null);
-        if (location.pathname !== '/reservar') setData(empty);
+        if (!publicBookingProp && location.pathname !== '/reservar')
+          setData(empty);
       }
       if (event === 'PASSWORD_RECOVERY')
         location.replace('/ingresar?recovery=1');
@@ -202,7 +210,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
       window.removeEventListener('focus', reload);
       clearInterval(timer);
     };
-  }, [client, demo, refresh]);
+  }, [client, demo, refresh, publicBookingProp]);
   const href = (path: string) =>
     demo ? path + (path.includes('?') ? '&' : '?') + 'demo=1' : path;
   async function createOrder(
